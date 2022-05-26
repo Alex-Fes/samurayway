@@ -1,13 +1,10 @@
 import React from "react";
 
 const Header = () => {
-    return (
-        <div>
-            <a href="#s">Home</a>
-            <a href="#s">News</a>
-            <a href="#s">Massage</a>
-            <a href="#s">Feed</a>
-        </div>
+    return (<header className='header'>
+            <img
+                src="https://spng.subpng.com/20180317/vie/kisspng-psychology-mind-psychologist-clip-art-brain-relaxing-cliparts-5aad8010187c63.4954245515213199521003.jpg"/>
+        </header>
     )
 }
 export default Header;

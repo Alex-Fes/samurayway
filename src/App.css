@@ -1,5 +1,7 @@
 .app-wrapper {
+    margin: 0 auto;
     display: grid;
+    width: 1700px;
     grid-template-areas:
     'h h'
     'n c';
@@ -10,7 +12,7 @@
 
 .header {
     grid-area: h;
-    background-color: aqua;
+    background-color: rgba(9, 243, 40, 0.7);
 }
 .header img {
     width: 50px;
@@ -18,12 +20,12 @@
 
 .nav {
     grid-area: n;
-    background-color: blue;
+    background-color: rgba(129, 176, 71, 0.67);
 }
 
 .content {
     grid-area: c;
-    background-color: bisque;
+    background-color: rgba(139, 243, 117, 0.71);
 }
 
 
