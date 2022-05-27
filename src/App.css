@@ -10,23 +10,11 @@
     /*grid-gap: 10px;*/
 }
 
-.header {
-    grid-area: h;
-    background-color: rgba(9, 243, 40, 0.7);
-}
-.header img {
-    width: 50px;
-}
 
-.nav {
-    grid-area: n;
-    background-color: rgba(129, 176, 71, 0.67);
-}
 
-.content {
-    grid-area: c;
-    background-color: rgba(139, 243, 117, 0.71);
-}
+
+
+
 
 
 
