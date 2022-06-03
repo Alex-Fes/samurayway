@@ -1,16 +1,22 @@
 import React from "react";
-import classes from "./Posts.module.css";
+import classes from "./Post.module.css";
 
-const Post = () => {
+type MessagePropsType = {
+    message: string
+    likeCount: number
+}
+
+
+const Post = (props: MessagePropsType) => {
     return (
         <div>
             <div className={classes.item}>
                 <img src='https://s00.yaplakal.com/pics/pics_original/8/3/6/1343638.jpg' alt=''/>
-                post 1
+                {props.message}
 
             </div>
             <div>
-                <span>Like</span>
+                <span>{props.likeCount} Like</span>
             </div>
 
         </div>
