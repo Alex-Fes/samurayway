@@ -4,17 +4,19 @@ import MyPosts from "./MyPosts/MyPosts";
 
 const Profile = () => {
     return (
-        <div><div className={classes.content}>
+        <div>
             <div>
-                <img
-                    src="https://www.imgfinancialgroup.com/sites/default/files/users/imgfinancialgroup/images/001-coastal.jpg" alt=''/>
-            </div>
-            <div>
-                ava + description
-            </div>
+                <div>
+                    <img
+                        src="https://www.imgfinancialgroup.com/sites/default/files/users/imgfinancialgroup/images/001-coastal.jpg"
+                        alt=''/>
+                </div>
+                <div>
+                    ava + description
+                </div>
 
-            <MyPosts />
-        </div>
+                <MyPosts/>
+            </div>
         </div>
     )
 }
