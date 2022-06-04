@@ -3,8 +3,9 @@
 
 .header {
     grid-area: h;
-    background-color: rgba(9, 243, 40, 0.7);
+    background-color: rgba(81, 145, 197, 0.87);
 }
 .header img {
-    width: 50px;
+    width: 80px;
+    padding-left: 25px;
 }

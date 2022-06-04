@@ -2,3 +2,12 @@
 .posts {
     color: #072eea;
 }
+
+.post {
+    margin-top: 15px;
+}
+
+
+.postsBlock {
+    padding: 20px;
+}
