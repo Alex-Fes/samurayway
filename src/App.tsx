@@ -9,16 +9,23 @@ import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
 
+type DialogsPropsType = {
+    id:number
+    message: string
+    likeCount: number
+}
+
 
 const App = () => {
+
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
                 <Navigation/>
                 <div className='app-wrapper-content'>
-                    <Route path='/profile' component={Profile}></Route>
-                    <Route path='/dialogs' component={Dialogs}></Route>
+                    <Route path='/profile' render={()=> <Profile />}></Route>
+                    <Route path='/dialogs' render={()=> <Dialogs />}></Route>
                     <Route path='/news' component={News}></Route>
                     <Route path='/music' component={Music}></Route>
                     <Route path='/settings' component={Settings}></Route>

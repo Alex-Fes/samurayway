@@ -2,6 +2,19 @@ import React from "react";
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
+
+export type MyPostsPropsType = {
+    id:number
+    message:string
+    likeCount: number
+}
+let posts = [
+    {id: 1, message: 'Hi, how are you?', likeCount: 15},
+    {id: 2, message: 'Yo yo, what\'s up', likeCount: 20},
+    {id: 3, message: 'Common', likeCount: 10}
+];
+let postsElement = posts.map(p =>  <Post message={p.message} likeCount={p.likeCount}/>)
+
 const MyPosts = () => {
     return (
         <div className={classes.postsBlock}>
@@ -12,8 +25,7 @@ const MyPosts = () => {
                     <div> <button>Add post</button></div>
                 </div>
                 <div className={classes.post}>
-                <Post message={'Hi, how are you?'} likeCount={15}/>
-                <Post message={"Yo yo, what's up"} likeCount={20}/>
+                    {postsElement}
                 </div>
             </div>
         </div>
