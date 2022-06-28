@@ -1,27 +1,18 @@
 import React from "react";
 import style from './Dialogs.module.css'
-import {BrowserRouter, NavLink, Route} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import {DialogType, MessageType} from "../../Redux/state";
 
+type DialogsPropsType = {
+    dialog: DialogType[]
+    message: MessageType[]
+}
 
-let dialog = [
-    {id: 1, name: 'Alex'},
-    {id: 2, name: 'Sasha'},
-    {id: 3, name: 'Yana'},
-    {id: 4, name: 'Dima'},
-    {id: 5, name: 'Vetal'}
-]
-let message = [
-    {id: 1, message: 'Hi!'},
-    {id: 2, message: 'How are you?'},
-    {id: 3, message: 'Yo Yo'}
-]
-let dialogElements = dialog.map(d => <DialogItem name={d.name} id={d.id}/>)
-let messagesElements = message.map(m => <Message message={m.message} id={m.id}/>)
-
-
-const Dialogs = () => {
+const Dialogs = (props:DialogsPropsType) => {
+    let dialogElements = props.dialog.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+    let messagesElements = props.message.map(m => <Message key={m.id} id={m.id} message={m.message} />)
     return (
         <BrowserRouter>
             <div className={style.dialogs}>

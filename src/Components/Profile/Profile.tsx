@@ -1,18 +1,20 @@
 import React from "react";
-import MyPosts, {MyPostsPropsType} from "./MyPosts/MyPosts";
+import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {PostType, RootStateType, state} from "../../Redux/state";
 
-type ProfilePropsType ={
-posts: Array<MyPostsPropsType>
+
+type ProfilePropsType = {
+    posts: PostType[]
 }
 
-
-const Profile = () => {
+const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts />
+            <MyPosts posts={props.posts} />
         </div>
     )
 }
+
 export default Profile;
