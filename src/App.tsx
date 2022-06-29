@@ -9,6 +9,8 @@ import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
 import {DialogType, MessageType, PostType} from "./Redux/state";
+import Sidebar from "./Components/Sidebar/Sidebar";
+import Footer from "./Components/Footer/Footer";
 
 type AppPropsType = {
     posts: PostType[]
@@ -27,9 +29,11 @@ const App = (props: AppPropsType) => {
                     <Route path='/profile' render={() => <Profile posts={props.posts}/>}></Route>
                     <Route path='/dialogs'
                            render={() => <Dialogs dialog={props.dialogs} message={props.message}/>}></Route>
-                    <Route path='/news' component={News}></Route>
-                    <Route path='/music' component={Music}></Route>
-                    <Route path='/settings' component={Settings}></Route>
+                    <Route path='/news' render={() => <News/>}></Route>
+                    <Route path='/music' render={() => <Music/>}></Route>
+                    <Route path='/settings' render={() => <Settings/>}></Route>
+                    <Route path='/sidebar' render={() => <Sidebar/>}></Route>
+                    <Route render={() => <Footer/>}></Route>
                 </div>
             </div>
         </BrowserRouter>
