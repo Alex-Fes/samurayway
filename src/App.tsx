@@ -21,7 +21,7 @@ type AppPropsType = {
 const App = (props: AppPropsType) => {
 
     return (
-        <BrowserRouter>
+
             <div className='app-wrapper'>
                 <Header/>
                 <Navigation/>
@@ -36,7 +36,7 @@ const App = (props: AppPropsType) => {
                     <Route render={() => <Footer/>}></Route>
                 </div>
             </div>
-        </BrowserRouter>
+
     );
 }
 

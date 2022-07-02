@@ -13,6 +13,7 @@ type DialogsPropsType = {
 const Dialogs = (props:DialogsPropsType) => {
     let dialogElements = props.dialog.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
     let messagesElements = props.message.map(m => <Message key={m.id} id={m.id} message={m.message} />)
+
     return (
         <BrowserRouter>
             <div className={style.dialogs}>
@@ -20,6 +21,7 @@ const Dialogs = (props:DialogsPropsType) => {
                     {dialogElements}
                 </div>
                 <div className={style.messages}>
+                    <textarea ></textarea>
                     {messagesElements}
                 </div>
             </div>
