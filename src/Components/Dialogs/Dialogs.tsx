@@ -10,9 +10,12 @@ type DialogsPropsType = {
     message: MessageType[]
 }
 
-const Dialogs = (props:DialogsPropsType) => {
-    let dialogElements = props.dialog.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
-    let messagesElements = props.message.map(m => <Message key={m.id} id={m.id} message={m.message} />)
+const Dialogs = (props: DialogsPropsType) => {
+    let dialogElements = props.dialog.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>);
+    let messagesElements = props.message.map(m => <Message key={m.id} id={m.id} message={m.message}/>);
+    let newMessage = React.createRef<HTMLTextAreaElement>();
+    let sendMessage = () => alert(newMessage.current?.value);
+
 
     return (
         <BrowserRouter>
@@ -21,8 +24,9 @@ const Dialogs = (props:DialogsPropsType) => {
                     {dialogElements}
                 </div>
                 <div className={style.messages}>
-                    <textarea ></textarea>
                     {messagesElements}
+                    <textarea ref={newMessage}></textarea>
+                    <button onClick={sendMessage}>Send</button>
                 </div>
             </div>
         </BrowserRouter>

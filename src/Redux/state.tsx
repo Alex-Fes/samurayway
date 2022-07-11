@@ -1,4 +1,5 @@
 import React from 'react';
+import {rerenderEntireTree} from "../reRender/rerenderEntireTree";
 
 export type DialogType = {
     id: number
@@ -51,3 +52,14 @@ export let state: RootStateType = {
     },
     sidebar: {}
 }
+
+export const addPost = (postMessage: string)=>{
+    // debugger
+    let newPost: PostType = {
+        id: new Date().getTime(),
+        message: postMessage,
+        likeCount: 0
+    };
+    state.ProfilePage.posts.push(newPost);
+    rerenderEntireTree(state);
+};
