@@ -1,5 +1,4 @@
-import React from 'react';
-import {rerenderEntireTree} from "../reRender/rerenderEntireTree";
+
 
 export type DialogType = {
     id: number
@@ -29,7 +28,6 @@ export type RootStateType = {
     DialogsPage: DialogsPageType
     sidebar: SidebarType
 }
-
 export let state: RootStateType = {
     ProfilePage: {
         posts: [
@@ -52,9 +50,18 @@ export let state: RootStateType = {
             {id: 2, message: 'How are you?'},
             {id: 3, message: 'Yo Yo'}
         ],
-        newMessageText: 'New text'
+        newMessageText: ''
     },
     sidebar: {}
+}
+
+
+
+let onChange = () => {
+}
+
+export const subscribe = (observer: () => void) => {
+    onChange = observer;
 }
 
 export const addPost = () => {
@@ -66,7 +73,7 @@ export const addPost = () => {
     };
     state.ProfilePage.posts.push(newPost);
     state.ProfilePage.newPostText = '';
-    rerenderEntireTree(state);
+    onChange();
 };
 export const addMessage = () => {
     let newMessage: MessageType = {
@@ -75,14 +82,13 @@ export const addMessage = () => {
     };
     state.DialogsPage.message.push(newMessage)
     state.DialogsPage.newMessageText = '';
-    rerenderEntireTree(state);
+    onChange();
 }
-
 export const changeNewText = (newText: string) => {
     state.ProfilePage.newPostText = newText;
-    rerenderEntireTree(state);
+    onChange();
 }
 export const changeNewMessageText = (newMessage: string) => {
     state.DialogsPage.newMessageText = newMessage;
-    rerenderEntireTree(state);
+    onChange();
 }
