@@ -1,12 +1,14 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
-import {PostType} from "../../../Redux/state"
+import {changeNewText, PostType} from "../../../Redux/state"
 
 type MyPostsPropsType = {
+    newPostText:string
     posts: PostType[]
     addPostCallback: (postMessage: string) => void
+    changeNewTextCallback: (newText: string) => void
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -16,16 +18,20 @@ const MyPosts = (props: MyPostsPropsType) => {
         // debugger
         if (newPostElement.current) {
             props.addPostCallback(newPostElement.current.value)
-            newPostElement.current.value = '';
+            // newPostElement.current.value = '';
         }
     };
 
+    const onChangePost = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.changeNewTextCallback(e.currentTarget.value)
+        // props.changeNewTextCallback('')
+    }
     return (
         <div className={classes.postsBlock}>
             <div className={classes.posts}>
                 <h3>My posts</h3>
                 <div className={classes.item}>
-                    <div><textarea ref={newPostElement}></textarea></div>
+                    <div><textarea ref={newPostElement} value={props.newPostText} onChange={onChangePost}/></div>
                     <div>
                         <button onClick={addPost}>Add post</button>
                     </div>

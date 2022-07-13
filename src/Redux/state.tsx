@@ -15,11 +15,13 @@ export type PostType = {
     likeCount: number
 }
 export type ProfilePageType = {
+    newPostText: string
     posts: Array<PostType>
 }
 export type DialogsPageType = {
     dialogs: Array<DialogType>
     message: Array<MessageType>
+    newMessageText: string
 }
 export type SidebarType = {}
 export type RootStateType = {
@@ -34,7 +36,8 @@ export let state: RootStateType = {
             {id: 1, message: 'Hi, how are you?', likeCount: 15},
             {id: 2, message: 'Yo yo, what\'s up', likeCount: 20},
             {id: 3, message: 'Common', likeCount: 10}
-        ]
+        ],
+        newPostText: ''
     },
     DialogsPage: {
         dialogs: [
@@ -48,18 +51,38 @@ export let state: RootStateType = {
             {id: 1, message: 'Hi!'},
             {id: 2, message: 'How are you?'},
             {id: 3, message: 'Yo Yo'}
-        ]
+        ],
+        newMessageText: 'New text'
     },
     sidebar: {}
 }
 
-export const addPost = (postMessage: string)=>{
+export const addPost = () => {
     // debugger
     let newPost: PostType = {
         id: new Date().getTime(),
-        message: postMessage,
+        message: state.ProfilePage.newPostText,
         likeCount: 0
     };
     state.ProfilePage.posts.push(newPost);
+    state.ProfilePage.newPostText = '';
     rerenderEntireTree(state);
 };
+export const addMessage = () => {
+    let newMessage: MessageType = {
+        id: new Date().getTime(),
+        message: state.DialogsPage.newMessageText
+    };
+    state.DialogsPage.message.push(newMessage)
+    state.DialogsPage.newMessageText = '';
+    rerenderEntireTree(state);
+}
+
+export const changeNewText = (newText: string) => {
+    state.ProfilePage.newPostText = newText;
+    rerenderEntireTree(state);
+}
+export const changeNewMessageText = (newMessage: string) => {
+    state.DialogsPage.newMessageText = newMessage;
+    rerenderEntireTree(state);
+}

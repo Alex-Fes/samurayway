@@ -11,6 +11,8 @@ export const rerenderEntireTree = (state: RootStateType) => {
                  dialogs={state.DialogsPage.dialogs}
                  message={state.DialogsPage.message}
                  addPostCallback={addPost}
+                 newPostText={state.ProfilePage.newPostText}
+                 newMessageText={state.DialogsPage.newMessageText}
             />
         </BrowserRouter>,
         document.getElementById('root')
