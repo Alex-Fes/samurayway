@@ -1,13 +1,14 @@
 import React from "react";
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {addPost, changeNewText, PostType, RootStateType, state} from "../../Redux/state";
+import {PostType} from "../../Redux/state";
 
 
 type ProfilePropsType = {
     newPostText: string
     posts: PostType[]
     addPostCallback: (postMessage: string) => void
+    changeNewTextCallback:(newText: string) => void
 }
 
 const Profile = (props: ProfilePropsType) => {
@@ -15,9 +16,9 @@ const Profile = (props: ProfilePropsType) => {
         <div>
             <ProfileInfo/>
             <MyPosts posts={props.posts}
-                     addPostCallback={addPost}
+                     addPostCallback={props.addPostCallback}
                      newPostText={props.newPostText}
-                     changeNewTextCallback={changeNewText}
+                     changeNewTextCallback={props.changeNewTextCallback}
             />
         </div>
     )

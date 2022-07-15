@@ -1,5 +1,3 @@
-
-
 export type DialogType = {
     id: number
     name: string
@@ -28,67 +26,143 @@ export type RootStateType = {
     DialogsPage: DialogsPageType
     sidebar: SidebarType
 }
-export let state: RootStateType = {
-    ProfilePage: {
-        posts: [
-            {id: 1, message: 'Hi, how are you?', likeCount: 15},
-            {id: 2, message: 'Yo yo, what\'s up', likeCount: 20},
-            {id: 3, message: 'Common', likeCount: 10}
-        ],
-        newPostText: ''
+// export let state: RootStateType = {
+//     ProfilePage: {
+//         posts: [
+//             {id: 1, message: 'Hi, how are you?', likeCount: 15},
+//             {id: 2, message: 'Yo yo, what\'s up', likeCount: 20},
+//             {id: 3, message: 'Common', likeCount: 10}
+//         ],
+//         newPostText: ''
+//     },
+//     DialogsPage: {
+//         dialogs: [
+//             {id: 1, name: 'Alex'},
+//             {id: 2, name: 'Sasha'},
+//             {id: 3, name: 'Yana'},
+//             {id: 4, name: 'Dima'},
+//             {id: 5, name: 'Vetal'}
+//         ],
+//         message: [
+//             {id: 1, message: 'Hi!'},
+//             {id: 2, message: 'How are you?'},
+//             {id: 3, message: 'Yo Yo'}
+//         ],
+//         newMessageText: ''
+//     },
+//     sidebar: {}
+// }
+
+export type StoreType = {
+    _state: RootStateType
+    changeNewMessageText: (newMessage: string) => void
+    changeNewText: (newText: string) => void
+    addMessage: () => void
+    addPost: () => void
+    subscribe: (observer: () => void) => void
+    _onChange: () => void
+    getState: () => RootStateType
+}
+const store: StoreType = {
+    _state: {
+        ProfilePage: {
+            posts: [
+                {id: 1, message: 'Hi, how are you?', likeCount: 15},
+                {id: 2, message: 'Yo yo, what\'s up', likeCount: 20},
+                {id: 3, message: 'Common', likeCount: 10}
+            ],
+            newPostText: ''
+        },
+        DialogsPage: {
+            dialogs: [
+                {id: 1, name: 'Alex'},
+                {id: 2, name: 'Sasha'},
+                {id: 3, name: 'Yana'},
+                {id: 4, name: 'Dima'},
+                {id: 5, name: 'Vetal'}
+            ],
+            message: [
+                {id: 1, message: 'Hi!'},
+                {id: 2, message: 'How are you?'},
+                {id: 3, message: 'Yo Yo'}
+            ],
+            newMessageText: ''
+        },
+        sidebar: {}
     },
-    DialogsPage: {
-        dialogs: [
-            {id: 1, name: 'Alex'},
-            {id: 2, name: 'Sasha'},
-            {id: 3, name: 'Yana'},
-            {id: 4, name: 'Dima'},
-            {id: 5, name: 'Vetal'}
-        ],
-        message: [
-            {id: 1, message: 'Hi!'},
-            {id: 2, message: 'How are you?'},
-            {id: 3, message: 'Yo Yo'}
-        ],
-        newMessageText: ''
+    changeNewMessageText(newMessage: string) {
+        this._state.DialogsPage.newMessageText = newMessage;
+        this._onChange();
     },
-    sidebar: {}
+    changeNewText(newText: string) {
+        this._state.ProfilePage.newPostText = newText;
+        this._onChange();
+    },
+    addMessage() {
+        let newMessage: MessageType = {
+            id: new Date().getTime(),
+            message: this._state.DialogsPage.newMessageText
+        };
+        this._state.DialogsPage.message.push(newMessage)
+        this._state.DialogsPage.newMessageText = '';
+        this._onChange();
+    },
+    addPost() {
+        let newPost: PostType = {
+            id: new Date().getTime(),
+            message: this._state.ProfilePage.newPostText,
+            likeCount: 0
+        };
+        this._state.ProfilePage.posts.push(newPost);
+        this._state.ProfilePage.newPostText = '';
+        this._onChange();
+    },
+    subscribe(observer) {
+        this._onChange = observer;
+    },
+    _onChange() {
+        console.log('state changed')
+    },
+    getState() {
+        return this._state
+    }
 }
 
 
+// let onChange = () => {
+// }
+//
+// export const subscribe = (observer: () => void) => {
+//     onChange = observer;
+// }
+//
+// export const addPost = () => {
+//     // debugger
+//     let newPost: PostType = {
+//         id: new Date().getTime(),
+//         message: state.ProfilePage.newPostText,
+//         likeCount: 0
+//     };
+//     state.ProfilePage.posts.push(newPost);
+//     state.ProfilePage.newPostText = '';
+//     onChange();
+// };
+// export const addMessage = () => {
+//     let newMessage: MessageType = {
+//         id: new Date().getTime(),
+//         message: state.DialogsPage.newMessageText
+//     };
+//     state.DialogsPage.message.push(newMessage)
+//     state.DialogsPage.newMessageText = '';
+//     onChange();
+// }
+// export const changeNewText = (newText: string) => {
+//     state.ProfilePage.newPostText = newText;
+//     onChange();
+// }
+// export const changeNewMessageText = (newMessage: string) => {
+//     state.DialogsPage.newMessageText = newMessage;
+//     onChange();
+// }
 
-let onChange = () => {
-}
-
-export const subscribe = (observer: () => void) => {
-    onChange = observer;
-}
-
-export const addPost = () => {
-    // debugger
-    let newPost: PostType = {
-        id: new Date().getTime(),
-        message: state.ProfilePage.newPostText,
-        likeCount: 0
-    };
-    state.ProfilePage.posts.push(newPost);
-    state.ProfilePage.newPostText = '';
-    onChange();
-};
-export const addMessage = () => {
-    let newMessage: MessageType = {
-        id: new Date().getTime(),
-        message: state.DialogsPage.newMessageText
-    };
-    state.DialogsPage.message.push(newMessage)
-    state.DialogsPage.newMessageText = '';
-    onChange();
-}
-export const changeNewText = (newText: string) => {
-    state.ProfilePage.newPostText = newText;
-    onChange();
-}
-export const changeNewMessageText = (newMessage: string) => {
-    state.DialogsPage.newMessageText = newMessage;
-    onChange();
-}
+export default store;
