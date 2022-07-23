@@ -55,10 +55,6 @@ export type RootStateType = {
 
 export type StoreType = {
     _state: RootStateType
-    changeNewMessageText: (newMessage: string) => void
-    changeNewText: (newText: string) => void
-    addMessage: () => void
-    addPost: () => void
     subscribe: (observer: () => void) => void
     _onChange: () => void
     getState: () => RootStateType
@@ -111,33 +107,6 @@ const store: StoreType = {
             newMessageText: ''
         },
         sidebar: {}
-    },
-    changeNewMessageText(newMessage: string) {
-        this._state.DialogsPage.newMessageText = newMessage;
-        this._onChange();
-    },
-    changeNewText(newText: string) {
-        this._state.ProfilePage.newPostText = newText;
-        this._onChange();
-    },
-    addMessage() {
-        let newMessage: MessageType = {
-            id: new Date().getTime(),
-            message: this._state.DialogsPage.newMessageText
-        };
-        this._state.DialogsPage.message.push(newMessage)
-        this._state.DialogsPage.newMessageText = '';
-        this._onChange();
-    },
-    addPost() {
-        let newPost: PostType = {
-            id: new Date().getTime(),
-            message: this._state.ProfilePage.newPostText,
-            likeCount: 0
-        };
-        this._state.ProfilePage.posts.push(newPost);
-        this._state.ProfilePage.newPostText = '';
-        this._onChange();
     },
     dispatch(action) {
         if (action.type === 'ADD-POST') {
