@@ -8,7 +8,7 @@ import {Route} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
-import {ActionTypes, StoreType} from "./Redux/state";
+import {StoreType} from "./Redux/state";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import Footer from "./Components/Footer/Footer";
 

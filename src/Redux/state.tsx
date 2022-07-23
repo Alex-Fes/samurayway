@@ -60,26 +60,19 @@ export type StoreType = {
     getState: () => RootStateType
     dispatch: (action: ActionTypes) => void
 }
-type AddPostActionType = {
+export type AddPostActionType = {
     type: 'ADD-POST'
     newPost: string
 }
-type AddMessageActionType = {
-    type: 'ADD-MESSAGE'
-    newMessage: string
-}
-type ChangeNewTextActionType = {
-    type: 'CHANGE-NEW-TEXT'
-    newText: string
-}
-type ChangeNewMessageText = {
-    type: 'CHANGE-NEW-MESSAGE-TEXT'
-    newMessage: string
-}
-export type ActionTypes = AddPostActionType
-    | AddMessageActionType
-    | ChangeNewTextActionType
-    | ChangeNewMessageText;
+// export type AddPostActionType = ReturnType<typeof addPostCreateAction>
+
+
+export type ActionTypes =
+    ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof onChangePostActionCreator>
+    | ReturnType<typeof sendMessageActionCreator>
+    | ReturnType<typeof addMessageActionCreator>;
+
 
 const store: StoreType = {
     _state: {
@@ -118,8 +111,7 @@ const store: StoreType = {
             this._state.ProfilePage.posts.push(newPost);
             this._state.ProfilePage.newPostText = '';
             this._onChange();
-        }
-        else if (action.type === 'ADD-MESSAGE') {
+        } else if (action.type === 'ADD-MESSAGE') {
             let newMessage: MessageType = {
                 id: new Date().getTime(),
                 message: this._state.DialogsPage.newMessageText
@@ -127,12 +119,10 @@ const store: StoreType = {
             this._state.DialogsPage.message.push(newMessage)
             this._state.DialogsPage.newMessageText = '';
             this._onChange();
-        }
-        else if (action.type === 'CHANGE-NEW-TEXT') {
+        } else if (action.type === 'CHANGE-NEW-TEXT') {
             this._state.ProfilePage.newPostText = action.newText;
             this._onChange();
-        }
-        else if (action.type === 'CHANGE-NEW-MESSAGE-TEXT') {
+        } else if (action.type === 'CHANGE-NEW-MESSAGE-TEXT') {
             this._state.DialogsPage.newMessageText = action.newMessage;
             this._onChange();
         }
@@ -147,6 +137,15 @@ const store: StoreType = {
         return this._state
     }
 }
+
+export const addPostActionCreator = (newPost: string) =>
+    ({type: 'ADD-POST', newPost: newPost}) as const;
+export const onChangePostActionCreator = (newText: string) =>
+    ({type: "CHANGE-NEW-TEXT", newText: newText}) as const;
+export const sendMessageActionCreator = (newMessage: string) =>
+     ({type: 'ADD-MESSAGE', newMessage: newMessage}) as const;
+export const addMessageActionCreator = (newMessage: string) =>
+    ({type: "CHANGE-NEW-MESSAGE-TEXT", newMessage: newMessage}) as const;
 
 
 // let onChange = () => {
