@@ -62,7 +62,29 @@ export type StoreType = {
     subscribe: (observer: () => void) => void
     _onChange: () => void
     getState: () => RootStateType
+    dispatch: (action: ActionTypes) => void
 }
+type AddPostActionType = {
+    type: 'ADD-POST'
+    newPost: string
+}
+type AddMessageActionType = {
+    type: 'ADD-MESSAGE'
+    newMessage: string
+}
+type ChangeNewTextActionType = {
+    type: 'CHANGE-NEW-TEXT'
+    newText: string
+}
+type ChangeNewMessageText = {
+    type: 'CHANGE-NEW-MESSAGE-TEXT'
+    newMessage: string
+}
+export type ActionTypes = AddPostActionType
+    | AddMessageActionType
+    | ChangeNewTextActionType
+    | ChangeNewMessageText;
+
 const store: StoreType = {
     _state: {
         ProfilePage: {
@@ -116,6 +138,35 @@ const store: StoreType = {
         this._state.ProfilePage.posts.push(newPost);
         this._state.ProfilePage.newPostText = '';
         this._onChange();
+    },
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost: PostType = {
+                id: new Date().getTime(),
+                message: this._state.ProfilePage.newPostText,
+                likeCount: 0
+            };
+            this._state.ProfilePage.posts.push(newPost);
+            this._state.ProfilePage.newPostText = '';
+            this._onChange();
+        }
+        else if (action.type === 'ADD-MESSAGE') {
+            let newMessage: MessageType = {
+                id: new Date().getTime(),
+                message: this._state.DialogsPage.newMessageText
+            };
+            this._state.DialogsPage.message.push(newMessage)
+            this._state.DialogsPage.newMessageText = '';
+            this._onChange();
+        }
+        else if (action.type === 'CHANGE-NEW-TEXT') {
+            this._state.ProfilePage.newPostText = action.newText;
+            this._onChange();
+        }
+        else if (action.type === 'CHANGE-NEW-MESSAGE-TEXT') {
+            this._state.DialogsPage.newMessageText = action.newMessage;
+            this._onChange();
+        }
     },
     subscribe(observer) {
         this._onChange = observer;
