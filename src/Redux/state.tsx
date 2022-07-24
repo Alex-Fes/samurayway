@@ -1,3 +1,7 @@
+import {addPostActionCreator, onChangePostActionCreator, profileReduser} from "./profileReduser";
+import {addMessageActionCreator, dialogReduser, sendMessageActionCreator} from "./dialogsReduser";
+import {sidebarReduser} from "./sidebarReduser";
+
 export type DialogType = {
     id: number
     name: string
@@ -60,10 +64,6 @@ export type StoreType = {
     getState: () => RootStateType
     dispatch: (action: ActionTypes) => void
 }
-export type AddPostActionType = {
-    type: 'ADD-POST'
-    newPost: string
-}
 // export type AddPostActionType = ReturnType<typeof addPostCreateAction>
 
 
@@ -102,30 +102,35 @@ const store: StoreType = {
         sidebar: {}
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let newPost: PostType = {
-                id: new Date().getTime(),
-                message: this._state.ProfilePage.newPostText,
-                likeCount: 0
-            };
-            this._state.ProfilePage.posts.push(newPost);
-            this._state.ProfilePage.newPostText = '';
-            this._onChange();
-        } else if (action.type === 'ADD-MESSAGE') {
-            let newMessage: MessageType = {
-                id: new Date().getTime(),
-                message: this._state.DialogsPage.newMessageText
-            };
-            this._state.DialogsPage.message.push(newMessage)
-            this._state.DialogsPage.newMessageText = '';
-            this._onChange();
-        } else if (action.type === 'CHANGE-NEW-TEXT') {
-            this._state.ProfilePage.newPostText = action.newText;
-            this._onChange();
-        } else if (action.type === 'CHANGE-NEW-MESSAGE-TEXT') {
-            this._state.DialogsPage.newMessageText = action.newMessage;
-            this._onChange();
-        }
+        this._state.ProfilePage = profileReduser(this._state.ProfilePage, action)
+        this._state.DialogsPage = dialogReduser(this._state.DialogsPage, action)
+        this._state.sidebar = sidebarReduser(this._state.sidebar, action)
+        this._onChange();
+        //
+        // if (action.type === 'ADD-POST') {
+        //     let newPost: PostType = {
+        //         id: new Date().getTime(),
+        //         message: this._state.ProfilePage.newPostText,
+        //         likeCount: 0
+        //     };
+        //     this._state.ProfilePage.posts.push(newPost);
+        //     this._state.ProfilePage.newPostText = '';
+        //     this._onChange();
+        // } else if (action.type === 'ADD-MESSAGE') {
+        //     let newMessage: MessageType = {
+        //         id: new Date().getTime(),
+        //         message: this._state.DialogsPage.newMessageText
+        //     };
+        //     this._state.DialogsPage.message.push(newMessage)
+        //     this._state.DialogsPage.newMessageText = '';
+        //     this._onChange();
+        // } else if (action.type === 'CHANGE-NEW-TEXT') {
+        //     this._state.ProfilePage.newPostText = action.newText;
+        //     this._onChange();
+        // } else if (action.type === 'CHANGE-NEW-MESSAGE-TEXT') {
+        //     this._state.DialogsPage.newMessageText = action.newMessage;
+        //     this._onChange();
+        // }
     },
     subscribe(observer) {
         this._onChange = observer;
@@ -137,17 +142,6 @@ const store: StoreType = {
         return this._state
     }
 }
-
-export const addPostActionCreator = (newPost: string) =>
-    ({type: 'ADD-POST', newPost: newPost}) as const;
-export const onChangePostActionCreator = (newText: string) =>
-    ({type: "CHANGE-NEW-TEXT", newText: newText}) as const;
-export const sendMessageActionCreator = (newMessage: string) =>
-     ({type: 'ADD-MESSAGE', newMessage: newMessage}) as const;
-export const addMessageActionCreator = (newMessage: string) =>
-    ({type: "CHANGE-NEW-MESSAGE-TEXT", newMessage: newMessage}) as const;
-
-
 // let onChange = () => {
 // }
 //
