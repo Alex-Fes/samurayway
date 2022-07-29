@@ -1,9 +1,16 @@
 import React from "react";
 import {ActionTypes, PostType, ProfilePageType} from "./state";
 
-
-export const profileReduser = (state: ProfilePageType, action: ActionTypes) => {
-    switch (action.type){
+let initialState = {
+    posts: [
+        {id: 1, message: 'Hi, how are you?', likeCount: 15},
+        {id: 2, message: 'Yo yo, what\'s up', likeCount: 20},
+        {id: 3, message: 'Common', likeCount: 10}
+    ],
+    newPostText: ''
+};
+export const profileReduser = (state: ProfilePageType = initialState, action: ActionTypes) => {
+    switch (action.type) {
         case "ADD-POST":
             let newPost: PostType = {
                 id: new Date().getTime(),

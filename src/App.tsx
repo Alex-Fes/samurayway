@@ -8,19 +8,19 @@ import {Route} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
-import {StoreType} from "./Redux/state";
+import {RootStateType, StoreType} from "./Redux/state";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import Footer from "./Components/Footer/Footer";
+import {RootState} from "@reduxjs/toolkit/dist/query/core/apiState";
 
-type AppPropsType = {
+export type AppPropsType = {
     // posts: PostType[]
     // dialogs: DialogType[]
     // message: MessageType[]
     // addPostCallback: (postMessage: string) => void
     // newPostText: string
     // newMessageText: string
-    store: StoreType
-
+    store: any
 }
 
 const App = (props: AppPropsType) => {

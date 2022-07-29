@@ -1,8 +1,22 @@
 import React from "react";
 import {ActionTypes, DialogsPageType, MessageType} from "./state";
 
-
-export const dialogReduser = (state: DialogsPageType, action: ActionTypes) => {
+let initialState = {
+    dialogs: [
+        {id: 1, name: 'Alex'},
+        {id: 2, name: 'Sasha'},
+        {id: 3, name: 'Yana'},
+        {id: 4, name: 'Dima'},
+        {id: 5, name: 'Vetal'}
+    ],
+    message: [
+        {id: 1, message: 'Hi!'},
+        {id: 2, message: 'How are you?'},
+        {id: 3, message: 'Yo Yo'}
+    ],
+    newMessageText: ''
+};
+export const dialogReduser = (state: DialogsPageType = initialState, action: ActionTypes) => {
     switch (action.type) {
         case "ADD-MESSAGE":
             let newMessage: MessageType = {

@@ -66,7 +66,6 @@ export type StoreType = {
 }
 // export type AddPostActionType = ReturnType<typeof addPostCreateAction>
 
-
 export type ActionTypes =
     ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof onChangePostActionCreator>
