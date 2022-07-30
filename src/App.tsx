@@ -12,6 +12,8 @@ import {RootStateType, StoreType} from "./Redux/state";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import Footer from "./Components/Footer/Footer";
 import {RootState} from "@reduxjs/toolkit/dist/query/core/apiState";
+import store from "./Redux/redux-store";
+import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 
 export type AppPropsType = {
     // posts: PostType[]
@@ -33,16 +35,18 @@ const App = (props: AppPropsType) => {
             <Navigation/>
             <div className='app-wrapper-content'>
                 <Route path='/profile' render={() => <Profile
-                    dispatch={props.store.dispatch.bind(props.store)}
-                    posts={state.ProfilePage.posts}
-                    newPostText={state.ProfilePage.newPostText}
+                    store={props.store}
+                    // dispatch={props.store.dispatch.bind(props.store)}
+                    // posts={state.ProfilePage.posts}
+                    // newPostText={state.ProfilePage.newPostText}
                 />}></Route>
                 <Route path='/dialogs'
-                       render={() => <Dialogs
-                           dispatch={props.store.dispatch.bind(props.store)}
-                           dialog={state.DialogsPage.dialogs}
-                           message={state.DialogsPage.message}
-                           newMessageText={state.DialogsPage.newMessageText}
+                       render={() => <DialogsContainer
+                           store={props.store}
+                           // dispatch={props.store.dispatch.bind(props.store)}
+                           // dialog={state.DialogsPage.dialogs}
+                           // message={state.DialogsPage.message}
+                           // newMessageText={state.DialogsPage.newMessageText}
                        />}></Route>
                 <Route path='/news' render={() => <News/>}></Route>
                 <Route path='/music' render={() => <Music/>}></Route>

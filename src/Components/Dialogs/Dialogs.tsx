@@ -10,22 +10,24 @@ type DialogsPropsType = {
     dialog: DialogType[]
     message: MessageType[]
     newMessageText: string
-    dispatch: (action: ActionTypes) => void
+    // dispatch: (action: ActionTypes) => void
+    changeNewMessageTextCallback: (newMessageTextBody: string) => void
+    sendMessage:()=> void
 }
 
 const Dialogs = (props: DialogsPropsType) => {
     let dialogElements = props.dialog.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>);
     let messagesElements = props.message.map(m => <Message key={m.id} id={m.id} message={m.message}/>);
     let newMessage = React.createRef<HTMLTextAreaElement>();
-    let sendMessage = () => {
-        //props.addMessageCallback(newMessage.current.value)
-        props.dispatch(sendMessageActionCreator(props.newMessageText))
-
+    let onSendMessage = () => {
+        props.sendMessage()
+        // props.dispatch(sendMessageActionCreator(props.newMessageText))
     }
-    let addMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        //props.changeNewMessageTextCallback(e.currentTarget.value)
+    let onAddMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let newMessageTextBody = e.currentTarget.value
+        props.changeNewMessageTextCallback(newMessageTextBody)
         //  props.dispatch({type: 'CHANGE-NEW-MESSAGE-TEXT', newMessage: e.currentTarget.value})
-        props.dispatch(addMessageActionCreator(e.currentTarget.value))
+        // props.dispatch(addMessageActionCreator(e.currentTarget.value))
     }
     return (
         <BrowserRouter>
@@ -38,8 +40,8 @@ const Dialogs = (props: DialogsPropsType) => {
                     <textarea placeholder={'Enter your message'}
                               ref={newMessage}
                               value={props.newMessageText}
-                              onChange={addMessageHandler}/>
-                    <button onClick={sendMessage}>Send</button>
+                              onChange={onAddMessageHandler}/>
+                    <button onClick={onSendMessage}>Send</button>
                 </div>
             </div>
         </BrowserRouter>
