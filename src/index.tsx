@@ -4,8 +4,8 @@ import store from "./Redux/redux-store";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
-import {RootStateType,} from "./Redux/state";
-import {Provider} from "react-redux";
+import {Provider} from "./StoreContext";
+
 
 let rerenderEntireTree = () => {
     ReactDOM.render(
@@ -18,7 +18,7 @@ let rerenderEntireTree = () => {
                     // addPostCallback={store.addPost}
                     // newPostText={store._state.ProfilePage.newPostText}
                     // newMessageText={store._state.DialogsPage.newMessageText}
-                    store={store}
+                    // store={store}
                 />
             </Provider>
         </BrowserRouter>,

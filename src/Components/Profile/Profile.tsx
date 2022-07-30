@@ -7,7 +7,7 @@ type ProfilePropsType = {
     // newPostText: string
     // posts: PostType[]
     // dispatch: (action: ActionTypes) => void
-    store: any
+    // store: any
 }
 
 const Profile = (props: ProfilePropsType) => {
@@ -18,7 +18,7 @@ const Profile = (props: ProfilePropsType) => {
                 // posts={props.posts}
                 // newPostText={props.newPostText}
                 // dispatch={props.dispatch}
-                store={props.store}
+                // store={props.store}
             />
         </div>
     )

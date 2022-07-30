@@ -3,16 +3,12 @@ import './App.css';
 import Header from "./Components/Header/Header";
 import Navigation from "./Components/Navigation/Navigation";
 import Profile from "./Components/Profile/Profile";
-import Dialogs from "./Components/Dialogs/Dialogs";
 import {Route} from "react-router-dom";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
-import {RootStateType, StoreType} from "./Redux/state";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import Footer from "./Components/Footer/Footer";
-import {RootState} from "@reduxjs/toolkit/dist/query/core/apiState";
-import store from "./Redux/redux-store";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 
 export type AppPropsType = {
@@ -22,11 +18,11 @@ export type AppPropsType = {
     // addPostCallback: (postMessage: string) => void
     // newPostText: string
     // newMessageText: string
-    store: any
+    // store: any
 }
 
 const App = (props: AppPropsType) => {
-    const state = props.store.getState();
+    //const state = props.store.getState();
 
     return (
 
@@ -35,14 +31,14 @@ const App = (props: AppPropsType) => {
             <Navigation/>
             <div className='app-wrapper-content'>
                 <Route path='/profile' render={() => <Profile
-                    store={props.store}
+                    // store={props.store}
                     // dispatch={props.store.dispatch.bind(props.store)}
                     // posts={state.ProfilePage.posts}
                     // newPostText={state.ProfilePage.newPostText}
                 />}></Route>
                 <Route path='/dialogs'
                        render={() => <DialogsContainer
-                           store={props.store}
+                           // store={props.store}
                            // dispatch={props.store.dispatch.bind(props.store)}
                            // dialog={state.DialogsPage.dialogs}
                            // message={state.DialogsPage.message}
