@@ -4,7 +4,7 @@ import {dialogReduser} from "./dialogsReduser";
 import {sidebarReduser} from "./sidebarReduser";
 
 type ReducerType = typeof redusers
-type StoreType = ReturnType<ReducerType>
+export type StoreType = ReturnType<ReducerType>
 
 
 let redusers = combineReducers({

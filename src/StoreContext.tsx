@@ -2,6 +2,8 @@ import React from "react";
 import {StoreType} from "./Redux/state";
 
 
+
+
 export type ProviderPropsType = {
     store: any
     children:React.ReactNode

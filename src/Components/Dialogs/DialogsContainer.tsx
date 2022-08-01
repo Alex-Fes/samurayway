@@ -1,13 +1,7 @@
-import React, {ChangeEvent} from "react";
-import style from './Dialogs.module.css'
-import {BrowserRouter} from "react-router-dom";
-import DialogItem from "./DialogItem/DialogItem";
-import Message from "./Message/Message";
-import {ActionTypes, DialogType, MessageType} from "../../Redux/state";
+import React from "react";
 import {addMessageActionCreator, sendMessageActionCreator} from "../../Redux/dialogsReduser";
 import Dialogs from "./Dialogs";
-import store from "../../Redux/redux-store";
-import StoreContext, {Provider} from "../../StoreContext";
+import StoreContext from "../../StoreContext";
 
 type DialogsPropsType = {
     // dialog: DialogType[]
@@ -39,7 +33,8 @@ const DialogsContainer = () => {
                                 sendMessage={sendMessage}
                                 newMessageText={state.DialogsPage.newMessageText}
                                 changeNewMessageTextCallback={addMessage}/>
-            }}
+            }
+            }
         </StoreContext.Consumer>
     )
     //
