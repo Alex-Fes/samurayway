@@ -3,17 +3,17 @@ import {profileReduser} from "./profileReduser";
 import {dialogReduser} from "./dialogsReduser";
 import {sidebarReduser} from "./sidebarReduser";
 
-type ReducerType = typeof redusers
+type ReducerType = typeof rootReduser
 export type StoreType = ReturnType<ReducerType>
 
 
-let redusers = combineReducers({
+let rootReduser = combineReducers({
     ProfilePage: profileReduser,
     DialogsPage: dialogReduser,
     sidebar: sidebarReduser
 })
 
 
-let store = createStore(redusers);
+let store = createStore(rootReduser);
 
 export default store;

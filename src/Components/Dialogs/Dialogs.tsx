@@ -3,11 +3,10 @@ import style from './Dialogs.module.css'
 import {BrowserRouter} from "react-router-dom";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {ActionTypes, DialogType, MessageType} from "../../Redux/state";
-import {addMessageActionCreator, sendMessageActionCreator} from "../../Redux/dialogsReduser";
+import {DialogType, MessageType} from "../../Redux/state";
 
 type DialogsPropsType = {
-    dialog: DialogType[]
+    dialogs: DialogType[]
     message: MessageType[]
     newMessageText: string
     // dispatch: (action: ActionTypes) => void
@@ -16,7 +15,7 @@ type DialogsPropsType = {
 }
 
 const Dialogs = (props: DialogsPropsType) => {
-    let dialogElements = props.dialog.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>);
+    let dialogElements = props.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>);
     let messagesElements = props.message.map(m => <Message key={m.id} id={m.id} message={m.message}/>);
     let newMessage = React.createRef<HTMLTextAreaElement>();
     let onSendMessage = () => {
