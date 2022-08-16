@@ -1,16 +1,15 @@
 import {addPostActionCreator, onChangePostActionCreator, profileReduser} from "./profileReduser";
-import {addMessageActionCreator, dialogReduser, sendMessageActionCreator} from "./dialogsReduser";
+import {
+    addMessageActionCreator,
+    dialogReduser,
+    DialogType,
+    MessageType,
+    sendMessageActionCreator
+} from "./dialogsReduser";
 import {sidebarReduser} from "./sidebarReduser";
 
-export type DialogType = {
-    id: number
-    name: string
-}
-export type MessageType = {
-    id: number
-    message: string
-}
-export type PostType = {
+
+type PostType = {
     id: number
     message: string
     likeCount: number
@@ -19,7 +18,7 @@ export type ProfilePageType = {
     newPostText: string
     posts: Array<PostType>
 }
-export type DialogsPageType = {
+type DialogsPageType = {
     dialogs: Array<DialogType>
     message: Array<MessageType>
     newMessageText: string
@@ -30,41 +29,14 @@ export type RootStateType = {
     DialogsPage: DialogsPageType
     sidebar: SidebarType
 }
-// export let state: RootStateType = {
-//     ProfilePage: {
-//         posts: [
-//             {id: 1, message: 'Hi, how are you?', likeCount: 15},
-//             {id: 2, message: 'Yo yo, what\'s up', likeCount: 20},
-//             {id: 3, message: 'Common', likeCount: 10}
-//         ],
-//         newPostText: ''
-//     },
-//     DialogsPage: {
-//         dialogs: [
-//             {id: 1, name: 'Alex'},
-//             {id: 2, name: 'Sasha'},
-//             {id: 3, name: 'Yana'},
-//             {id: 4, name: 'Dima'},
-//             {id: 5, name: 'Vetal'}
-//         ],
-//         message: [
-//             {id: 1, message: 'Hi!'},
-//             {id: 2, message: 'How are you?'},
-//             {id: 3, message: 'Yo Yo'}
-//         ],
-//         newMessageText: ''
-//     },
-//     sidebar: {}
-// }
 
-export type StoreType = {
+type StoreType = {
     _state: RootStateType
     subscribe: (observer: () => void) => void
     _onChange: () => void
     getState: () => RootStateType
     dispatch: (action: ActionTypes) => void
 }
-// export type AddPostActionType = ReturnType<typeof addPostCreateAction>
 
 export type ActionTypes =
     ReturnType<typeof addPostActionCreator>

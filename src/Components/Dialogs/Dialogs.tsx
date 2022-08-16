@@ -3,16 +3,17 @@ import style from './Dialogs.module.css'
 import {BrowserRouter} from "react-router-dom";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogType, MessageType} from "../../Redux/state";
+import {DialogsPropsType} from "./DialogsContainer";
 
-type DialogsPropsType = {
-    dialogs: DialogType[]
-    message: MessageType[]
-    newMessageText: string
-    // dispatch: (action: ActionTypes) => void
-    changeNewMessageTextCallback: (newMessageTextBody: string) => void
-    sendMessage:()=> void
-}
+//
+// type DialogsPropsType = {
+//     dialogs: DialogType[]
+//     message: MessageType[]
+//     newMessageText: string
+//     // dispatch: (action: ActionTypes) => void
+//     changeNewMessageTextCallback: (newMessageTextBody: string) => void
+//     sendMessage:()=> void
+// }
 
 const Dialogs = (props: DialogsPropsType) => {
     let dialogElements = props.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>);

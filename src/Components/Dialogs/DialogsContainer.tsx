@@ -1,18 +1,19 @@
 import React from "react";
-import {addMessageActionCreator, sendMessageActionCreator} from "../../Redux/dialogsReduser";
+import {addMessageActionCreator, DialogType, MessageType, sendMessageActionCreator} from "../../Redux/dialogsReduser";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import state, {DialogsPageType} from "../../Redux/state";
-import {StoreType} from "../../Redux/redux-store";
 import {Dispatch} from "redux";
 
-type DialogsPropsType = {
-    // dialog: DialogType[]
-    // message: MessageType[]
-    // newMessageText: string
-    // dispatch: (action: ActionTypes) => void
-    // store: any
-}
+import {StoreType} from "../../Redux/redux-store";
+import state from "../../Redux/state";
+
+// type DialogsPropsType = {
+//     // dialog: DialogType[]
+//     // message: MessageType[]
+//     // newMessageText: string
+//     // dispatch: (action: ActionTypes) => void
+//     // store: any
+// }
 
 // const DialogsContainer = () => {
 //     //let state = store.getState();
@@ -41,15 +42,18 @@ type DialogsPropsType = {
 //     )
 // }
 
-type MapStateToProps = {
-
+type MapStateToPropsType = {
+    dialogs: Array<DialogType>
+    message:Array<MessageType>
+    newMessageText:string
 }
 type MapDispatchToProps = {
     sendMessage: ()=>void
     changeNewMessageTextCallback: (newMessageTextBody: string) => void
 }
+export type DialogsPropsType = MapDispatchToProps & MapStateToPropsType;
 
-const mapStateToProps = (state:StoreType): DialogsPageType => {
+const mapStateToProps = (state: StoreType): MapStateToPropsType => {
     return {
         dialogs: state.DialogsPage.dialogs,
         message: state.DialogsPage.message,
@@ -59,7 +63,7 @@ const mapStateToProps = (state:StoreType): DialogsPageType => {
 const mapDispatchToProps = (dispatch: Dispatch):MapDispatchToProps => {
     return {
         sendMessage: () => {
-            dispatch(sendMessageActionCreator(state.DialogsPage.newMessageText))
+            dispatch(sendMessageActionCreator())
         },
         changeNewMessageTextCallback: (newMessageTextBody: string) => {
             dispatch(addMessageActionCreator(newMessageTextBody))
