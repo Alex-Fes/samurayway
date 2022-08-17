@@ -4,14 +4,13 @@ import {StoreType} from "../../../../Redux/redux-store";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {addPostActionCreator, onChangePostActionCreator} from "../../../../Redux/profileReduser";
-import state from "../../../../Redux/state";
 
-type MyPostsPropsType = {
-    // newPostText: string
-    // posts: PostType[]
-    // dispatch: (action: ActionTypes) => void
-    // store: any
-}
+// type MyPostsPropsType = {
+//     // newPostText: string
+//     // posts: PostType[]
+//     // dispatch: (action: ActionTypes) => void
+//     // store: any
+// }
 
 // const MyPostsContainer = () => {
 //     // let state = props.store.getState();

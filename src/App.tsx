@@ -10,6 +10,7 @@ import Settings from "./Components/Settings/Settings";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import Footer from "./Components/Footer/Footer";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
+import Users from "./Components/Friends/Users";
 
 export type AppPropsType = {
     // posts: PostType[]
@@ -46,6 +47,7 @@ const App = (props: AppPropsType) => {
                        />}></Route>
                 <Route path='/news' render={() => <News/>}></Route>
                 <Route path='/music' render={() => <Music/>}></Route>
+                <Route path='/users' render={() => <Users/>}></Route>
                 <Route path='/settings' render={() => <Settings/>}></Route>
                 <Route path='/sidebar' render={() => <Sidebar/>}></Route>
                 <Route render={() => <Footer/>}></Route>

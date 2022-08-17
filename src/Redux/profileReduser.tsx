@@ -16,7 +16,7 @@ let initialState = {
     ] as Array<PostType>,
     newPostText: '' as string
 };
-export const profileReduser = (state: InitialStateType = initialState, action: ActionTypes):InitialStateType => {
+export const profileReduser = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
         case "ADD-POST":
             let newPost: PostType = {
@@ -24,15 +24,15 @@ export const profileReduser = (state: InitialStateType = initialState, action: A
                 message: state.newPostText,
                 likeCount: 0
             };
-            return {...state,posts: [...state.posts,newPost],newPostText: ''};
+            return {...state, posts: [...state.posts, newPost], newPostText: ''};
         case "CHANGE-NEW-TEXT":
             // state.newPostText = action.newText;
-            return {...state,newPostText: action.newText};
+            return {...state, newPostText: action.newText};
         default:
             return state;
     }
 }
 export const addPostActionCreator = () =>
-    ({type: 'ADD-POST' }) as const;
+    ({type: 'ADD-POST'}) as const;
 export const onChangePostActionCreator = (newText: string) =>
     ({type: "CHANGE-NEW-TEXT", newText: newText}) as const;
