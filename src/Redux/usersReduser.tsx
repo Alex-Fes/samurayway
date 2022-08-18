@@ -1,6 +1,8 @@
 import React from "react";
 import {ActionTypes} from "./state";
 
+
+
 export type InitialStateType = typeof initialState;
 
 let initialState = {
@@ -9,7 +11,7 @@ let initialState = {
             id: 1,
             followed: true,
             fullName: 'Alex',
-            status: 'I am will be in IT',
+            status: 'I will be in IT',
             location: {city: 'SPb', country: 'Russia'}
         },
         {

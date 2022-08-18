@@ -46,11 +46,11 @@ type MapStateToPropsType = {
     message: Array<MessageType>
     newMessageText: string
 }
-type MapDispatchToProps = {
+type MapDispatchToPropsType = {
     sendMessage: () => void
     changeNewMessageTextCallback: (newMessageTextBody: string) => void
 }
-export type DialogsPropsType = MapDispatchToProps & MapStateToPropsType;
+export type DialogsPropsType = MapDispatchToPropsType & MapStateToPropsType;
 
 const mapStateToProps = (state: StoreType): MapStateToPropsType => {
     return {
@@ -59,7 +59,7 @@ const mapStateToProps = (state: StoreType): MapStateToPropsType => {
         newMessageText: state.DialogsPage.newMessageText
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         sendMessage: () => {
             dispatch(sendMessageActionCreator())
