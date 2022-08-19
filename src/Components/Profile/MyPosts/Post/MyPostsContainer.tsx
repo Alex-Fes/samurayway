@@ -60,6 +60,7 @@ type MapDispatchToPropsType = {
     onChangePost: (text: string)=>void
     addPost: () => void
 }
+export type MyPostPropsType = MapStateToPropsType & MapDispatchToPropsType;
 
 const mapStateToProps = (state: StoreType): MapStateToPropsType => {
     return {

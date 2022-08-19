@@ -1,41 +1,23 @@
 import React from "react";
 import {ActionTypes} from "./state";
 
-
-
-export type InitialStateType = typeof initialState;
-
-let initialState = {
-    users: [
-        {
-            id: 1,
-            followed: true,
-            fullName: 'Alex',
-            status: 'I will be in IT',
-            location: {city: 'SPb', country: 'Russia'}
-        },
-        {
-            id: 2,
-            followed: false,
-            fullName: 'Vova',
-            status: 'Looking for a summer',
-            location: {city: 'Kiev', country: 'Ukraine'}
-        },
-        {
-            id: 3,
-            followed: true,
-            fullName: 'Yana',
-            status: 'Pretty miss',
-            location: {city: 'SPb', country: 'Russia'}
-        },
-        {
-            id: 4,
-            followed: true,
-            fullName: 'Kseniya',
-            status: 'Happy mom',
-            location: {city: 'Feodosia', country: 'Crimea'}
-        }
-    ]
+type UserLocationType = {
+    city: string
+    country: string
+}
+export type UserType = {
+    id: number
+    photoURL: string
+    followed: boolean
+    fullName: string
+    status: string
+    location: UserLocationType
+}
+export type InitialStateType = {
+    users: Array<UserType>
+}
+const initialState: InitialStateType = {
+    users: []
 };
 export const usersReduser = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
@@ -63,6 +45,6 @@ export const usersReduser = (state: InitialStateType = initialState, action: Act
             return state;
     }
 }
-export const followAC = (userId: any) => ({type: 'FOLLOW', userId}) as const;
-export const unfollowAC = (userId: any) => ({type: 'UNFOLLOW', userId}) as const;
-export const setUsersAC = (users: any) => ({type: 'SET-USERS', users}) as const;
+export const followAC = (userId: number) => ({type: 'FOLLOW', userId}) as const;
+export const unfollowAC = (userId: number) => ({type: 'UNFOLLOW', userId}) as const;
+export const setUsersAC = (users: Array<UserType>) => ({type: 'SET-USERS', users}) as const;

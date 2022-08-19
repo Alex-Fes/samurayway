@@ -1,17 +1,17 @@
 import React, {ChangeEvent} from "react";
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import {PostType} from "../../../Redux/profileReduser";
+import {MyPostPropsType} from "./Post/MyPostsContainer";
 
-type MyPostsPropsType = {
-    newPostText: string
-    posts: PostType[]
-    // dispatch: (action: ActionTypes) => void
-    onChangePost: (text: string) => void
-    addPost: () => void
-}
+// type MyPostsPropsType = {
+//     newPostText: string
+//     posts: PostType[]
+//     // dispatch: (action: ActionTypes) => void
+//     onChangePost: (text: string) => void
+//     addPost: () => void
+// }
 
-const MyPosts = (props: MyPostsPropsType) => {
+const MyPosts = (props: MyPostPropsType) => {
     let postsElement = props.posts.map(p => <Post message={p.message} likeCount={p.likeCount} key={p.id}/>)
     let newPostElement = React.createRef<HTMLTextAreaElement>();
     let onAddPost = () => {
