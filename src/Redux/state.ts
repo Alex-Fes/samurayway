@@ -7,7 +7,7 @@ import {
     sendMessageActionCreator
 } from "./dialogsReduser";
 import {sidebarReduser} from "./sidebarReduser";
-import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC} from "./usersReduser";
+import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC} from "./usersReducer";
 
 
 type PostType = {

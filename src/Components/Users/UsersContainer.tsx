@@ -1,6 +1,5 @@
 import React from "react";
 import {connect} from "react-redux";
-import Users from "./UsersС";
 import {StoreType} from "../../Redux/redux-store";
 import {Dispatch} from "redux";
 import {
@@ -11,7 +10,9 @@ import {
     setUsersAC,
     unfollowAC,
     UserType
-} from "../../Redux/usersReduser";
+} from "../../Redux/usersReducer";
+import axios from "axios";
+import Users from "./Users";
 
 type MapStateToPropsType = {
     usersPage: InitialStateType
@@ -26,8 +27,82 @@ type MapDispatchToProps = {
     setCurrentPageAC: (currentPage: number) => void
     setTotalUsersCountAC: (currentCount: number) => void
 }
-export type UsersPropsType = MapStateToPropsType & MapDispatchToProps;
+export type UsersAPIComponentPropsType = MapStateToPropsType & MapDispatchToProps;
 
+class UsersContainer extends React.Component<UsersAPIComponentPropsType> {
+    componentDidMount() {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+            this.props.setTotalUsersCountAC(response.data.totalCount)
+        })
+    }
+    onPageChanged = (pageNumber: number) => {
+        this.props.setCurrentPageAC(pageNumber);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+        })
+    }
+    render() {
+        // let pagesCount = Math.ceil(this.props.totalUserCount / this.props.pageSize);// округление в большую сторону
+        // // let pages = [];
+        // // for(let i = 1; i <= pagesCount; i++) {
+        // //     pages.push(i)
+        // // }
+        // let pages = [1, this.props.currentPage - 1, this.props.currentPage, this.props.currentPage + 1, pagesCount]
+        // if (this.props.currentPage < 4) {
+        //     pages = [1, 2, 3, 4, pagesCount]
+        // }
+        // if (this.props.currentPage > pagesCount - 2) {
+        //     pages = [1, pagesCount - 3, pagesCount - 2, pagesCount - 1, pagesCount]
+        // }
+
+        return <Users
+            totalUserCount={this.props.totalUserCount}
+            pageSize={this.props.pageSize}
+            currentPage={this.props.currentPage}
+            onPageChanged={this.onPageChanged}
+            usersPage={this.props.usersPage}
+            follow={this.props.follow}
+            unfollow={this.props.unfollow}
+        />
+        // <div>
+        //     <div>
+        //         {pages.map(el => {
+        //             return <span onClick={() => this.onPageChanged(el)}
+        //                          className={this.props.currentPage === el ? styles.selectPage : ''}>
+        //                        {el === pagesCount && this.props.currentPage < pagesCount - 2 && ' ... '}
+        //                 {el}
+        //                 {el === 1 && this.props.currentPage > 3 && ' ... '}
+        //                    </span>
+        //         })}
+        //     </div>
+        //     {this.props.usersPage.users.map(u =>
+        //             <div key={u.id}>
+        //         <span>
+        //             <div>
+        //             <img src={u.photos.small != null ? u.photos.small : userPhoto}
+        //                  alt="" className={styles.userPhoto}/>
+        //         </div>
+        //             <div>{u.followed ?
+        //                 <button onClick={() => {
+        //                     this.props.unfollow(u.id)
+        //                 }}>UnFollow</button>
+        //                 : <button onClick={() => {
+        //                     this.props.follow(u.id)
+        //                 }}>Follow</button>}
+        //         </div>
+        //         </span>
+        //                 <span><span>
+        //                 <div>{u.name}</div>
+        //                 <div>{u.status}</div>
+        //             </span><span>
+        //              <div>{'u.location.country'}</div>
+        //                 <div>{'u.location.city'}</div>
+        //         </span></span>
+        //             </div>)}
+        // </div>
+    }
+}
 let mapStateToProps = (state: StoreType): MapStateToPropsType => {
     return {
         usersPage: state.usersPage,
@@ -53,6 +128,7 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
         setTotalUsersCountAC: (totalCount: number) => {
             dispatch(setTotalUsersCountAC(totalCount))
         }
+
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
