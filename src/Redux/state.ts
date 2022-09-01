@@ -8,11 +8,11 @@ import {
 } from "./dialogsReduser";
 import {sidebarReduser} from "./sidebarReduser";
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC, toggleIsFetchingAC,
-    unfollowAC
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers, toggleIsFetching,
+    unfollow
 } from "./usersReducer";
 
 
@@ -50,12 +50,12 @@ export type ActionTypes =
     | ReturnType<typeof onChangePostActionCreator>
     | ReturnType<typeof sendMessageActionCreator>
     | ReturnType<typeof addMessageActionCreator>
-    | ReturnType<typeof followAC>
-    | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setTotalUsersCountAC>
-    | ReturnType<typeof toggleIsFetchingAC>;
+    | ReturnType<typeof follow>
+    | ReturnType<typeof unfollow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount>
+    | ReturnType<typeof toggleIsFetching>;
 
 
 const store: StoreType = {
