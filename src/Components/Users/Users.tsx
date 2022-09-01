@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 import styles from './Users.module.css'
 import userPhoto from '../../assets/images/userPic.png'
-import {InitialStateType} from "../../Redux/usersReducer";
+import {InitialStateType} from '../../Redux/usersReducer';
 
 type UsersPropsType = {
     usersPage: InitialStateType
@@ -11,6 +11,7 @@ type UsersPropsType = {
     onPageChanged: (pageNumber: number) => void
     follow: (userId: number) => void
     unfollow: (userId: number) => void
+
 }
 
 

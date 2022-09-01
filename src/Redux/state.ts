@@ -7,7 +7,13 @@ import {
     sendMessageActionCreator
 } from "./dialogsReduser";
 import {sidebarReduser} from "./sidebarReduser";
-import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC} from "./usersReducer";
+import {
+    followAC,
+    setCurrentPageAC,
+    setTotalUsersCountAC,
+    setUsersAC, toggleIsFetchingAC,
+    unfollowAC
+} from "./usersReducer";
 
 
 type PostType = {
@@ -40,15 +46,16 @@ type StoreType = {
 }
 
 export type ActionTypes =
-    ReturnType<typeof addPostActionCreator>
+      ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof onChangePostActionCreator>
     | ReturnType<typeof sendMessageActionCreator>
     | ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setUsersAC>
-    |ReturnType<typeof setCurrentPageAC>
-    |ReturnType<typeof setTotalUsersCountAC>;
+    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setTotalUsersCountAC>
+    | ReturnType<typeof toggleIsFetchingAC>;
 
 
 const store: StoreType = {
