@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Users.module.css'
 import userPhoto from '../../assets/images/userPic.png'
 import {InitialStateType} from '../../Redux/usersReducer';
+import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {
     usersPage: InitialStateType
@@ -45,8 +46,10 @@ function Users(props: UsersPropsType) {
                 <div key={u.id}>
                 <span>
                     <div>
+                        <NavLink to={'/profile/' + u.id}>
                     <img src={u.photos.small != null ? u.photos.small : userPhoto}
                          alt="UserPic" className={styles.userPhoto}/>
+                            </NavLink>
                 </div>
                     <div>{u.followed ?
                         <button onClick={() => {
