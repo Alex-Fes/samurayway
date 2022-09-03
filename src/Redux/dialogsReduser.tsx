@@ -33,7 +33,7 @@ let initialState = {
     newMessageText: '' as string
 };
 
-export const dialogReduser = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
+export const dialogReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
         case "ADD-MESSAGE":
             let newMessage: MessageType = {

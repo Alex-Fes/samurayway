@@ -3,7 +3,7 @@ import MyPosts from "../MyPosts";
 import {StoreType} from "../../../../Redux/redux-store";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {addPostActionCreator, onChangePostActionCreator} from "../../../../Redux/profileReduser";
+import {addPostActionCreator, onChangePostActionCreator} from "../../../../Redux/profileReducer";
 
 // type MyPostsPropsType = {
 //     // newPostText: string
