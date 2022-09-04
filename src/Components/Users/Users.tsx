@@ -32,9 +32,9 @@ function Users(props: UsersPropsType) {
 
     return <div>
         <div>
-            {pages.map(el => {
+            {pages.map((el, index) => {
                 return <span onClick={() => props.onPageChanged(el)}
-                             className={props.currentPage === el ? styles.selectPage : ''}>
+                             className={props.currentPage === el ? styles.selectPage : ''} key={index}>
                                {el === pagesCount && props.currentPage < pagesCount - 2 && ' ... '}
                     {el}
                     {el === 1 && props.currentPage > 3 && ' ... '}

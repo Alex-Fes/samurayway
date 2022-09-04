@@ -8,17 +8,12 @@ const ADD_POST = 'ADD-POST';
 const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 
-
-
-
 export type PostType = {
     id: number
     message: string
     likeCount: number
 }
-
 export type InitialStateType = typeof initialState;
-
 let initialState = {
     posts: [
         {id: 1, message: 'Hi, how are you?', likeCount: 15},
@@ -26,7 +21,7 @@ let initialState = {
         {id: 3, message: 'Common', likeCount: 10}
     ] as Array<PostType>,
     newPostText: '' as string,
-    profile:{}
+    profile: {} as RootUserProfileType
 };
 export const profileReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
@@ -42,6 +37,7 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
             return {...state, newPostText: action.newText};
         case SET_USER_PROFILE:
             return {...state, profile: action.profile};
+
         default:
             return state;
     }

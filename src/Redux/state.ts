@@ -1,19 +1,14 @@
-import {addPostActionCreator, onChangePostActionCreator, profileReduser} from "./profileReduser";
+import {addPostActionCreator, onChangePostActionCreator, profileReducer, setUserProfile} from "./profileReducer";
 import {
     addMessageActionCreator,
-    dialogReduser,
+    dialogReducer,
     DialogType,
     MessageType,
     sendMessageActionCreator
 } from "./dialogsReduser";
-import {sidebarReduser} from "./sidebarReduser";
-import {
-    follow,
-    setCurrentPage,
-    setTotalUsersCount,
-    setUsers, toggleIsFetching,
-    unfollow
-} from "./usersReducer";
+import {sidebarReducer} from "./sidebarReducer";
+import {follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching, unfollow} from "./usersReducer";
+import {RootUserProfileType} from "../Components/Profile/RootUserProfileType";
 
 
 type PostType = {
@@ -24,6 +19,7 @@ type PostType = {
 export type ProfilePageType = {
     newPostText: string
     posts: Array<PostType>
+    //profile: RootUserProfileType
 }
 type DialogsPageType = {
     dialogs: Array<DialogType>
@@ -46,7 +42,7 @@ type StoreType = {
 }
 
 export type ActionTypes =
-      ReturnType<typeof addPostActionCreator>
+    ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof onChangePostActionCreator>
     | ReturnType<typeof sendMessageActionCreator>
     | ReturnType<typeof addMessageActionCreator>
@@ -55,77 +51,72 @@ export type ActionTypes =
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
-    | ReturnType<typeof toggleIsFetching>;
+    | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof setUserProfile>;
+
+//
+// const store: StoreType = {
+//     _state: {
+//         ProfilePage: {
+//             posts: [
+//                 {id: 1, message: 'Hi, how are you?', likeCount: 15},
+//                 {id: 2, message: 'Yo yo, what\'s up', likeCount: 20},
+//                 {id: 3, message: 'Common', likeCount: 10}
+//             ],
+//             newPostText: '',
+//             profile: {}
+//         },
+//         DialogsPage: {
+//             dialogs: [
+//                 {id: 1, name: 'Alex'},
+//                 {id: 2, name: 'Sasha'},
+//                 {id: 3, name: 'Yana'},
+//                 {id: 4, name: 'Dima'},
+//                 {id: 5, name: 'Vetal'}
+//             ],
+//             message: [
+//                 {id: 1, message: 'Hi!'},
+//                 {id: 2, message: 'How are you?'},
+//                 {id: 3, message: 'Yo Yo'}
+//             ],
+//             newMessageText: ''
+//         },
+//         sidebar: {}
+//     },
+//     dispatch(action) {
+//         this._state.ProfilePage = profileReducer(this._state.ProfilePage, action)
+//         this._state.DialogsPage = dialogReducer(this._state.DialogsPage, action)
+//         this._state.sidebar = sidebarReducer(this._state.sidebar, action)
+//         this._onChange();
+//     },
+//     subscribe(observer) {
+//         this._onChange = observer;
+//     },
+//     _onChange() {
+//         console.log('state changed')
+//     },
+//     getState() {
+//         return this._state
+//     }
+// }
 
 
-const store: StoreType = {
-    _state: {
-        ProfilePage: {
-            posts: [
-                {id: 1, message: 'Hi, how are you?', likeCount: 15},
-                {id: 2, message: 'Yo yo, what\'s up', likeCount: 20},
-                {id: 3, message: 'Common', likeCount: 10}
-            ],
-            newPostText: ''
-        },
-        DialogsPage: {
-            dialogs: [
-                {id: 1, name: 'Alex'},
-                {id: 2, name: 'Sasha'},
-                {id: 3, name: 'Yana'},
-                {id: 4, name: 'Dima'},
-                {id: 5, name: 'Vetal'}
-            ],
-            message: [
-                {id: 1, message: 'Hi!'},
-                {id: 2, message: 'How are you?'},
-                {id: 3, message: 'Yo Yo'}
-            ],
-            newMessageText: ''
-        },
-        sidebar: {}
-    },
-    dispatch(action) {
-        this._state.ProfilePage = profileReduser(this._state.ProfilePage, action)
-        this._state.DialogsPage = dialogReduser(this._state.DialogsPage, action)
-        this._state.sidebar = sidebarReduser(this._state.sidebar, action)
-        this._onChange();
-        //
-        // if (action.type === 'ADD-POST') {
-        //     let newPost: PostType = {
-        //         id: new Date().getTime(),
-        //         message: this._state.ProfilePage.newPostText,
-        //         likeCount: 0
-        //     };
-        //     this._state.ProfilePage.posts.push(newPost);
-        //     this._state.ProfilePage.newPostText = '';
-        //     this._onChange();
-        // } else if (action.type === 'ADD-MESSAGE') {
-        //     let newMessage: MessageType = {
-        //         id: new Date().getTime(),
-        //         message: this._state.DialogsPage.newMessageText
-        //     };
-        //     this._state.DialogsPage.message.push(newMessage)
-        //     this._state.DialogsPage.newMessageText = '';
-        //     this._onChange();
-        // } else if (action.type === 'CHANGE-NEW-TEXT') {
-        //     this._state.ProfilePage.newPostText = action.newText;
-        //     this._onChange();
-        // } else if (action.type === 'CHANGE-NEW-MESSAGE-TEXT') {
-        //     this._state.DialogsPage.newMessageText = action.newMessage;
-        //     this._onChange();
-        // }
-    },
-    subscribe(observer) {
-        this._onChange = observer;
-    },
-    _onChange() {
-        console.log('state changed')
-    },
-    getState() {
-        return this._state
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // let onChange = () => {
 // }
 //
@@ -162,4 +153,4 @@ const store: StoreType = {
 //     onChange();
 // }
 
-export default store;
+// export default store;
