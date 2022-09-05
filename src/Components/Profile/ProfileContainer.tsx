@@ -18,7 +18,7 @@ type ProfileContainerPropsType = MapStateToPropsType & MapDispatchToProps;
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`).then(response => {
+        axios.get<RootUserProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/2`).then(response => {
             this.props.setUserProfile(response.data)
         })
     }

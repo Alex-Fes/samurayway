@@ -1,7 +1,10 @@
 import React from "react";
 import {ActionTypes} from "./state";
-import {RootUserProfileType} from "../Components/Profile/RootUserProfileType";
-
+import {
+    RootUserProfileType,
+    RootUserProfileTypeContacts,
+    RootUserProfileTypePhotos
+} from "../Components/Profile/RootUserProfileType";
 
 
 const ADD_POST = 'ADD-POST';
@@ -13,6 +16,28 @@ export type PostType = {
     message: string
     likeCount: number
 }
+export type ProfileType = {
+    aboutMe: '',
+    contacts: {
+        facebook: '',
+        website: '',
+        vk: '',
+        twitter: '',
+        instagram: '',
+        youtube: '',
+        github: '',
+        mainLink: '',
+    },
+    lookingForAJob: false,
+    lookingForAJobDescription: '',
+    fullName: '',
+    userId: 0,
+    photos: {
+        small: '',
+        large: '',
+    }
+}
+
 export type InitialStateType = typeof initialState;
 let initialState = {
     posts: [
@@ -20,9 +45,30 @@ let initialState = {
         {id: 2, message: 'Yo yo, what\'s up', likeCount: 20},
         {id: 3, message: 'Common', likeCount: 10}
     ] as Array<PostType>,
-    newPostText: '' as string,
-    profile: {} as RootUserProfileType
+    newPostText: '',
+    profile: {
+        aboutMe: '',
+        contacts: {
+            facebook: '',
+            website: '',
+            vk: '',
+            twitter: '',
+            instagram: '',
+            youtube: '',
+            github: '',
+            mainLink: '',
+        },
+        lookingForAJob: false,
+        lookingForAJobDescription: '',
+        fullName: '',
+        userId: 0,
+        photos: {
+            small: '',
+            large: '',
+        }
+    }
 };
+
 export const profileReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
@@ -36,7 +82,7 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
             // state.newPostText = action.newText;
             return {...state, newPostText: action.newText};
         case SET_USER_PROFILE:
-            return {...state, profile: action.profile};
+            return {...state, profile: action.profile} as InitialStateType;
 
         default:
             return state;

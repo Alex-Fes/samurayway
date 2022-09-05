@@ -17,6 +17,7 @@ let rootReducer = combineReducers({
 
 
 
-let store = createStore(rootReducer);
+export const store = createStore(rootReducer);
 
-export default store;
+//@ts-ignore
+window.store = store
