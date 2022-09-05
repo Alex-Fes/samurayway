@@ -31,7 +31,7 @@ const App = (props: AppPropsType) => {
             <Header/>
             <Navigation/>
             <div className='app-wrapper-content'>
-                <Route path='/profile' render={() => <ProfileContainer
+                <Route path='/profile/:userId?' render={() => <ProfileContainer
                     // store={props.store}
                     // dispatch={props.store.dispatch.bind(props.store)}
                     // posts={state.ProfilePage.posts}
