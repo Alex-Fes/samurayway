@@ -23,6 +23,12 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                 </div>
                 <div className={classes.descriptionBlock}>
                     <img src={props.profile.photos.large} alt=""/>
+                    <span>About me: {props.profile.aboutMe}</span>
+                    <ul>Contacts:
+                        <li>{props.profile.contacts.facebook}</li>
+                        <li>{props.profile.contacts.github}</li>
+                        <li>{props.profile.contacts.vk}</li>
+                        <li>{props.profile.contacts.youtube}</li></ul>
                     ava + description
                 </div>
             </div>
