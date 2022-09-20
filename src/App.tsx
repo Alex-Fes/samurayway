@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Header from "./Components/Header/Header";
 import Navigation from "./Components/Navigation/Navigation";
 import {Route} from "react-router-dom";
 import News from "./Components/News/News";
@@ -11,6 +10,7 @@ import Footer from "./Components/Footer/Footer";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
+import HeaderContainer from "./Components/Header/HeaderContainer";
 
 export type AppPropsType = {
     // posts: PostType[]
@@ -28,7 +28,7 @@ const App = (props: AppPropsType) => {
     return (
 
         <div className='app-wrapper'>
-            <Header/>
+            <HeaderContainer/>
             <Navigation/>
             <div className='app-wrapper-content'>
                 <Route path='/profile/:userId?' render={() => <ProfileContainer

@@ -5,10 +5,11 @@ import {
     DialogType,
     MessageType,
     sendMessageActionCreator
-} from "./dialogsReduser";
+} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching, unfollow} from "./usersReducer";
 import {RootUserProfileType} from "../Components/Profile/RootUserProfileType";
+import {setAuthUserDataAC} from "./authReducer";
 
 
 type PostType = {
@@ -52,6 +53,7 @@ export type ActionTypes =
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof setAuthUserDataAC>
     | ReturnType<typeof setUserProfile>;
 
 //
