@@ -1,12 +1,11 @@
 import React from "react";
 import Profile from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
 import {StoreType} from "../../Redux/redux-store";
 import {setUserProfile} from "../../Redux/profileReducer";
 import {RootUserProfileType} from "./RootUserProfileType";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {authMe} from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 export type PathParamType = {
     userId: string
@@ -28,7 +27,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
             userId = '2';
         }
 
-        authMe(userId).then(data => {
+        usersAPI.authMe(userId).then(data => {
             this.props.setUserProfile(data)
         })
     }
