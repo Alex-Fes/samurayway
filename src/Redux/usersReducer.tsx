@@ -13,19 +13,24 @@ export type UserType = {
     status: string
     location: UserLocationType
 }
+// export type followingInProcessType ={
+//     id: number
+// }
 export type InitialStateType = {
     users: Array<UserType>
     pageSize: number
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProcess: Array<number>
 }
 const initialState: InitialStateType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProcess: [1]
 };
 export const usersReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
@@ -55,6 +60,10 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
             return {...state, totalUsersCount: action.totalUsersCount}
         case "TOGGLE-IS-FETCHING":
             return {...state, isFetching: action.isFetching}
+        case "TOGGLE-IS-FOLLOWING-IN-PROCESS":
+            return {...state, followingInProcess: action.isFetching ?
+            [...state.followingInProcess, action.userId]
+            : state.followingInProcess.filter(id => id != action.userId)}
         default:
             return state;
     }
@@ -65,3 +74,5 @@ export const setUsers = (users: Array<UserType>) => ({type: 'SET-USERS', users})
 export const setCurrentPage = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage}) as const;
 export const setTotalUsersCount = (totalUsersCount: number) => ({type: 'SET-TOTAL-USERS-COUNT', totalUsersCount}) as const;
 export const toggleIsFetching = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching}) as const;
+export const toggleIsFollowingInProcess = (isFetching:boolean, userId: number) =>
+    ({type: 'TOGGLE-IS-FOLLOWING-IN-PROCESS',isFetching, userId}) as const;

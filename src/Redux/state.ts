@@ -7,7 +7,15 @@ import {
     sendMessageActionCreator
 } from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
-import {follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching, unfollow} from "./usersReducer";
+import {
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    toggleIsFetching,
+    toggleIsFollowingInProcess,
+    unfollow
+} from "./usersReducer";
 import {RootUserProfileType} from "../Components/Profile/RootUserProfileType";
 import {setAuthUserDataAC} from "./authReducer";
 
@@ -54,7 +62,8 @@ export type ActionTypes =
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setAuthUserDataAC>
-    | ReturnType<typeof setUserProfile>;
+    | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof toggleIsFollowingInProcess>;
 
 //
 // const store: StoreType = {
