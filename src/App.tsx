@@ -11,6 +11,7 @@ import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
+import {Login} from "./Components/Login/Login";
 
 export type AppPropsType = {
     // posts: PostType[]
@@ -50,6 +51,7 @@ const App = (props: AppPropsType) => {
                 <Route path='/users' render={() => <UsersContainer/>}></Route>
                 <Route path='/settings' render={() => <Settings/>}></Route>
                 <Route path='/sidebar' render={() => <Sidebar/>}></Route>
+                <Route path='/login' render={() => <Login/>}></Route>
                 <Route render={() => <Footer/>}></Route>
             </div>
         </div>

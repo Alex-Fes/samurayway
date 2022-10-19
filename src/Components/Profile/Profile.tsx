@@ -1,15 +1,16 @@
 import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/Post/MyPostsContainer";
-import {RootUserProfileType} from "./RootUserProfileType";
+import {Redirect} from "react-router-dom";
+import {ProfileContainerPropsType} from "./ProfileContainer";
 
 
-type ProfilePropsType = {
-    //props: any
-    profile: RootUserProfileType
-}
+// type ProfilePropsType = {
+//     //props: any
+//     profile: RootUserProfileType
+// }
 
-const Profile = (props: ProfilePropsType) => {
+const Profile = (props: ProfileContainerPropsType) => {
 
     return (
         <div>

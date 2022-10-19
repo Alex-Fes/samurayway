@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from "react";
 import style from './Dialogs.module.css'
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter, Redirect} from "react-router-dom";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
@@ -29,6 +29,7 @@ const Dialogs = (props: DialogsPropsType) => {
         //  props.dispatch({type: 'CHANGE-NEW-MESSAGE-TEXT', newMessage: e.currentTarget.value})
         // props.dispatch(addMessageActionCreator(e.currentTarget.value))
     }
+    if (!props.isAuth) return <Redirect to={"/login"} />;
     return (
         <BrowserRouter>
             <div className={style.dialogs}>
