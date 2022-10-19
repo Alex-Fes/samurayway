@@ -8,13 +8,13 @@ import {
 } from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {
-    follow,
+    followSuccess,
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
     toggleIsFetching,
     toggleIsFollowingInProcess,
-    unfollow
+    unfollowSuccess
 } from "./usersReducer";
 import {RootUserProfileType} from "../Components/Profile/RootUserProfileType";
 import {setAuthUserDataAC} from "./authReducer";
@@ -55,8 +55,8 @@ export type ActionTypes =
     | ReturnType<typeof onChangePostActionCreator>
     | ReturnType<typeof sendMessageActionCreator>
     | ReturnType<typeof addMessageActionCreator>
-    | ReturnType<typeof follow>
-    | ReturnType<typeof unfollow>
+    | ReturnType<typeof followSuccess>
+    | ReturnType<typeof unfollowSuccess>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>

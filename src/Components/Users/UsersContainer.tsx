@@ -3,19 +3,17 @@ import {connect} from 'react-redux';
 import {StoreType} from '../../Redux/redux-store';
 import {
     follow,
+    getUsersThunkCreator,
     InitialStateType,
+    onPageChangedThunkCreation,
     setCurrentPage,
-    setTotalUsersCount,
-    setUsers,
-    toggleIsFetching, toggleIsFollowingInProcess,
-    unfollow,
-    UserType
+    toggleIsFollowingInProcess,
+    unfollow
 } from '../../Redux/usersReducer';
 import Users from './Users';
 import {Preloader} from "../common/Preloader/Preloader";
-import {usersAPI} from "../../api/api";
 
-type MapStateToPropsType = {
+export type MapStateToPropsType = {
     usersPage: InitialStateType
     pageSize: number
     totalUserCount: number
@@ -23,34 +21,39 @@ type MapStateToPropsType = {
     isFetching: boolean
     followingInProcess: Array<number>
 }
-type MapDispatchToProps = {
+export type MapDispatchToProps = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    setUsers: (users: Array<UserType>) => void
+    //setUsers: (users: Array<UserType>) => void
     setCurrentPage: (currentPage: number) => void
-    setTotalUsersCount: (currentCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
-    toggleIsFollowingInProcess: (isFetching:boolean, followingInProcess: number) => void
+   // setTotalUsersCount: (currentCount: number) => void
+   // toggleIsFetching: (isFetching: boolean) => void
+   // toggleIsFollowingInProcess: (isFetching:boolean, followingInProcess: number) => void
+    getUsers: (currentPage: number, pageSize: number) => void
+    onPageChanged:(pageNumber: number, pageSize: number) => void
 }
 export type UsersAPIComponentPropsType = MapStateToPropsType & MapDispatchToProps;
 
 class UsersContainer extends React.Component<UsersAPIComponentPropsType> {
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false);
-            this.props.setUsers(data.items)
-            this.props.setTotalUsersCount(data.totalCount)
-        });
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        // this.props.toggleIsFetching(true);
+        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+        //     this.props.toggleIsFetching(false);
+        //     this.props.setUsers(data.items)
+        //     this.props.setTotalUsersCount(data.totalCount)
+        // });
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.toggleIsFetching(true);
-        this.props.setCurrentPage(pageNumber);
-        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false);
-            this.props.setUsers(data.items)
-        })
+        this.props.onPageChanged(pageNumber, this.props.pageSize)
+
+        // this.props.toggleIsFetching(true);
+        // this.props.setCurrentPage(pageNumber);
+        // usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
+        //     this.props.toggleIsFetching(false);
+        //     this.props.setUsers(data.items)
+        // })
     }
 
     render() {
@@ -77,7 +80,7 @@ class UsersContainer extends React.Component<UsersAPIComponentPropsType> {
                 usersPage={this.props.usersPage}
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
-                toggleIsFollowingInProcess={this.props.toggleIsFollowingInProcess}
+                //toggleIsFollowingInProcess={this.props.toggleIsFollowingInProcess}
                 followingInProcess={this.props.followingInProcess}
             />
         </>
@@ -153,10 +156,13 @@ let mapStateToProps = (state: StoreType): MapStateToPropsType => {
 //     }
 // }
 export default connect(mapStateToProps,
-    {follow,
+    {
+        follow,
         unfollow,
-        setUsers,
+       // setUsers,
         setCurrentPage,
-        setTotalUsersCount,
-        toggleIsFetching,
-        toggleIsFollowingInProcess})(UsersContainer);
+        //setTotalUsersCount,
+       // toggleIsFetching,
+        //toggleIsFollowingInProcess,
+        getUsers: getUsersThunkCreator,
+        onPageChanged: onPageChangedThunkCreation})(UsersContainer);

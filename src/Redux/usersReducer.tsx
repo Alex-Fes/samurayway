@@ -1,5 +1,6 @@
 import React from "react";
 import {ActionTypes} from "./state";
+import {usersAPI} from "../api/api";
 
 type UserLocationType = {
     city: string
@@ -61,18 +62,97 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
         case "TOGGLE-IS-FETCHING":
             return {...state, isFetching: action.isFetching}
         case "TOGGLE-IS-FOLLOWING-IN-PROCESS":
-            return {...state, followingInProcess: action.isFetching ?
-            [...state.followingInProcess, action.userId]
-            : state.followingInProcess.filter(id => id != action.userId)}
+            return {
+                ...state, followingInProcess: action.isFetching ?
+                    [...state.followingInProcess, action.userId]
+                    : state.followingInProcess.filter(id => id != action.userId)
+            }
         default:
             return state;
     }
 }
-export const follow = (userId: number) => ({type: 'FOLLOW', userId}) as const;
-export const unfollow = (userId: number) => ({type: 'UNFOLLOW', userId}) as const;
+export const followSuccess = (userId: number) => ({type: 'FOLLOW', userId}) as const;
+export const unfollowSuccess = (userId: number) => ({type: 'UNFOLLOW', userId}) as const;
 export const setUsers = (users: Array<UserType>) => ({type: 'SET-USERS', users}) as const;
 export const setCurrentPage = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage}) as const;
-export const setTotalUsersCount = (totalUsersCount: number) => ({type: 'SET-TOTAL-USERS-COUNT', totalUsersCount}) as const;
+export const setTotalUsersCount = (totalUsersCount: number) => ({
+    type: 'SET-TOTAL-USERS-COUNT',
+    totalUsersCount
+}) as const;
 export const toggleIsFetching = (isFetching: boolean) => ({type: 'TOGGLE-IS-FETCHING', isFetching}) as const;
-export const toggleIsFollowingInProcess = (isFetching:boolean, userId: number) =>
-    ({type: 'TOGGLE-IS-FOLLOWING-IN-PROCESS',isFetching, userId}) as const;
+export const toggleIsFollowingInProcess = (isFetching: boolean, userId: number) => ({
+    type: 'TOGGLE-IS-FOLLOWING-IN-PROCESS',
+    isFetching,
+    userId
+}) as const;
+
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: any) => {
+        dispatch(toggleIsFetching(true));
+        usersAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(toggleIsFetching(false));
+            dispatch(setUsers(data.items));
+            dispatch(setTotalUsersCount(data.totalCount));
+        });
+    }
+}
+
+export const onPageChangedThunkCreation = (pageNumber: number, pageSize: number) => {
+    return (dispatch: any) => {
+        dispatch(toggleIsFetching(true));
+        dispatch(setCurrentPage(pageNumber));
+        usersAPI.getUsers(pageNumber, pageSize).then(data => {
+            dispatch(toggleIsFetching(false));
+            dispatch(setUsers(data.items))
+        })
+    }
+}
+
+export const follow = (userId: number) => {
+    return (dispatch: any) => {
+        dispatch(toggleIsFollowingInProcess(true, userId))
+        usersAPI.followUser(userId).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(followSuccess(userId))
+            }
+            dispatch(toggleIsFollowingInProcess(false, userId));
+        })
+    }
+}
+export const unfollow = (userId: number) => {
+    return (dispatch: any) => {
+        dispatch(toggleIsFollowingInProcess(true, userId))
+        usersAPI.unFollowUser(userId).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(unfollowSuccess(userId))
+            }
+            dispatch(toggleIsFollowingInProcess(false, userId));
+        })
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

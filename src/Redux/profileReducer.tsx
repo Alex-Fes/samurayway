@@ -1,10 +1,7 @@
 import React from "react";
 import {ActionTypes} from "./state";
-import {
-    RootUserProfileType,
-    RootUserProfileTypeContacts,
-    RootUserProfileTypePhotos
-} from "../Components/Profile/RootUserProfileType";
+import {RootUserProfileType} from "../Components/Profile/RootUserProfileType";
+import {usersAPI} from "../api/api";
 
 
 const ADD_POST = 'ADD-POST';
@@ -91,3 +88,12 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
 export const addPostActionCreator = () => ({type: ADD_POST}) as const;
 export const onChangePostActionCreator = (newText: string) => ({type: CHANGE_NEW_TEXT, newText: newText}) as const;
 export const setUserProfile = (profile: RootUserProfileType) => ({type: SET_USER_PROFILE, profile}) as const;
+
+
+export const getUserProfile = (userId:string) => {
+    return (dispatch: any)=> {
+        usersAPI.getProfile(userId).then(response => {
+            dispatch(setUserProfile(response.data))
+        })
+    }
+}
