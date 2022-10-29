@@ -1,12 +1,5 @@
-import {addPostActionCreator, onChangePostActionCreator, profileReducer, setUserProfile} from "./profileReducer";
-import {
-    addMessageActionCreator,
-    dialogReducer,
-    DialogType,
-    MessageType,
-    sendMessageActionCreator
-} from "./dialogsReducer";
-import {sidebarReducer} from "./sidebarReducer";
+import {addPostActionCreator, onChangePostActionCreator, setUserProfile} from "./profileReducer";
+import {addMessageActionCreator, DialogType, MessageType, sendMessageActionCreator} from "./dialogsReducer";
 import {
     followSuccess,
     setCurrentPage,
@@ -16,7 +9,6 @@ import {
     toggleIsFollowingInProcess,
     unfollowSuccess
 } from "./usersReducer";
-import {RootUserProfileType} from "../Components/Profile/RootUserProfileType";
 import {setAuthUserDataAC} from "./authReducer";
 
 

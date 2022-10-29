@@ -29,7 +29,7 @@ const Dialogs = (props: DialogsPropsType) => {
         //  props.dispatch({type: 'CHANGE-NEW-MESSAGE-TEXT', newMessage: e.currentTarget.value})
         // props.dispatch(addMessageActionCreator(e.currentTarget.value))
     }
-    if (!props.isAuth) return <Redirect to={"/login"} />;
+
     return (
         <BrowserRouter>
             <div className={style.dialogs}>
@@ -48,5 +48,6 @@ const Dialogs = (props: DialogsPropsType) => {
         </BrowserRouter>
     )
 }
+
 
 export default Dialogs;

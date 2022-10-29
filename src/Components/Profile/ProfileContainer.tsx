@@ -4,21 +4,21 @@ import {connect} from "react-redux";
 import {StoreType} from "../../Redux/redux-store";
 import {getUserProfile} from "../../Redux/profileReducer";
 import {RootUserProfileType} from "./RootUserProfileType";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 export type PathParamType = {
     userId: string
 }
 type MapStateToPropsType = {
     profile: RootUserProfileType
-    isAuth: boolean
 }
+
 type MapDispatchToProps = {
     //setUserProfile: (profile: RootUserProfileType) => void
     getUserProfile: (userId: string) => void
 }
 export type ProfileContainerPropsType = MapStateToPropsType & MapDispatchToProps & RouteComponentProps<PathParamType>;
-
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     componentDidMount() {
 
@@ -27,13 +27,9 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
             userId = '2';
         }
         this.props.getUserProfile(userId)
-        // usersAPI.getProfile(userId).then(response => {
-        //     this.props.getUserProfile(response.data)
-        // })
     }
-
     render() {
-        if (!this.props.isAuth) return <Redirect to={"/login"} />;
+
         return (
             <div>
                 <Profile
@@ -44,12 +40,36 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     }
 }
 
-let mapStateToProps = (state: StoreType): MapStateToPropsType => {
-    return {
-        profile: state.ProfilePage.profile,
-        isAuth: state.auth.isAuth
-    }
-}
+let mapStateToProps = (state: StoreType): MapStateToPropsType => ({
+    profile: state.ProfilePage.profile
+})
+
+
 let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
-export default connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent);
+export default withAuthRedirect(connect(mapStateToProps,
+    {getUserProfile})(WithUrlDataContainerComponent));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
