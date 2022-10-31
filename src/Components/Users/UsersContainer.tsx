@@ -12,6 +12,8 @@ import {
 } from '../../Redux/usersReducer';
 import Users from './Users';
 import {Preloader} from "../common/Preloader/Preloader";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 export type MapStateToPropsType = {
     usersPage: InitialStateType
@@ -155,14 +157,56 @@ let mapStateToProps = (state: StoreType): MapStateToPropsType => {
 //         }
 //     }
 // }
-export default connect(mapStateToProps,
-    {
-        follow,
-        unfollow,
-       // setUsers,
-        setCurrentPage,
-        //setTotalUsersCount,
-       // toggleIsFetching,
-        //toggleIsFollowingInProcess,
-        getUsers: getUsersThunkCreator,
-        onPageChanged: onPageChangedThunkCreation})(UsersContainer);
+// export default connect(mapStateToProps,
+//     {
+//         follow,
+//         unfollow,
+//        // setUsers,
+//         setCurrentPage,
+//         //setTotalUsersCount,
+//        // toggleIsFetching,
+//         //toggleIsFollowingInProcess,
+//         getUsers: getUsersThunkCreator,
+//         onPageChanged: onPageChangedThunkCreation})(UsersContainer);
+
+export default compose<React.ComponentType>(
+    withAuthRedirect,
+
+    connect(mapStateToProps,
+        {
+            follow,
+            unfollow,
+            // setUsers,
+            setCurrentPage,
+            //setTotalUsersCount,
+            // toggleIsFetching,
+            //toggleIsFollowingInProcess,
+            getUsers: getUsersThunkCreator,
+            onPageChanged: onPageChangedThunkCreation})
+
+) (UsersContainer)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

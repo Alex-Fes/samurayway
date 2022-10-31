@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./ProfileInfo.module.css";
 import {RootUserProfileType} from "../RootUserProfileType";
 import {Preloader} from "../../common/Preloader/Preloader";
+import ProfileStatus from "./ProfileStatus";
 
 
 type ProfileInfoPropsType = {
@@ -29,7 +30,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                         <li>{props.profile.contacts.github}</li>
                         <li>{props.profile.contacts.vk}</li>
                         <li>{props.profile.contacts.youtube}</li></ul>
-                    ava + description
+                    <ProfileStatus status={'YO YO Common'}/>
                 </div>
             </div>
         </div>
