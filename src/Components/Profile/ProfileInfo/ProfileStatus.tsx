@@ -1,6 +1,4 @@
 import React from "react";
-import classes from "./ProfileInfo.module.css";
-import {RootUserProfileType} from "../RootUserProfileType";
 import {Preloader} from "../../common/Preloader/Preloader";
 
 type ProfileInfoPropsType = {
@@ -11,6 +9,8 @@ class ProfileStatus extends React.Component<ProfileInfoPropsType> {
         editMode: false
     }
     activateEditMode = () => {
+
+        console.log('this: ', this)
         this.setState({
             editMode: true})}
     deActivateEditMode = () => {

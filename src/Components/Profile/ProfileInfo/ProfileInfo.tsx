@@ -23,7 +23,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                         alt=''/>
                 </div>
                 <div className={classes.descriptionBlock}>
-                    <img src={props.profile.photos.large} alt=""/>
+                    <img src={props.profile.photos.large} alt="" width={'200px'} height={'200px'}/>
                     <span>About me: {props.profile.aboutMe}</span>
                     <ul>Contacts:
                         <li>{props.profile.contacts.facebook}</li>
