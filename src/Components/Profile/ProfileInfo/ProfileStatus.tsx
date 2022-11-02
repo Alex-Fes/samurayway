@@ -5,10 +5,14 @@ type ProfileInfoPropsType = {
     status: string
     updateStatus: (status: string) => void
 }
+type LocalStateType = {
+    editMode: boolean
+    status: string
+}
 
-class ProfileStatus extends React.Component<ProfileInfoPropsType> {
+class ProfileStatus extends React.Component<ProfileInfoPropsType, LocalStateType> {
 
-    state = {
+    state: LocalStateType = {
         editMode: false,
         status: this.props.status
     }
@@ -24,11 +28,20 @@ class ProfileStatus extends React.Component<ProfileInfoPropsType> {
         })
         this.props.updateStatus(this.state.status)
     }
-    onStatusChange = (e:React.FormEvent<HTMLInputElement>) => {
-         this.setState({
-             status: e.currentTarget.value
-         })
+    onStatusChange = (e: React.FormEvent<HTMLInputElement>) => {
+        this.setState({
+            status: e.currentTarget.value
+        })
     }
+
+    componentDidUpdate(prevProps: ProfileInfoPropsType, prevState: LocalStateType) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
+    }
+
     render() {
         if (!this.props.status) {
             return <Preloader/>
