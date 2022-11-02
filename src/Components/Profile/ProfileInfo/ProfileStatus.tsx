@@ -3,27 +3,42 @@ import {Preloader} from "../../common/Preloader/Preloader";
 
 type ProfileInfoPropsType = {
     status: string
+    updateStatus: (status: string) => void
 }
+
 class ProfileStatus extends React.Component<ProfileInfoPropsType> {
+
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
     activateEditMode = () => {
-
         console.log('this: ', this)
         this.setState({
-            editMode: true})}
+            editMode: true
+        })
+    }
     deActivateEditMode = () => {
         this.setState({
-            editMode: false})}
+            editMode: false
+        })
+        this.props.updateStatus(this.state.status)
+    }
+    onStatusChange = (e:React.FormEvent<HTMLInputElement>) => {
+         this.setState({
+             status: e.currentTarget.value
+         })
+    }
     render() {
         if (!this.props.status) {
-            return <Preloader/>}
+            return <Preloader/>
+        }
         return (<div>
             {!this.state.editMode &&
-                <div><span onDoubleClick={this.activateEditMode}>{this.props.status}</span></div>}
+                <div><span onDoubleClick={this.activateEditMode}>{this.props.status || "-----"}</span></div>}
             {this.state.editMode &&
-                <div><input autoFocus={true} onBlur={this.deActivateEditMode} value={this.props.status}/></div>}
+                <div><input onChange={this.onStatusChange} autoFocus={true} onBlur={this.deActivateEditMode}
+                            value={this.state.status}/></div>}
         </div>)
     }
 }

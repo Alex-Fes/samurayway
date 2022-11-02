@@ -1,4 +1,4 @@
-import {addPostActionCreator, onChangePostActionCreator, setUserProfile} from "./profileReducer";
+import {addPostActionCreator, onChangePostActionCreator, setStatus, setUserProfile} from "./profileReducer";
 import {addMessageActionCreator, DialogType, MessageType, sendMessageActionCreator} from "./dialogsReducer";
 import {
     followSuccess,
@@ -55,6 +55,7 @@ export type ActionTypes =
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setAuthUserDataAC>
     | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setStatus>
     | ReturnType<typeof toggleIsFollowingInProcess>;
 
 //
@@ -102,21 +103,6 @@ export type ActionTypes =
 //         return this._state
 //     }
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

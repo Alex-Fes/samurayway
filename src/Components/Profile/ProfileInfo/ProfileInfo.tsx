@@ -7,13 +7,14 @@ import ProfileStatus from "./ProfileStatus";
 
 type ProfileInfoPropsType = {
     profile: RootUserProfileType
+    status: string
+    updateStatus: (status: string) => void
 }
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
     if(!props.profile){
         return <Preloader/>
     }
-
     return (
         <div>
             <div>
@@ -22,18 +23,48 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                         src="https://www.imgfinancialgroup.com/sites/default/files/users/imgfinancialgroup/images/001-coastal.jpg"
                         alt=''/>
                 </div>
+
                 <div className={classes.descriptionBlock}>
                     <img src={props.profile.photos.large} alt="" width={'200px'} height={'200px'}/>
+                    <ProfileStatus status={props.status}
+                                   updateStatus={props.updateStatus}/>
                     <span>About me: {props.profile.aboutMe}</span>
-                    <ul>Contacts:
-                        <li>{props.profile.contacts.facebook}</li>
-                        <li>{props.profile.contacts.github}</li>
-                        <li>{props.profile.contacts.vk}</li>
-                        <li>{props.profile.contacts.youtube}</li></ul>
-                    <ProfileStatus status={'YO YO Common'}/>
+                    {/*<ul>Contacts:*/}
+                    {/*    <li>{props.profile.contacts.facebook}</li>*/}
+                    {/*    <li>{props.profile.contacts.github}</li>*/}
+                    {/*    <li>{props.profile.contacts.vk}</li>*/}
+                    {/*    <li>{props.profile.contacts.youtube}</li></ul>*/}
+
                 </div>
             </div>
         </div>
     )
 }
 export default ProfileInfo;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
