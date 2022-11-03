@@ -1,6 +1,7 @@
 import axios from "axios";
 import {UserType} from "../Redux/usersReducer";
 import {RootUserProfileType} from "../Components/Profile/RootUserProfileType";
+import {FormDataType} from "../Components/Login/Login";
 
 
 const instance = axios.create({
@@ -47,10 +48,10 @@ export const profileAPI = {
     getProfile(userId: string) {
         return instance.get<RootUserProfileType>(`profile/` + userId)
     },
-    getStatus  (userId: string) {
+    getStatus(userId: string) {
         return instance.get(`profile/status/` + userId)
     },
-    updateStatus (status: string) {
+    updateStatus(status: string) {
         return instance.put(`profile/status/`, {status: status})
     }
 
@@ -61,6 +62,9 @@ export const authAPI = {
     me() {
         return instance.get(`auth/me`)
         //.then(response => response.data)
+    },
+    login(formData: FormDataType) {
+        return instance.post('/auth/login', formData)
     }
 }
 

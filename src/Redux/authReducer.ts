@@ -1,6 +1,8 @@
-import React from "react";
 import {ActionTypes} from "./state";
-import {authAPI, usersAPI} from "../api/api";
+import {authAPI} from "../api/api";
+import {Dispatch} from "redux";
+import {reset} from "redux-form";
+import {FormDataType} from "../Components/Login/Login";
 
 const SET_USER_DATA = 'SET-USER-DATA'
 
@@ -11,7 +13,7 @@ export type InitialStateType = {
     isAuth: boolean
 };
 
-let initialState = {
+let initialState: InitialStateType = {
     userId: 0,
     email: '',
     login: '',
@@ -33,11 +35,26 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
 }
 export const setAuthUserDataAC = (userId: number, email: string, login: string) =>
     ({type: SET_USER_DATA, data: {userId, email, login}}) as const;
+export const loginUserAC = () => {
+
+}
 
 
 export const getAuthUserDataTC = () => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch) => {
         authAPI.me().then(response => {
+            if (response.data.resultCode === 0) {
+                let {id, email, login} = response.data.data;
+                dispatch(setAuthUserDataAC(id, email, login))
+            }
+
+        })
+    }
+}
+
+export const loginUserTC = (formData:FormDataType) => {
+    return (dispatch: Dispatch) => {
+        authAPI.login(formData).then(response => {
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data;
                 dispatch(setAuthUserDataAC(id, email, login))
@@ -45,5 +62,4 @@ export const getAuthUserDataTC = () => {
         })
     }
 }
-
 
