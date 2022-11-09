@@ -1,5 +1,5 @@
 import React from "react";
-import {addMessageActionCreator, DialogType, MessageType, sendMessageActionCreator} from "../../Redux/dialogsReducer";
+import {DialogType, MessageType, sendMessageActionCreator} from "../../Redux/dialogsReducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
@@ -44,12 +44,14 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 type MapStateToPropsType = {
     dialogs: Array<DialogType>
     message: Array<MessageType>
-    newMessageText: string
+    //newMessageText: string
+
     //isAuth: boolean - авторизация будет браться  в HOC
 }
 type MapDispatchToPropsType = {
-    sendMessage: () => void
-    changeNewMessageTextCallback: (newMessageTextBody: string) => void
+    //onSubmit: ()=> void
+    sendMessage: (newMessageText: string) => void
+    //changeNewMessageTextCallback: (newMessageTextBody: string) => void
 }
 export type DialogsPropsType = MapDispatchToPropsType & MapStateToPropsType;
 
@@ -57,20 +59,21 @@ const mapStateToProps = (state: StoreType): MapStateToPropsType => {
     return {
         dialogs: state.DialogsPage.dialogs,
         message: state.DialogsPage.message,
-        newMessageText: state.DialogsPage.newMessageText,
+       // newMessageText: state.DialogsPage.newMessageText,
         //isAuth: state.auth.isAuth - авторизация будет браться  в HOC
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        sendMessage: () => {
-            dispatch(sendMessageActionCreator())
+        sendMessage: (newMessage: string) => {
+            dispatch(sendMessageActionCreator(newMessage))
         },
-        changeNewMessageTextCallback: (newMessageTextBody: string) => {
-            dispatch(addMessageActionCreator(newMessageTextBody))
+        // changeNewMessageTextCallback: (newMessageTextBody: string) => {
+        //     dispatch(addMessageActionCreator(newMessageTextBody))
         }
+
     }
-}
+
 
 
 // let AuthRedirectComponent = withAuthRedirect(Dialogs)

@@ -1,5 +1,4 @@
 import axios from "axios";
-import {UserType} from "../Redux/usersReducer";
 import {RootUserProfileType} from "../Components/Profile/RootUserProfileType";
 import {FormDataType} from "../Components/Login/Login";
 

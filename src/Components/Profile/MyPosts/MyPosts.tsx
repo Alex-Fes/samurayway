@@ -2,6 +2,7 @@ import React, {ChangeEvent} from "react";
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import {MyPostPropsType} from "./Post/MyPostsContainer";
+import {Field, FormSubmitHandler, reduxForm} from "redux-form";
 
 // type MyPostsPropsType = {
 //     newPostText: string
@@ -13,15 +14,18 @@ import {MyPostPropsType} from "./Post/MyPostsContainer";
 
 const MyPosts = (props: MyPostPropsType) => {
     let postsElement = props.posts.map(p => <Post message={p.message} likeCount={p.likeCount} key={p.id}/>)
-    let newPostElement = React.createRef<HTMLTextAreaElement>();
-    let onAddPost = () => {
-        props.addPost();
-    };
-    const onNewPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        // props.dispatch({type: 'CHANGE-NEW-TEXT', newText: e.currentTarget.value})
-        let text = e.currentTarget.value
-        props.onChangePost(text)
-        // props.changeNewTextCallback('')
+    // let newPostElement = React.createRef<HTMLTextAreaElement>();
+    // let onAddPost = () => {
+    //    // props.addPost();
+    // };
+    // const onNewPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    //     // props.dispatch({type: 'CHANGE-NEW-TEXT', newText: e.currentTarget.value})
+    //     let text = e.currentTarget.value
+    //     props.onChangePost(text)
+    //     // props.changeNewTextCallback('')
+    // }
+    const addNewPost = (newPostText: FormSubmitHandler<{}, {}, string>) => {
+        props.addPost(newPostText.name);
     }
 
     return (
@@ -29,12 +33,7 @@ const MyPosts = (props: MyPostPropsType) => {
             <div className={classes.posts}>
                 <h3>My posts</h3>
                 <div className={classes.item}>
-                    <div><textarea ref={newPostElement}
-                                   value={props.newPostText}
-                                   onChange={onNewPostChange}/></div>
-                    <div>
-                        <button onClick={onAddPost}>Add post</button>
-                    </div>
+                    <AddPostFormRedux onSubmit={addNewPost}/>
                 </div>
                 <div className={classes.post}>
                     {postsElement}
@@ -44,4 +43,19 @@ const MyPosts = (props: MyPostPropsType) => {
 
     )
 }
+
+const addPostForm = (props: any) => {
+    return <form onSubmit={props.handleSubmit}>
+        <div>
+            <Field component="textarea" name="newPost" placeholder="Enter your text" />
+        </div>
+        <div>
+            <button>Add post</button>
+        </div>
+    </form>
+}
+
+const AddPostFormRedux = reduxForm({form: 'addNewPostTextForm'})(addPostForm)
+
+
 export default MyPosts;

@@ -1,7 +1,9 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {connect} from "react-redux";
-import {loginUserTC} from "../../Redux/authReducer";
+import {getAuthUserDataTC, loginUserTC} from "../../Redux/authReducer";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 
@@ -9,7 +11,7 @@ import {loginUserTC} from "../../Redux/authReducer";
 export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (<form onSubmit={props.handleSubmit}>
         <div>
-            <Field placeholder={'Input'} name={'login'} component={'input'}/>
+            <Field placeholder={'Login'} name={'login'} component={'input'}/>
         </div>
         <div>
             <Field placeholder={'Password'} name={'password'} component={'input'}/>
@@ -44,6 +46,7 @@ export type FormDataType = {
 export const Login = () => {
     const onSubmit = (formData: FormDataType) => {
         console.log(formData)
+
         loginUserTC(formData)
     }
     return <div>
@@ -51,9 +54,8 @@ export const Login = () => {
         <LoginReduxForm onSubmit={onSubmit}/>
     </div>
 }
-
-connect(loginUserTC)(Login)
-
+//export default compose<React.ComponentType>(connect(getAuthUserDataTC), withAuthRedirect)(Login)
+//export default compose<React.ComponentType>(connect(loginUserTC), withAuthRedirect)(Login)
 
 
 

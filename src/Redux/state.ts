@@ -9,7 +9,7 @@ import {
     toggleIsFollowingInProcess,
     unfollowSuccess
 } from "./usersReducer";
-import {setAuthUserDataAC} from "./authReducer";
+import {loginUserAC, setAuthUserDataAC} from "./authReducer";
 
 
 type PostType = {
@@ -56,7 +56,9 @@ export type ActionTypes =
     | ReturnType<typeof setAuthUserDataAC>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
-    | ReturnType<typeof toggleIsFollowingInProcess>;
+    | ReturnType<typeof toggleIsFollowingInProcess>
+    | ReturnType<typeof loginUserAC>;
+
 
 //
 // const store: StoreType = {

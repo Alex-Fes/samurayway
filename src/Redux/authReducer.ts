@@ -1,10 +1,10 @@
 import {ActionTypes} from "./state";
 import {authAPI} from "../api/api";
 import {Dispatch} from "redux";
-import {reset} from "redux-form";
 import {FormDataType} from "../Components/Login/Login";
 
-const SET_USER_DATA = 'SET-USER-DATA'
+const SET_USER_DATA = 'SET-USER-DATA';
+const SET_LOGIN_DATA = 'SET-LOGIN-DATA';
 
 export type InitialStateType = {
     userId: number
@@ -28,6 +28,11 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
                 ...action.data,
                 isAuth: true
             }
+        case SET_LOGIN_DATA:
+            return {
+                ...state,
+                isAuth: true
+            }
         default:
             return state
     }
@@ -35,9 +40,8 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
 }
 export const setAuthUserDataAC = (userId: number, email: string, login: string) =>
     ({type: SET_USER_DATA, data: {userId, email, login}}) as const;
-export const loginUserAC = () => {
-
-}
+export const loginUserAC = (data: boolean) => (
+    {type: SET_LOGIN_DATA, data: data}) as const;
 
 
 export const getAuthUserDataTC = () => {
@@ -47,17 +51,17 @@ export const getAuthUserDataTC = () => {
                 let {id, email, login} = response.data.data;
                 dispatch(setAuthUserDataAC(id, email, login))
             }
-
         })
     }
 }
 
-export const loginUserTC = (formData:FormDataType) => {
+export const loginUserTC = (formData: FormDataType) => {
     return (dispatch: Dispatch) => {
-        authAPI.login(formData).then(response => {
+        authAPI.login(formData)
+            .then(response => {
             if (response.data.resultCode === 0) {
-                let {id, email, login} = response.data.data;
-                dispatch(setAuthUserDataAC(id, email, login))
+                dispatch(loginUserAC(true))
+                getAuthUserDataTC()
             }
         })
     }

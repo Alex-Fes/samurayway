@@ -3,7 +3,7 @@ import MyPosts from "../MyPosts";
 import {StoreType} from "../../../../Redux/redux-store";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {addPostActionCreator, onChangePostActionCreator} from "../../../../Redux/profileReducer";
+import {addPostActionCreator} from "../../../../Redux/profileReducer";
 
 // type MyPostsPropsType = {
 //     // newPostText: string
@@ -54,27 +54,27 @@ type PostType = {
 }
 type MapStateToPropsType = {
     posts: Array<PostType>
-    newPostText: string
+   // newPostText: string
 }
 type MapDispatchToPropsType = {
-    onChangePost: (text: string)=>void
-    addPost: () => void
+   // onChangePost: (text: string)=>void
+    addPost: (newPostText: string) => void
 }
 export type MyPostPropsType = MapStateToPropsType & MapDispatchToPropsType;
 
 const mapStateToProps = (state: StoreType): MapStateToPropsType => {
     return {
         posts: state.ProfilePage.posts,
-        newPostText: state.ProfilePage.newPostText
+       // newPostText: state.ProfilePage.newPostText
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        onChangePost: (text:string) => {
-            dispatch(onChangePostActionCreator(text))
-        },
-        addPost: ()=>{
-            dispatch(addPostActionCreator())
+        // onChangePost: (text:string) => {
+        //     dispatch(onChangePostActionCreator(text))
+        // },
+        addPost: (newPostText: string)=>{
+            dispatch(addPostActionCreator(newPostText))
         }
     }
 }

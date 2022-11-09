@@ -29,8 +29,8 @@ let initialState = {
         {id: 1, message: 'Hi!'},
         {id: 2, message: 'How are you?'},
         {id: 3, message: 'Yo Yo'}
-    ] as Array<MessageType>,
-    newMessageText: '' as string
+    ] as Array<MessageType>
+    // newMessageText: '' as string
 };
 
 export const dialogReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
@@ -38,14 +38,16 @@ export const dialogReducer = (state: InitialStateType = initialState, action: Ac
         case "ADD-MESSAGE":
             let newMessage: MessageType = {
                 id: new Date().getTime(),
-                message: state.newMessageText
+                message: action.newMessage
             };
             // state.message.push(newMessage)
             // state.newMessageText = '';
-            return {...state,message: [...state.message, newMessage],newMessageText: ''};
-        case "CHANGE-NEW-MESSAGE-TEXT":
-            // state.newMessageText = action.newMessage;
-            return {...state,newMessageText:action.newMessage};
+            return {...state, message: [...state.message, newMessage]};
+        // case "CHANGE-NEW-MESSAGE-TEXT":
+        //     // state.newMessageText = action.newMessage;
+        //     return {...state,
+        //         // newMessageText: action.newMessage
+        //     };
         default:
             return state
     }
@@ -61,8 +63,8 @@ export const dialogReducer = (state: InitialStateType = initialState, action: Ac
     // }
     // return state;
 }
-export const sendMessageActionCreator = () =>
-    ({type: 'ADD-MESSAGE'}) as const;
-export const addMessageActionCreator = (newMessage: string) =>
-    ({type: "CHANGE-NEW-MESSAGE-TEXT", newMessage: newMessage}) as const;
+export const sendMessageActionCreator = (newMessage: string) =>
+    ({type: 'ADD-MESSAGE', newMessage}) as const;
+// export const addMessageActionCreator = (newMessage: string) =>
+//     ({type: "CHANGE-NEW-MESSAGE-TEXT", newMessage: newMessage}) as const;
 
