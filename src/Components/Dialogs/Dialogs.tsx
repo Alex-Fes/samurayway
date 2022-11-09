@@ -38,7 +38,7 @@ const Dialogs = (props: DialogsPropsType) => {
     // }
 
 
-    let addNewMessage = (value: newMessageFormType) => {
+    let addNewMessage = (value: any) => {
         props.sendMessage(value.newMessage)
     }
     return (

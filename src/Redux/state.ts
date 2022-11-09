@@ -1,5 +1,5 @@
-import {addPostActionCreator, onChangePostActionCreator, setStatus, setUserProfile} from "./profileReducer";
-import {addMessageActionCreator, DialogType, MessageType, sendMessageActionCreator} from "./dialogsReducer";
+import {addPostActionCreator, setStatus, setUserProfile} from "./profileReducer";
+import {DialogType, MessageType, sendMessageActionCreator} from "./dialogsReducer";
 import {
     followSuccess,
     setCurrentPage,
@@ -44,9 +44,9 @@ type StoreType = {
 
 export type ActionTypes =
     ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof onChangePostActionCreator>
+  //  | ReturnType<typeof onChangePostActionCreator>
     | ReturnType<typeof sendMessageActionCreator>
-    | ReturnType<typeof addMessageActionCreator>
+   // | ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof followSuccess>
     | ReturnType<typeof unfollowSuccess>
     | ReturnType<typeof setUsers>

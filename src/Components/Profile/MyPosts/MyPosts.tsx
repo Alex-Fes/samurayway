@@ -24,8 +24,8 @@ const MyPosts = (props: MyPostPropsType) => {
     //     props.onChangePost(text)
     //     // props.changeNewTextCallback('')
     // }
-    const addNewPost = (newPostText: FormSubmitHandler<{}, {}, string>) => {
-        props.addPost(newPostText.name);
+    const addNewPost = (newPostText: any) => {
+        props.addPost(newPostText.newPost);
     }
 
     return (
