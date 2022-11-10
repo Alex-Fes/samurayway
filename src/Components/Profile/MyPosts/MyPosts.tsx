@@ -1,8 +1,12 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import {MyPostPropsType} from "./Post/MyPostsContainer";
-import {Field, FormSubmitHandler, reduxForm} from "redux-form";
+import {Field, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../../utilits/validators/validators";
+import {Textarea} from "../../common/FormsControls/FormsControl";
+import {loginUserTC} from "../../../Redux/authReducer";
+import {FormDataType} from "../../Login/Login";
 
 // type MyPostsPropsType = {
 //     newPostText: string
@@ -44,10 +48,16 @@ const MyPosts = (props: MyPostPropsType) => {
     )
 }
 
+
+const maxLength =  maxLengthCreator(10)
 const addPostForm = (props: any) => {
     return <form onSubmit={props.handleSubmit}>
         <div>
-            <Field component="textarea" name="newPost" placeholder="Enter your text" />
+            <Field component={Textarea}
+                   name="newPost"
+                   placeholder="Enter your text"
+                   validate={[required, maxLength]}
+            />
         </div>
         <div>
             <button>Add post</button>
