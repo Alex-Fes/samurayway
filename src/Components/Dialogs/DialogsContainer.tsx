@@ -64,6 +64,7 @@ const mapStateToProps = (state: StoreType): MapStateToPropsType => {
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+
     return {
         sendMessage: (newMessage: string) => {
             dispatch(sendMessageActionCreator(newMessage))

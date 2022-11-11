@@ -9,7 +9,7 @@ import {
     toggleIsFollowingInProcess,
     unfollowSuccess
 } from "./usersReducer";
-import {loginUserAC, setAuthUserDataAC} from "./authReducer";
+import {setAuthUserDataAC} from "./authReducer";
 
 
 type PostType = {
@@ -57,7 +57,7 @@ export type ActionTypes =
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
     | ReturnType<typeof toggleIsFollowingInProcess>
-    | ReturnType<typeof loginUserAC>;
+    //| ReturnType<typeof loginUserAC>;
 
 
 //

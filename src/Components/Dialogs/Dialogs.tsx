@@ -26,7 +26,6 @@ type newMessageFormType = {
 const Dialogs = (props: DialogsPropsType) => {
     let dialogElements = props.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>);
     let messagesElements = props.message.map(m => <Message key={m.id} id={m.id} message={m.message}/>);
-
     // let newMessage = React.createRef<HTMLTextAreaElement>();
     // let onSendMessage = () => {
     //     //props.sendMessage()
@@ -38,8 +37,6 @@ const Dialogs = (props: DialogsPropsType) => {
     //     //  props.dispatch({type: 'CHANGE-NEW-MESSAGE-TEXT', newMessage: e.currentTarget.value})
     //     // props.dispatch(addMessageActionCreator(e.currentTarget.value))
     // }
-
-
     let addNewMessage = (value: any) => {
         props.sendMessage(value.newMessage)
     }
@@ -54,7 +51,6 @@ const Dialogs = (props: DialogsPropsType) => {
                     <AddMessageFormRedux
                         onSubmit={addNewMessage}
                     />
-
                 </div>
             </div>
         </BrowserRouter>
@@ -82,3 +78,26 @@ const AddMessageForm = (props: any) => {
 const AddMessageFormRedux = reduxForm({form: 'dialogAddMessageForm'})(AddMessageForm)
 
 export default Dialogs;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
