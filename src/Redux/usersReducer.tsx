@@ -1,6 +1,7 @@
 import React from "react";
 import {ActionTypes} from "./state";
 import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 type UserLocationType = {
     city: string
@@ -88,7 +89,7 @@ export const toggleIsFollowingInProcess = (isFetching: boolean, userId: number) 
 
 
 export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch<ActionTypes>) => {
         dispatch(toggleIsFetching(true));
         usersAPI.getUsers(currentPage, pageSize).then(response => {
             dispatch(toggleIsFetching(false));
@@ -99,7 +100,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
 }
 
 export const onPageChangedThunkCreation = (pageNumber: number, pageSize: number) => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch<ActionTypes>) => {
         dispatch(toggleIsFetching(true));
         dispatch(setCurrentPage(pageNumber));
         usersAPI.getUsers(pageNumber, pageSize).then(response => {
@@ -110,7 +111,7 @@ export const onPageChangedThunkCreation = (pageNumber: number, pageSize: number)
 }
 
 export const follow = (userId: number) => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch<ActionTypes>) => {
         dispatch(toggleIsFollowingInProcess(true, userId))
         usersAPI.followUser(userId).then(response => {
             if (response.data.resultCode === 0) {
@@ -121,7 +122,7 @@ export const follow = (userId: number) => {
     }
 }
 export const unfollow = (userId: number) => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch<ActionTypes>) => {
         dispatch(toggleIsFollowingInProcess(true, userId))
         usersAPI.unFollowUser(userId).then(response => {
             if (response.data.resultCode === 0) {

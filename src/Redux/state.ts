@@ -9,7 +9,8 @@ import {
     toggleIsFollowingInProcess,
     unfollowSuccess
 } from "./usersReducer";
-import {setAuthUserDataAC} from "./authReducer";
+import {getAuthUserDataTC, setAuthUserDataAC} from "./authReducer";
+import {stopSubmit} from "redux-form/lib/actions";
 
 
 type PostType = {
@@ -44,9 +45,7 @@ type StoreType = {
 
 export type ActionTypes =
     ReturnType<typeof addPostActionCreator>
-  //  | ReturnType<typeof onChangePostActionCreator>
     | ReturnType<typeof sendMessageActionCreator>
-   // | ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof followSuccess>
     | ReturnType<typeof unfollowSuccess>
     | ReturnType<typeof setUsers>
@@ -57,7 +56,7 @@ export type ActionTypes =
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
     | ReturnType<typeof toggleIsFollowingInProcess>
-    //| ReturnType<typeof loginUserAC>;
+    | ReturnType<typeof getAuthUserDataTC>;
 
 
 //

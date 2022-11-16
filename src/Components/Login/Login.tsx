@@ -6,6 +6,7 @@ import {maxLengthCreator, required} from "../../utilits/validators/validators";
 import {Input} from "../common/FormsControls/FormsControl";
 import {Redirect} from "react-router-dom";
 import {StoreType} from "../../Redux/redux-store";
+import styles from '../common/FormsControls/FormControls.module.css'
 
 
 const maxLengthForLogin = maxLengthCreator(50)
@@ -33,6 +34,9 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                    component={Input}
             /> remember me
         </div>
+        {props.error && <div className={styles.formSummaryError}>
+            {props.error}
+        </div>}
         <div>
             <button>Login</button>
         </div>
