@@ -4,11 +4,18 @@ import {dialogReducer} from "./dialogsReducer";
 import {sidebarReducer} from "./sidebarReducer";
 import {usersReducer} from "./usersReducer";
 import {authReducer} from "./authReducer";
-import thunkMiddleware from "redux-thunk"
+import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk"
 import {reducer as formReducer} from 'redux-form'
+import {ActionTypes} from "./state";
+import {appReducer} from "./appReducer";
 
 type ReducerType = typeof rootReducer
 export type StoreType = ReturnType<ReducerType>
+
+//type rof thunk
+export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, StoreType, unknown, ActionTypes>
+//export type AppThunkDispatchType = ThunkDispatch<StoreType, unknown, ActionTypes>
+
 
 
 let rootReducer = combineReducers({
@@ -17,7 +24,8 @@ let rootReducer = combineReducers({
     sidebar: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
-    form: formReducer
+    form: formReducer,
+    app: appReducer
 })
 
 

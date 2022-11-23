@@ -19,9 +19,9 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
         <div>
             <div>
                 <div className={classes.img}>
-                    <img
-                        src="https://www.imgfinancialgroup.com/sites/default/files/users/imgfinancialgroup/images/001-coastal.jpg"
-                        alt=''/>
+                    {/*<img*/}
+                    {/*    src="https://www.imgfinancialgroup.com/sites/default/files/users/imgfinancialgroup/images/001-coastal.jpg"*/}
+                    {/*    alt=''/>*/}
                 </div>
 
                 <div className={classes.descriptionBlock}>

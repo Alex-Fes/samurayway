@@ -2,6 +2,7 @@ import React from "react";
 import {ActionTypes} from "./state";
 import {usersAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {AppThunkType} from "./redux-store";
 
 type UserLocationType = {
     city: string
@@ -88,8 +89,8 @@ export const toggleIsFollowingInProcess = (isFetching: boolean, userId: number) 
 }) as const;
 
 
-export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
-    return (dispatch: Dispatch<ActionTypes>) => {
+export const getUsersThunkCreator = (currentPage: number, pageSize: number): AppThunkType => {
+    return (dispatch) => {
         dispatch(toggleIsFetching(true));
         usersAPI.getUsers(currentPage, pageSize).then(response => {
             dispatch(toggleIsFetching(false));
@@ -99,8 +100,8 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
     }
 }
 
-export const onPageChangedThunkCreation = (pageNumber: number, pageSize: number) => {
-    return (dispatch: Dispatch<ActionTypes>) => {
+export const onPageChangedThunkCreation = (pageNumber: number, pageSize: number): AppThunkType => {
+    return (dispatch) => {
         dispatch(toggleIsFetching(true));
         dispatch(setCurrentPage(pageNumber));
         usersAPI.getUsers(pageNumber, pageSize).then(response => {
@@ -110,8 +111,8 @@ export const onPageChangedThunkCreation = (pageNumber: number, pageSize: number)
     }
 }
 
-export const follow = (userId: number) => {
-    return (dispatch: Dispatch<ActionTypes>) => {
+export const follow = (userId: number): AppThunkType => {
+    return (dispatch) => {
         dispatch(toggleIsFollowingInProcess(true, userId))
         usersAPI.followUser(userId).then(response => {
             if (response.data.resultCode === 0) {
@@ -121,8 +122,8 @@ export const follow = (userId: number) => {
         })
     }
 }
-export const unfollow = (userId: number) => {
-    return (dispatch: Dispatch<ActionTypes>) => {
+export const unfollow = (userId: number): AppThunkType => {
+    return (dispatch) => {
         dispatch(toggleIsFollowingInProcess(true, userId))
         usersAPI.unFollowUser(userId).then(response => {
             if (response.data.resultCode === 0) {

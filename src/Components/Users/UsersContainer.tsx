@@ -7,7 +7,6 @@ import {
     InitialStateType,
     onPageChangedThunkCreation,
     setCurrentPage,
-    toggleIsFollowingInProcess,
     unfollow
 } from '../../Redux/usersReducer';
 import Users from './Users';
@@ -26,11 +25,7 @@ export type MapStateToPropsType = {
 export type MapDispatchToProps = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    //setUsers: (users: Array<UserType>) => void
     setCurrentPage: (currentPage: number) => void
-   // setTotalUsersCount: (currentCount: number) => void
-   // toggleIsFetching: (isFetching: boolean) => void
-   // toggleIsFollowingInProcess: (isFetching:boolean, followingInProcess: number) => void
     getUsers: (currentPage: number, pageSize: number) => void
     onPageChanged:(pageNumber: number, pageSize: number) => void
 }
@@ -56,7 +51,6 @@ class UsersContainer extends React.Component<UsersAPIComponentPropsType> {
                 usersPage={this.props.usersPage}
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
-                //toggleIsFollowingInProcess={this.props.toggleIsFollowingInProcess}
                 followingInProcess={this.props.followingInProcess}
             />
         </>
@@ -73,52 +67,15 @@ let mapStateToProps = (state: StoreType): MapStateToPropsType => {
         followingInProcess: state.usersPage.followingInProcess
     }
 }
-// let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
-//     return {
-//         follow: (userId: number) => {
-//             dispatch(follow(userId))
-//         },
-//         unfollow: (userId: number) => {
-//             dispatch(unfollow(userId))
-//         },
-//         setUsers: (users: Array<UserType>) => {
-//             dispatch(setUsers(users))
-//         },
-//         setCurrentPage: (pageNumber: number) => {
-//             dispatch(setCurrentPage(pageNumber))
-//         },
-//         setTotalUsersCount: (totalCount: number) => {
-//             dispatch(setTotalUsersCount(totalCount))
-//         },
-//         toggleIsFetching: (isFetching) => {
-//             dispatch(toggleIsFetching(isFetching))
-//         }
-//     }
-// }
-// export default connect(mapStateToProps,
-//     {
-//         follow,
-//         unfollow,
-//        // setUsers,
-//         setCurrentPage,
-//         //setTotalUsersCount,
-//        // toggleIsFetching,
-//         //toggleIsFollowingInProcess,
-//         getUsers: getUsersThunkCreator,
-//         onPageChanged: onPageChangedThunkCreation})(UsersContainer);
 
 export default compose<React.ComponentType>(
-    withAuthRedirect,
+    // withAuthRedirect,
 
     connect(mapStateToProps,
         {
             follow,
             unfollow,
-            // setUsers,
             setCurrentPage,
-            //setTotalUsersCount,
-            // toggleIsFetching,
-            //toggleIsFollowingInProcess,
             getUsers: getUsersThunkCreator,
             onPageChanged: onPageChangedThunkCreation})
 

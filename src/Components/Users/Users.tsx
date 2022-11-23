@@ -12,7 +12,6 @@ type UsersPropsType = {
     onPageChanged: (pageNumber: number) => void
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    //toggleIsFollowingInProcess: (isFetching: boolean, followingInProcess: number) => void
     followingInProcess: Array<number>
 }
 
@@ -55,23 +54,9 @@ function Users(props: UsersPropsType) {
                     <div>{u.followed ?
                         <button disabled={props.followingInProcess.some(id => id === u.id)} onClick={() => {
                             props.unfollow(u.id)
-                            // props.toggleIsFollowingInProcess(true, u.id)
-                            // usersAPI.unFollowUser(u).then(data => {
-                            //     if (data.resultCode === 0) {
-                            //         props.unfollow(u.id)
-                            //     }
-                            //     props.toggleIsFollowingInProcess(false, u.id);
-                            // })
                         }}>UnFollow</button>
                         : <button disabled={props.followingInProcess.some(id => id === u.id)} onClick={() => {
                             props.follow(u.id)
-                            // props.toggleIsFollowingInProcess(true, u.id)
-                            // usersAPI.followUser(u).then(data => {
-                            //     if (data.resultCode === 0) {
-                            //         props.follow(u.id)
-                            //     }
-                            //     props.toggleIsFollowingInProcess(false, u.id);
-                            // })
                         }}>Follow</button>}
                 </div>
                 </span>
