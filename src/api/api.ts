@@ -1,6 +1,5 @@
 import axios from "axios";
 import {RootUserProfileType} from "../Components/Profile/RootUserProfileType";
-import {FormDataType} from "../Components/Login/Login";
 
 
 const instance = axios.create({

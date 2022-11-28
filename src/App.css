@@ -2,11 +2,12 @@
     margin: 0 auto;
     display: grid;
     width: auto;
+    height: 100vh;
     grid-template-areas:
     'h h h'
     'n c c'
     'f f f';
-    grid-template-rows: 80px 1fr 40px;
+    grid-template-rows: 100px 1fr 50px;
     grid-auto-columns: 2fr 10fr;
     grid-gap: 5px;
 }
@@ -22,7 +23,9 @@
     text-align: center;
     /*margin: 0 auto 40px;*/
 }
+.navigation {
 
+}
 
 
 

@@ -22,15 +22,18 @@ import {Preloader} from "./Components/common/Preloader/Preloader";
 class App extends React.Component<AppPropsType> {
     componentDidMount() {
         this.props.initializeAppTC();
+
     }
     render() {
         if(!this.props.initialized) {
             return <Preloader/>
         }
+
         return (
             <div className='app-wrapper'>
                 <HeaderContainer/>
                 <Navigation/>
+
                 <div className='app-wrapper-content'>
                     <Route path='/profile/:userId?' render={() => <ProfileContainer/>}></Route>
                     <Route path='/dialogs'
@@ -41,6 +44,9 @@ class App extends React.Component<AppPropsType> {
                     <Route path='/settings' render={() => <Settings/>}></Route>
                     <Route path='/sidebar' render={() => <Sidebar/>}></Route>
                     <Route path='/login' render={() => <Login/>}></Route>
+
+                </div>
+                <div className='footer'>
                     <Route render={() => <Footer/>}></Route>
                 </div>
             </div>)
@@ -48,7 +54,7 @@ class App extends React.Component<AppPropsType> {
 }
 
 const mapStateToProps = (state: StoreType) => ({
-    initialized: state.app.initialized
+    initialized: state.app.initialized,
 })
 
 export default compose<React.ComponentType>(withRouter,

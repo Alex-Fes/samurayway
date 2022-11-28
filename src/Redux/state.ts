@@ -10,8 +10,7 @@ import {
     unfollowSuccess
 } from "./usersReducer";
 import {getAuthUserDataTC, setAuthUserDataAC} from "./authReducer";
-import {stopSubmit} from "redux-form/lib/actions";
-import {appReducer, initializedSuccessAC} from "./appReducer";
+import {initializedSuccessAC} from "./appReducer";
 
 
 type PostType = {
