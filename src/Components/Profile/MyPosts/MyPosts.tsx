@@ -5,51 +5,33 @@ import {MyPostPropsType} from "./Post/MyPostsContainer";
 import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utilits/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControl";
-import {loginUserTC} from "../../../Redux/authReducer";
-import {FormDataType} from "../../Login/Login";
 
-// type MyPostsPropsType = {
-//     newPostText: string
-//     posts: PostType[]
-//     // dispatch: (action: ActionTypes) => void
-//     onChangePost: (text: string) => void
-//     addPost: () => void
-// }
+class MyPosts extends React.Component<MyPostPropsType> {
+    render() {
+        let postsElement = this.props.posts.map(p =>
+            <Post message={p.message} likeCount={p.likeCount} key={p.id}/>)
+        const addNewPost = (newPostText: any) => {
+            this.props.addPost(newPostText.newPost);
+        }
 
-const MyPosts = (props: MyPostPropsType) => {
-    let postsElement = props.posts.map(p => <Post message={p.message} likeCount={p.likeCount} key={p.id}/>)
-    // let newPostElement = React.createRef<HTMLTextAreaElement>();
-    // let onAddPost = () => {
-    //    // props.addPost();
-    // };
-    // const onNewPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //     // props.dispatch({type: 'CHANGE-NEW-TEXT', newText: e.currentTarget.value})
-    //     let text = e.currentTarget.value
-    //     props.onChangePost(text)
-    //     // props.changeNewTextCallback('')
-    // }
-    const addNewPost = (newPostText: any) => {
-        props.addPost(newPostText.newPost);
-    }
-
-    return (
-        <div className={classes.postsBlock}>
-            <div className={classes.posts}>
-                <h3>My posts</h3>
-                <div className={classes.item}>
-                    <AddPostFormRedux onSubmit={addNewPost}/>
-                </div>
-                <div className={classes.post}>
-                    {postsElement}
+        return (
+            <div className={classes.postsBlock}>
+                <div className={classes.posts}>
+                    <h3>My posts</h3>
+                    <div className={classes.item}>
+                        <AddPostFormRedux onSubmit={addNewPost}/>
+                    </div>
+                    <div className={classes.post}>
+                        {postsElement}
+                    </div>
                 </div>
             </div>
-        </div>
 
-    )
+        )
+    }
 }
 
-
-const maxLength =  maxLengthCreator(10)
+const maxLength = maxLengthCreator(10)
 const addPostForm = (props: any) => {
     return <form onSubmit={props.handleSubmit}>
         <div>
