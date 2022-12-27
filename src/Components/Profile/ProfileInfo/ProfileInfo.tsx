@@ -2,7 +2,6 @@ import React from "react";
 import classes from "./ProfileInfo.module.css";
 import {RootUserProfileType} from "../RootUserProfileType";
 import {Preloader} from "../../common/Preloader/Preloader";
-import ProfileStatus from "./ProfileStatus";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 
@@ -13,7 +12,7 @@ type ProfileInfoPropsType = {
 }
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
-    if(!props.profile){
+    if (!props.profile) {
         return <Preloader/>
     }
     return (
@@ -28,7 +27,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                 <div className={classes.descriptionBlock}>
                     <img src={props.profile.photos.large} alt="" width={'200px'} height={'200px'}/>
                     <ProfileStatusWithHooks status={props.status}
-                                   updateStatus={props.updateStatus}/>
+                                            updateStatus={props.updateStatus}/>
                     <span>About me: {props.profile.aboutMe}</span>
                     {/*<ul>Contacts:*/}
                     {/*    <li>{props.profile.contacts.facebook}</li>*/}
