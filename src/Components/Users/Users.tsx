@@ -1,8 +1,23 @@
 import React from 'react';
-import styles from './Users.module.css'
-import userPhoto from '../../assets/images/userPic.png'
 import {InitialStateType} from '../../Redux/usersReducer';
-import {NavLink} from "react-router-dom";
+import {Pagination} from "../common/Pagination/Pagination";
+import {User} from "./User";
+
+export const Users = (props: UsersPropsType) => {
+    return <div>
+        <Pagination currentPage={props.currentPage}
+                    onPageChanged={props.onPageChanged}
+                    totalUserCount={props.totalUserCount}
+                    pageSize={props.pageSize}/>
+
+        {props.usersPage.users.map(u =>
+            <User key={u.id} user={u}
+                  followingInProcess={props.followingInProcess}
+                  follow={props.follow}
+                  unfollow={props.unfollow}/>
+        )}
+    </div>
+}
 
 type UsersPropsType = {
     usersPage: InitialStateType
@@ -14,62 +29,3 @@ type UsersPropsType = {
     unfollow: (userId: number) => void
     followingInProcess: Array<number>
 }
-
-
-function Users(props: UsersPropsType) {
-    let pagesCount = Math.ceil(props.totalUserCount / props.pageSize);// округление в большую сторону
-    // let pages = [];
-    // for(let i = 1; i <= pagesCount; i++) {
-    //     pages.push(i)
-    // }
-    let pages = [1, props.currentPage - 1, props.currentPage, props.currentPage + 1, pagesCount]
-    if (props.currentPage < 4) {
-        pages = [1, 2, 3, 4, pagesCount]
-    }
-    if (props.currentPage > pagesCount - 2) {
-        pages = [1, pagesCount - 3, pagesCount - 2, pagesCount - 1, pagesCount]
-    }
-
-    return <div>
-        <div>
-            {pages.map((el, index) => {
-                return <span onClick={() => props.onPageChanged(el)}
-                             className={props.currentPage === el ? styles.selectPage : '  '} key={index}>
-                               {el === pagesCount && props.currentPage < pagesCount - 2 && ' ... '}
-                    {el}
-                    {el === 1 && props.currentPage > 3 && ' ... '}
-                           </span>
-            })}
-        </div>
-        {
-            props.usersPage.users.map(u =>
-                <div key={u.id}>
-                <span>
-                    <div>
-                        <NavLink to={'/profile/' + u.id}>
-                    <img src={u.photos.small != null ? u.photos.small : userPhoto}
-                         alt="UserPic" className={styles.userPhoto}/>
-                            </NavLink>
-                </div>
-                    <div>{u.followed ?
-                        <button disabled={props.followingInProcess.some(id => id === u.id)} onClick={() => {
-                            props.unfollow(u.id)
-                        }}>UnFollow</button>
-                        : <button disabled={props.followingInProcess.some(id => id === u.id)} onClick={() => {
-                            props.follow(u.id)
-                        }}>Follow</button>}
-                </div>
-                </span>
-                    <span><span>
-                        <div>{u.name}</div>
-                        <div>{u.status}</div>
-                    </span><span>
-                     <div>{'u.location.country'}</div>
-                        <div>{'u.location.city'}</div>
-                </span></span>
-                </div>)}
-    </div>
-}
-
-
-export default Users;
