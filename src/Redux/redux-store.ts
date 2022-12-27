@@ -12,9 +12,9 @@ import {appReducer} from "./appReducer";
 type ReducerType = typeof rootReducer
 export type StoreType = ReturnType<ReducerType>
 
-//type rof thunk
+//type for thunk
 export type AppThunkType<ReturnType = void> = ThunkAction<ReturnType, StoreType, unknown, ActionTypes>
-//export type AppThunkDispatchType = ThunkDispatch<StoreType, unknown, ActionTypes>
+export type AppThunkDispatchType = ThunkDispatch<StoreType, unknown, ActionTypes>
 
 
 
