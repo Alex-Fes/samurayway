@@ -5,11 +5,11 @@ import {
     follow,
     getUsersThunkCreator,
     InitialStateType,
-    onPageChangedThunkCreation,
+    onPageChangedThunkCreator,
     setCurrentPage,
     unfollow
 } from '../../Redux/usersReducer';
-import Users from './Users';
+
 import {Preloader} from "../common/Preloader/Preloader";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
@@ -21,15 +21,18 @@ import {
     getTotalUserCount,
     getUsersSuperSelector
 } from "../../Redux/user-selectors";
+import {Users} from "./Users";
 
 
 class UsersContainer extends React.Component<UsersAPIComponentPropsType> {
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.getUsers(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.onPageChanged(pageNumber, this.props.pageSize)
+        const {pageSize} = this.props
+        this.props.onPageChanged(pageNumber, pageSize)
     }
 
     render() {
@@ -71,19 +74,18 @@ let mapStateToProps = (state: StoreType): MapStateToPropsType => {
 }
 
 export default compose<React.ComponentType>(
-     withAuthRedirect,
-
+    withAuthRedirect,
     connect(mapStateToProps,
         {
             follow,
             unfollow,
             setCurrentPage,
             getUsers: getUsersThunkCreator,
-            onPageChanged: onPageChangedThunkCreation})
+            onPageChanged: onPageChangedThunkCreator
+        })
+)(UsersContainer)
 
-) (UsersContainer)
-
-//Types
+//TYPES ==============================
 
 export type MapStateToPropsType = {
     usersPage: InitialStateType
@@ -98,7 +100,7 @@ export type MapDispatchToProps = {
     unfollow: (userId: number) => void
     setCurrentPage: (currentPage: number) => void
     getUsers: (currentPage: number, pageSize: number) => void
-    onPageChanged:(pageNumber: number, pageSize: number) => void
+    onPageChanged: (pageNumber: number, pageSize: number) => void
 }
 export type UsersAPIComponentPropsType = MapStateToPropsType & MapDispatchToProps;
 
