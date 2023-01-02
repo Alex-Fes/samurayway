@@ -1,40 +1,27 @@
-import {StoreType} from "./redux-store";
-import {createSelector} from "reselect";
+import { createSelector } from 'reselect'
+
+import { StoreType } from './redux-store'
 
 const getUsers = (state: StoreType) => {
-    return state.usersPage
+  return state.usersPage
 }
-export const getUsersSuperSelector = createSelector(getUsers, (users) => {
-    return users
+
+export const getUsersSuperSelector = createSelector(getUsers, users => {
+  return users
 })
 
-
 export const getPageSize = (state: StoreType) => {
-    return state.usersPage.pageSize
+  return state.usersPage.pageSize
 }
 export const getTotalUserCount = (state: StoreType) => {
-    return state.usersPage.totalUsersCount
+  return state.usersPage.totalUsersCount
 }
 export const getCurrentPage = (state: StoreType) => {
-    return state.usersPage.currentPage
+  return state.usersPage.currentPage
 }
 export const getIsFetching = (state: StoreType) => {
-    return state.usersPage.isFetching
+  return state.usersPage.isFetching
 }
 export const getFollowingProcess = (state: StoreType) => {
-    return state.usersPage.followingInProcess
+  return state.usersPage.followingInProcess
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

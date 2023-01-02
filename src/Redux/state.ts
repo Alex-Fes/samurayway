@@ -1,65 +1,63 @@
-import {addPostActionCreator, deletePostAC, setStatus, setUserProfile} from "./profileReducer";
-import {DialogType, MessageType, sendMessageActionCreator} from "./dialogsReducer";
+import { initializedSuccessAC } from './appReducer'
+import { getAuthUserDataTC, setAuthUserDataAC } from './authReducer'
+import { DialogType, MessageType, sendMessageActionCreator } from './dialogsReducer'
+import { addPostActionCreator, deletePostAC, setStatus, setUserProfile } from './profileReducer'
 import {
-    followSuccess,
-    setCurrentPage,
-    setTotalUsersCount,
-    setUsers,
-    toggleIsFetching,
-    toggleIsFollowingInProcess,
-    unfollowSuccess
-} from "./usersReducer";
-import {getAuthUserDataTC, setAuthUserDataAC} from "./authReducer";
-import {initializedSuccessAC} from "./appReducer";
-
+  followSuccess,
+  setCurrentPage,
+  setTotalUsersCount,
+  setUsers,
+  toggleIsFetching,
+  toggleIsFollowingInProcess,
+  unfollowSuccess,
+} from './usersReducer'
 
 type PostType = {
-    id: number
-    message: string
-    likeCount: number
+  id: number
+  message: string
+  likeCount: number
 }
 export type ProfilePageType = {
-    newPostText: string
-    posts: Array<PostType>
-    //profile: RootUserProfileType
+  newPostText: string
+  posts: Array<PostType>
+  //profile: RootUserProfileType
 }
 type DialogsPageType = {
-    dialogs: Array<DialogType>
-    message: Array<MessageType>
-    newMessageText: string
+  dialogs: Array<DialogType>
+  message: Array<MessageType>
+  newMessageText: string
 }
 export type SidebarType = {}
 export type RootStateType = {
-    ProfilePage: ProfilePageType
-    DialogsPage: DialogsPageType
-    sidebar: SidebarType
+  ProfilePage: ProfilePageType
+  DialogsPage: DialogsPageType
+  sidebar: SidebarType
 }
-
-type StoreType = {
-    _state: RootStateType
-    subscribe: (observer: () => void) => void
-    _onChange: () => void
-    getState: () => RootStateType
-    dispatch: (action: ActionTypes) => void
-}
+//
+// type StoreType = {
+//   _state: RootStateType
+//   subscribe: (observer: () => void) => void
+//   _onChange: () => void
+//   getState: () => RootStateType
+//   dispatch: (action: ActionTypes) => void
+// }
 
 export type ActionTypes =
-    ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof sendMessageActionCreator>
-    | ReturnType<typeof followSuccess>
-    | ReturnType<typeof unfollowSuccess>
-    | ReturnType<typeof setUsers>
-    | ReturnType<typeof setCurrentPage>
-    | ReturnType<typeof setTotalUsersCount>
-    | ReturnType<typeof toggleIsFetching>
-    | ReturnType<typeof setAuthUserDataAC>
-    | ReturnType<typeof setUserProfile>
-    | ReturnType<typeof setStatus>
-    | ReturnType<typeof toggleIsFollowingInProcess>
-    | ReturnType<typeof getAuthUserDataTC>
-    | ReturnType<typeof initializedSuccessAC>
-    | ReturnType<typeof deletePostAC>;
-
+  | ReturnType<typeof addPostActionCreator>
+  | ReturnType<typeof sendMessageActionCreator>
+  | ReturnType<typeof followSuccess>
+  | ReturnType<typeof unfollowSuccess>
+  | ReturnType<typeof setUsers>
+  | ReturnType<typeof setCurrentPage>
+  | ReturnType<typeof setTotalUsersCount>
+  | ReturnType<typeof toggleIsFetching>
+  | ReturnType<typeof setAuthUserDataAC>
+  | ReturnType<typeof setUserProfile>
+  | ReturnType<typeof setStatus>
+  | ReturnType<typeof toggleIsFollowingInProcess>
+  | ReturnType<typeof getAuthUserDataTC>
+  | ReturnType<typeof initializedSuccessAC>
+  | ReturnType<typeof deletePostAC>
 
 //
 // const store: StoreType = {
@@ -106,8 +104,6 @@ export type ActionTypes =
 //         return this._state
 //     }
 // }
-
-
 
 // let onChange = () => {
 // }

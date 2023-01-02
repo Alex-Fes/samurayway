@@ -1,8 +1,9 @@
-import React from "react";
-import {ActionTypes, ProfilePageType, SidebarType} from "./state";
+import React from 'react'
 
-let initialState = {};
+import { ActionTypes, SidebarType } from './state'
+
+let initialState = {}
+
 export const sidebarReducer = (state: SidebarType = initialState, action: ActionTypes) => {
-
-    return state;
+  return state
 }

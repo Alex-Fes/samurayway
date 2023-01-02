@@ -1,10 +1,13 @@
-import React from "react";
-import {DialogType, MessageType, sendMessageActionCreator} from "../../Redux/dialogsReducer";
-import Dialogs from "./Dialogs";
-import {connect} from "react-redux";
-import {compose, Dispatch} from "redux";
-import {StoreType} from "../../Redux/redux-store";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import React from 'react'
+
+import { connect } from 'react-redux'
+import { compose, Dispatch } from 'redux'
+
+import { withAuthRedirect } from '../../hoc/withAuthRedirect'
+import { DialogType, MessageType, sendMessageActionCreator } from '../../Redux/dialogsReducer'
+import { StoreType } from '../../Redux/redux-store'
+
+import Dialogs from './Dialogs'
 
 // type DialogsPropsType = {
 //     // dialog: DialogType[]
@@ -42,66 +45,42 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 // }
 
 type MapStateToPropsType = {
-    dialogs: Array<DialogType>
-    message: Array<MessageType>
-    //newMessageText: string
+  dialogs: Array<DialogType>
+  message: Array<MessageType>
+  //newMessageText: string
 
-    //isAuth: boolean - авторизация будет браться  в HOC
+  //isAuth: boolean - авторизация будет браться  в HOC
 }
 type MapDispatchToPropsType = {
-    //onSubmit: ()=> void
-    sendMessage: (newMessageText: string) => void
-    //changeNewMessageTextCallback: (newMessageTextBody: string) => void
+  //onSubmit: ()=> void
+  sendMessage: (newMessageText: string) => void
+  //changeNewMessageTextCallback: (newMessageTextBody: string) => void
 }
-export type DialogsPropsType = MapDispatchToPropsType & MapStateToPropsType;
+export type DialogsPropsType = MapDispatchToPropsType & MapStateToPropsType
 
 const mapStateToProps = (state: StoreType): MapStateToPropsType => {
-    return {
-        dialogs: state.DialogsPage.dialogs,
-        message: state.DialogsPage.message,
-       // newMessageText: state.DialogsPage.newMessageText,
-        //isAuth: state.auth.isAuth - авторизация будет браться  в HOC
-    }
+  return {
+    dialogs: state.DialogsPage.dialogs,
+    message: state.DialogsPage.message,
+    // newMessageText: state.DialogsPage.newMessageText,
+    //isAuth: state.auth.isAuth - авторизация будет браться  в HOC
+  }
 }
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-
-    return {
-        sendMessage: (newMessage: string) => {
-            dispatch(sendMessageActionCreator(newMessage))
-        },
-        // changeNewMessageTextCallback: (newMessageTextBody: string) => {
-        //     dispatch(addMessageActionCreator(newMessageTextBody))
-        }
-
-    }
-
-
+  return {
+    sendMessage: (newMessage: string) => {
+      dispatch(sendMessageActionCreator(newMessage))
+    },
+    // changeNewMessageTextCallback: (newMessageTextBody: string) => {
+    //     dispatch(addMessageActionCreator(newMessageTextBody))
+  }
+}
 
 // let AuthRedirectComponent = withAuthRedirect(Dialogs)
 //
 // const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
 
-export default compose<React.ComponentType>(connect(mapStateToProps, mapDispatchToProps),
-    withAuthRedirect)(Dialogs);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default compose<React.ComponentType>(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(Dialogs)
