@@ -1,89 +1,70 @@
-import React from "react";
-import Profile from "./Profile";
-import {connect} from "react-redux";
-import {StoreType} from "../../Redux/redux-store";
-import {getStatus, getUserProfile, updateStatus} from "../../Redux/profileReducer";
-import {RootUserProfileType} from "./RootUserProfileType";
-import {RouteComponentProps, withRouter} from "react-router-dom";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
-import {compose} from "redux";
+import React from 'react'
+
+import { connect } from 'react-redux'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
+import { compose } from 'redux'
+
+import { withAuthRedirect } from '../../hoc/withAuthRedirect'
+import { getStatus, getUserProfile, updateStatus } from '../../Redux/profileReducer'
+import { StoreType } from '../../Redux/redux-store'
+
+import Profile from './Profile'
+import { RootUserProfileType } from './RootUserProfileType'
 
 export type PathParamType = {
-    userId: string
+  userId: string
 }
 type MapStateToPropsType = {
-    profile: RootUserProfileType
-    status: string
-    authorizedUserId: number,
-    isAuth: boolean
+  profile: RootUserProfileType
+  status: string
+  authorizedUserId: number
+  isAuth: boolean
 }
 
 type MapDispatchToProps = {
-    //setUserProfile: (profile: RootUserProfileType) => void
-    getUserProfile: (userId: number) => void
-    getStatus: (userId: number) => void
-    updateStatus: (status: string) => void
-
+  //setUserProfile: (profile: RootUserProfileType) => void
+  getUserProfile: (userId: number) => void
+  getStatus: (userId: number) => void
+  updateStatus: (status: string) => void
 }
-export type ProfileContainerPropsType = MapStateToPropsType & MapDispatchToProps & RouteComponentProps<PathParamType>;
+export type ProfileContainerPropsType = MapStateToPropsType &
+  MapDispatchToProps &
+  RouteComponentProps<PathParamType>
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
-    componentDidMount() {
-        let userId = +this.props.match.params.userId;
-        if (!userId) {
-            userId = this.props.authorizedUserId;
-         }
-        this.props.getUserProfile(userId)
-        this.props.getStatus(userId)
-    }
+  componentDidMount() {
+    let userId = +this.props.match.params.userId
 
-    render() {
-        return (
-            <div>
-                <Profile
-                    {...this.props}
-                    profile={this.props.profile}
-                    status={this.props.status}
-                    updateStatus={this.props.updateStatus}/>
-            </div>
-        )
+    if (!userId) {
+      userId = this.props.authorizedUserId
     }
+    this.props.getUserProfile(userId)
+    this.props.getStatus(userId)
+  }
+
+  render() {
+    return (
+      <div>
+        <Profile
+          {...this.props}
+          profile={this.props.profile}
+          status={this.props.status}
+          updateStatus={this.props.updateStatus}
+        />
+      </div>
+    )
+  }
 }
 
 let mapStateToProps = (state: StoreType): MapStateToPropsType => ({
-    profile: state.ProfilePage.profile,
-    status: state.ProfilePage.status,
-    authorizedUserId: state.auth.userId,
-    isAuth: state.auth.isAuth
+  profile: state.ProfilePage.profile,
+  status: state.ProfilePage.status,
+  authorizedUserId: state.auth.userId,
+  isAuth: state.auth.isAuth,
 })
 
-
 export default compose<React.ComponentType>(
-    connect(mapStateToProps,
-        {getUserProfile, getStatus, updateStatus}),
-    withRouter,
-    withAuthRedirect
+  connect(mapStateToProps, { getUserProfile, getStatus, updateStatus }),
+  withRouter,
+  withAuthRedirect
 )(ProfileContainer)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
