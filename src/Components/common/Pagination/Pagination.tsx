@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './Pagination.module.css'
 
 export const Pagination = (props: PaginationPropsType) => {
-  let pagesCount = Math.ceil(props.totalUserCount / props.pageSize) // округление в большую сторону
+  let pagesCount = Math.ceil(props.totalItemsCount / props.pageSize) // округление в большую сторону
   // let pages = [];
   // for(let i = 1; i <= pagesCount; i++) {
   //     pages.push(i)
@@ -18,17 +18,17 @@ export const Pagination = (props: PaginationPropsType) => {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       {pages.map((el, index) => {
         return (
           <span
             onClick={() => props.onPageChanged(el)}
-            className={props.currentPage === el ? styles.selectPage : '  '}
+            className={props.currentPage === el ? styles.selectPage : styles.unSelectPage}
             key={index}
           >
-            {el === pagesCount && props.currentPage < pagesCount - 2 && ' ... '}
+            {el === pagesCount && props.currentPage < pagesCount - 2 && ' ---> '}
             {el}
-            {el === 1 && props.currentPage > 3 && ' ... '}
+            {el === 1 && props.currentPage > 3 && ' <--- '}
           </span>
         )
       })}
@@ -39,6 +39,6 @@ export const Pagination = (props: PaginationPropsType) => {
 type PaginationPropsType = {
   currentPage: number
   onPageChanged: (pageNumber: number) => void
-  totalUserCount: number
+  totalItemsCount: number
   pageSize: number
 }
