@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/557.956194f9.chunk.js","mappings":"2IAMA,UAJgB,WACd,OAAO,yBAAK,eACd,C","sources":["Components/Sidebar/Sidebar.tsx"],"sourcesContent":["import React from 'react'\r\n\r\nconst Sidebar = () => {\r\n  return <div> My Friends</div>\r\n}\r\n\r\nexport default Sidebar\r\n"],"names":[],"sourceRoot":""}
