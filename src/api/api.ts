@@ -24,22 +24,7 @@ export const usersAPI = {
     console.warn('Obsolete method. Please use profileAPI object.')
 
     return profileAPI.getProfile(userId)
-    // .then(response => response.data)
   },
-  // authUser (id: number, email: string, login: string) {
-  //     return  instance.get(`auth/me`).then(response => response.data
-  //         // if (response.data.resultCode === 0) {
-  //         //     let {id, email, login} = response.data.data;
-  //         //     this.props.setAuthUserDataAC(id, email, login)
-  //         // }
-  //     )
-  // }
-}
-
-export type ResponseType<D = {}> = {
-  resultCode: number
-  messages: Array<string>
-  data: D
 }
 
 export const profileAPI = {
@@ -52,12 +37,22 @@ export const profileAPI = {
   updateStatus(status: string) {
     return instance.put(`profile/status/`, { status: status })
   },
+  savePhoto(photoFile: string) {
+    const formData = new FormData()
+
+    formData.append('image', photoFile)
+
+    return instance.put(`profile/photo`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+  },
 }
 
 export const authAPI = {
   me() {
     return instance.get(`auth/me`)
-    //.then(response => response.data)
   },
   login(email: string, password: string, rememberMe: boolean) {
     return instance.post<ResponseType<{ userId: number }>>('/auth/login', {
@@ -71,19 +66,10 @@ export const authAPI = {
   },
 }
 
-// export const getUsers = (currentPage = 1, pageSize = 10) => {
-//     return instance.get(`users?page=${currentPage}&count=${pageSize}`,).then(response => response.data)
-// }
-//
-// export const followUser = (u: UserType) => {
-//     return instance.post(`follow/${u.id}`, {},).then(response => response.data)
-// }
-//
-// export const unFollowUser = (u: UserType) => {
-//     return instance.delete(`follow/${u.id}`).then(response => response.data)
-// }
-//
-// export const authMe = (userId: string) => {
-//     return instance.get<RootUserProfileType>(`profile/` + userId)
-//         .then(response => response.data)
-// }
+//TYPES ===========================
+
+export type ResponseType<D = {}> = {
+  resultCode: number
+  messages: Array<string>
+  data: D
+}
