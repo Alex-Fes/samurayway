@@ -6,11 +6,12 @@ import { RootUserProfileType } from '../Components/Profile/RootUserProfileType'
 import { AppThunkType } from './redux-store'
 import { ActionTypes } from './state'
 
-const ADD_POST = 'ADD-POST'
+const ADD_POST = 'profile/ADD-POST'
 // const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT';
-const SET_USER_PROFILE = 'SET-USER-PROFILE'
-const SET_STATUS = 'SET-STATUS'
-const DELETE_POST = 'DELETE-POST'
+const SET_USER_PROFILE = 'profile/SET-USER-PROFILE'
+const SET_STATUS = 'profile/SET-STATUS'
+const DELETE_POST = 'profile/DELETE-POST'
+const SAVE_PHOTO_SUCCESS = 'profile/SAVE-PHOTO-SUCCESS'
 
 export type InitialStateType = typeof initialState
 let initialState = {
@@ -72,6 +73,11 @@ export const profileReducer = (
         ...state,
         posts: state.posts.filter(post => post.id !== action.postId),
       } as InitialStateType
+    case SAVE_PHOTO_SUCCESS:
+      return {
+        ...state,
+        profile: { ...state.profile, photos: action.photos },
+      } as InitialStateType
     default:
       return state
   }
@@ -85,6 +91,8 @@ export const setUserProfile = (profile: RootUserProfileType) =>
   ({ type: SET_USER_PROFILE, profile } as const)
 export const setStatus = (status: string) => ({ type: SET_STATUS, status } as const)
 export const deletePostAC = (postId: number) => ({ type: DELETE_POST, postId } as const)
+export const savePhotoSuccessAC = (photos: string) =>
+  ({ type: SAVE_PHOTO_SUCCESS, photos } as const)
 
 //THUNKS ==================================
 export const getUserProfile =
@@ -118,6 +126,18 @@ export const updateStatus =
       let response = await profileAPI.updateStatus(status)
 
       if (response.data.resultCode === 0) dispatch(setStatus(status))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+export const savePhotoTC =
+  (photoFile: string): AppThunkType =>
+  async dispatch => {
+    try {
+      let response = await profileAPI.savePhoto(photoFile)
+
+      if (response.data.resultCode === 0) dispatch(savePhotoSuccessAC(response.data.data.photos))
     } catch (err) {
       console.log(err)
     }
