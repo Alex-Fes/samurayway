@@ -9,7 +9,7 @@ type ProfileInfoPropsType = {
 //   status: string
 // }
 
-const ProfileStatusWithHooks = (props: ProfileInfoPropsType) => {
+export const ProfileStatusWithHooks = (props: ProfileInfoPropsType) => {
   let [editMode, setEditMode] = useState(false)
   let [status, setStatus] = useState(props.status)
 
@@ -48,5 +48,3 @@ const ProfileStatusWithHooks = (props: ProfileInfoPropsType) => {
     </div>
   )
 }
-
-export default ProfileStatusWithHooks
