@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Component, lazy, Suspense } from 'react'
 
 import './App.css'
 import { connect } from 'react-redux'
@@ -16,14 +16,22 @@ import UsersContainer from './Components/Users/UsersContainer'
 import { initializeAppTC } from './Redux/appReducer'
 import { StoreType } from './Redux/redux-store'
 
-const Music = React.lazy(() => import('./Components/Music/Music'))
-const News = React.lazy(() => import('./Components/News/News'))
-const Settings = React.lazy(() => import('./Components/Settings/Settings'))
-const Sidebar = React.lazy(() => import('./Components/Sidebar/Sidebar'))
+const Music = lazy(() => import('./Components/Music/Music'))
+const News = lazy(() => import('./Components/News/News'))
+const Settings = lazy(() => import('./Components/Settings/Settings'))
+const Sidebar = lazy(() => import('./Components/Sidebar/Sidebar'))
 
-class App extends React.Component<AppPropsType> {
+class App extends Component<AppPropsType> {
+  catchAllUnhandledErrors = (promiseRejectionEvent: PromiseRejectionEvent) => {
+    alert('Some error occurred')
+    console.error(promiseRejectionEvent)
+  }
   componentDidMount() {
     this.props.initializeAppTC()
+    window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+  }
+  componentWillUnmount() {
+    window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
   }
 
   render() {
