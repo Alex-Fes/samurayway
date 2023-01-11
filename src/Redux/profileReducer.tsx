@@ -1,6 +1,10 @@
 import React from 'react'
 
+import { AxiosError } from 'axios'
+import { stopSubmit } from 'redux-form'
+
 import { profileAPI, usersAPI } from '../api/api'
+import { ProfileDataFormReduxFormType } from '../Components/Profile/ProfileInfo/ProfileDataForm'
 import { RootUserProfileType } from '../Components/Profile/RootUserProfileType'
 
 import { AppThunkType } from './redux-store'
@@ -96,7 +100,7 @@ export const savePhotoSuccessAC = (photos: string) =>
 
 //THUNKS ==================================
 export const getUserProfile =
-  (userId: string): AppThunkType =>
+  (userId: number): AppThunkType =>
   async dispatch => {
     try {
       let response = await usersAPI.getProfile(userId)
@@ -140,6 +144,31 @@ export const savePhotoTC =
       if (response.data.resultCode === 0) dispatch(savePhotoSuccessAC(response.data.data.photos))
     } catch (err) {
       console.log(err)
+    }
+  }
+
+export const updateUserDataTC =
+  (formData: ProfileDataFormReduxFormType): AppThunkType =>
+  async (dispatch, getState) => {
+    const userId = getState().auth.userId
+
+    try {
+      let response = await profileAPI.updateUserData(formData)
+
+      if (response.data.resultCode === 0) {
+        dispatch(getUserProfile(userId))
+      } else {
+        let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+
+        dispatch(stopSubmit('edit-profile', { _error: message }))
+
+        //return Promise.reject(message)
+      }
+    } catch (e) {
+      const err = e as Error | AxiosError<{ error: string }>
+
+      // debugger
+      // dispatch(stopSubmit('edit-profile', { _error: err.message[0] }))
     }
   }
 
