@@ -1,5 +1,5 @@
 import { initializedSuccessAC } from './appReducer'
-import { getAuthUserDataTC, setAuthUserDataAC } from './authReducer'
+import { getAuthUserDataTC, getCaptchaUrlAC, setAuthUserDataAC } from './authReducer'
 import { DialogType, MessageType, sendMessageActionCreator } from './dialogsReducer'
 import {
   addPostActionCreator,
@@ -65,6 +65,7 @@ export type ActionTypes =
   | ReturnType<typeof initializedSuccessAC>
   | ReturnType<typeof deletePostAC>
   | ReturnType<typeof savePhotoSuccessAC>
+  | ReturnType<typeof getCaptchaUrlAC>
 
 //
 // const store: StoreType = {
