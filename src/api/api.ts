@@ -1,5 +1,6 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
+import { ProfileDataFormReduxFormType } from '../Components/Profile/ProfileInfo/ProfileDataForm'
 import { RootUserProfileType } from '../Components/Profile/RootUserProfileType'
 
 const instance = axios.create({
@@ -20,7 +21,7 @@ export const usersAPI = {
   unFollowUser(userId: number) {
     return instance.delete(`follow/${userId}`)
   },
-  getProfile(userId: string) {
+  getProfile(userId: number) {
     console.warn('Obsolete method. Please use profileAPI object.')
 
     return profileAPI.getProfile(userId)
@@ -28,7 +29,7 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-  getProfile(userId: string) {
+  getProfile(userId: number) {
     return instance.get<RootUserProfileType>(`profile/` + userId)
   },
   getStatus(userId: string) {
@@ -47,6 +48,12 @@ export const profileAPI = {
         'Content-Type': 'multipart/form-data',
       },
     })
+  },
+  updateUserData(formData: ProfileDataFormReduxFormType) {
+    return instance.put<'', AxiosResponse<ResponseType>, ProfileDataFormReduxFormType>(
+      `profile`,
+      formData
+    )
   },
 }
 
