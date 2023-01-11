@@ -1,22 +1,27 @@
 import React from 'react'
 
 import { Field } from 'redux-form'
-import { WrappedFieldProps } from 'redux-form/lib/Field'
+import { WrappedFieldMetaProps, WrappedFieldProps } from 'redux-form/lib/Field'
+
+import { FieldValidatorType } from '../../../utilits/validators/validators'
 
 import styles from './FormControls.module.css'
 
-export const FormControl = ({ input, meta: { touched, error }, ...props }: any) => {
+export const FormControl: React.FC<FormControlPropsType> = ({
+  meta: { touched, error },
+  children,
+}) => {
   const hasError = touched && error
 
   return (
     <div className={styles.formControl + ' ' + (hasError ? styles.error : ' ')}>
-      <div>{props.children}</div>
+      <div>{children}</div>
       {hasError && <span>{error}</span>}
     </div>
   )
 }
 
-export const Textarea = (props: WrappedFieldProps) => {
+export const Textarea: React.FC<WrappedFieldProps> = props => {
   const { input, meta, ...resProps } = props
 
   return (
@@ -26,7 +31,7 @@ export const Textarea = (props: WrappedFieldProps) => {
   )
 }
 
-export const Input = (props: WrappedFieldProps) => {
+export const Input: React.FC<WrappedFieldProps> = props => {
   const { input, meta, ...resProps } = props
 
   return (
@@ -36,22 +41,30 @@ export const Input = (props: WrappedFieldProps) => {
   )
 }
 
-export const createField = (
+export function createField<FormKeysType>(
   placeholder: string,
-  name: string,
-  component: any,
-  validators: any,
+  name: FormKeysType,
+  component: React.FC<WrappedFieldProps>,
+  validators: Array<FieldValidatorType>,
   props?: any,
   text?: string
-) => (
-  <div>
-    <Field
-      placeholder={placeholder}
-      name={name}
-      component={component}
-      validate={validators}
-      {...props}
-    />
-    {text}
-  </div>
-)
+) {
+  return (
+    <div>
+      <Field
+        placeholder={placeholder}
+        name={name}
+        component={component}
+        validate={validators}
+        {...props}
+      />
+      {text}
+    </div>
+  )
+}
+
+//TYPES================================
+type FormControlPropsType = {
+  meta: WrappedFieldMetaProps
+  children: React.ReactNode
+}
