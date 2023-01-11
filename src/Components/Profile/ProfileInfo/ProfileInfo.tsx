@@ -1,21 +1,17 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 
 import defaultUserPhoto from '../../../assets/images/userPic.png'
+import { updateUserDataTC } from '../../../Redux/profileReducer'
 import { Preloader } from '../../common/Preloader/Preloader'
-import { RootUserProfileType } from '../RootUserProfileType'
+import { RootUserProfileType, RootUserProfileTypeContacts } from '../RootUserProfileType'
 
+import { ProfileDataFormReduxForm, ProfileDataFormReduxFormType } from './ProfileDataForm'
 import s from './ProfileInfo.module.css'
 import { ProfileStatusWithHooks } from './ProfileStatusWithHooks'
 
-type ProfileInfoPropsType = {
-  profile: RootUserProfileType
-  status: string
-  updateStatus: (status: string) => void
-  savePhoto: (photoFile: any) => void
-  isOwner: boolean
-}
-
 export const ProfileInfo = (props: ProfileInfoPropsType) => {
+  const [editMode, setEditMode] = useState(false)
+
   if (!props.profile) {
     return <Preloader />
   }
@@ -24,34 +20,113 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
     if (e.target.files && e.target.files.length) props.savePhoto(e.target.files[0])
   }
 
+  const onSubmit = (formData: ProfileDataFormReduxFormType) => {
+    props.updateUserDataTC(formData)
+    setEditMode(false)
+  }
+
   return (
     <div>
       <div>
-        <div className={s.img}>
-          {/*<img*/}
-          {/*    src="https://www.imgfinancialgroup.com/sites/default/files/users/imgfinancialgroup/images/001-coastal.jpg"*/}
-          {/*    alt=''/>*/}
-        </div>
+        <div className={s.img}></div>
 
         <div className={s.descriptionBlock}>
-          <img
-            src={props.profile.photos.large || defaultUserPhoto}
-            alt=""
-            width={'200px'}
-            height={'200px'}
-          />
-          {props.isOwner && <input type={'file'} onChange={onMainPhotoSelected} />}
-          <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
-          <span>About me: {props.profile.aboutMe}</span>
-          <ul>
-            Contacts:
-            <li>{props.profile.contacts.facebook}</li>
-            <li>{props.profile.contacts.github}</li>
-            <li>{props.profile.contacts.vk}</li>
-            <li>{props.profile.contacts.youtube}</li>
-          </ul>
+          <div>
+            <img
+              src={props.profile.photos.large || defaultUserPhoto}
+              alt=""
+              width={'200px'}
+              height={'200px'}
+            />
+          </div>
+          <div>{props.isOwner && <input type={'file'} onChange={onMainPhotoSelected} />}</div>
+          <div>
+            <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
+          </div>
+
+          {editMode ? (
+            <ProfileDataFormReduxForm onSubmit={onSubmit} initialValues={props.profile} />
+          ) : (
+            <ProfileData
+              profile={props.profile}
+              isOwner={props.isOwner}
+              goToEditMode={() => {
+                setEditMode(!editMode)
+              }}
+            />
+          )}
         </div>
       </div>
     </div>
   )
+}
+
+const ProfileData = ({ profile, isOwner, goToEditMode }: ProfileDataPropsType) => {
+  return (
+    <div>
+      <div>
+        <h1>{profile.fullName}</h1>
+      </div>
+      <div>
+        <b>Looking for a job </b> : {profile.lookingForAJob ? 'yes' : 'no'}
+      </div>
+      {profile.lookingForAJob && (
+        <div>
+          <b>My professional skills</b> : {profile.lookingForAJobDescription}
+        </div>
+      )}
+      <span>About me: {profile.aboutMe}</span>
+      <div>
+        <b>Contacts :</b>
+        <ul>
+          {Object.keys(profile.contacts).map(key => {
+            return (
+              <li key={key}>
+                <Contact
+                  contactTitle={key}
+                  contactValue={profile.contacts[key as keyof RootUserProfileTypeContacts]}
+                />
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+      <div>{isOwner && <button onClick={goToEditMode}>edit</button>}</div>
+    </div>
+  )
+}
+
+export const Contact = ({ contactTitle, contactValue }: ContactType) => {
+  return (
+    <div>
+      <b>{contactTitle}</b> : {contactValue}
+    </div>
+  )
+}
+
+//TYPES =====================================
+
+type ContactType = {
+  contactTitle: string
+  contactValue: string
+}
+export type ProfileDataFormPropsType = {
+  initialValues: RootUserProfileType
+  onSubmit?: (formData: ProfileDataFormReduxFormType) => void
+}
+
+export type ProfileDataPropsType = {
+  profile: RootUserProfileType
+  isOwner?: boolean
+  goToEditMode?: () => void
+  onSubmit?: (formData: ProfileDataFormReduxFormType) => void
+}
+
+type ProfileInfoPropsType = {
+  profile: RootUserProfileType
+  status: string
+  updateStatus: (status: string) => void
+  savePhoto: (photoFile: any) => void
+  isOwner: boolean
+  updateUserDataTC: (formData: ProfileDataFormReduxFormType) => void
 }
