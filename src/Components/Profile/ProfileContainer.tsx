@@ -5,33 +5,18 @@ import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
-import { getStatus, getUserProfile, savePhotoTC, updateStatus } from '../../Redux/profileReducer'
+import {
+  getStatus,
+  getUserProfile,
+  savePhotoTC,
+  updateStatus,
+  updateUserDataTC,
+} from '../../Redux/profileReducer'
 import { StoreType } from '../../Redux/redux-store'
 
 import Profile from './Profile'
+import { ProfileDataFormReduxFormType } from './ProfileInfo/ProfileDataForm'
 import { RootUserProfileType } from './RootUserProfileType'
-
-export type PathParamType = {
-  userId: string
-}
-type MapStateToPropsType = {
-  profile: RootUserProfileType
-  status: string
-  authorizedUserId: number
-  isAuth: boolean
-  isOwner: boolean
-}
-
-type MapDispatchToProps = {
-  //setUserProfile: (profile: RootUserProfileType) => void
-  getUserProfile: (userId: number) => void
-  getStatus: (userId: number) => void
-  updateStatus: (status: string) => void
-  savePhotoTC: (photoFile: any) => void
-}
-export type ProfileContainerPropsType = MapStateToPropsType &
-  MapDispatchToProps &
-  RouteComponentProps<PathParamType>
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
   refreshProfile() {
@@ -80,7 +65,37 @@ let mapStateToProps = (state: StoreType): MapStateToPropsType => ({
 })
 
 export default compose<React.ComponentType>(
-  connect(mapStateToProps, { getUserProfile, getStatus, updateStatus, savePhotoTC }),
+  connect(mapStateToProps, {
+    getUserProfile,
+    getStatus,
+    updateStatus,
+    savePhotoTC,
+    updateUserDataTC,
+  }),
   withRouter,
   withAuthRedirect
 )(ProfileContainer)
+
+//TYPES =====================================
+export type PathParamType = {
+  userId: string
+}
+type MapStateToPropsType = {
+  profile: RootUserProfileType
+  status: string
+  authorizedUserId: number
+  isAuth: boolean
+  isOwner: boolean
+}
+
+type MapDispatchToProps = {
+  //setUserProfile: (profile: RootUserProfileType) => void
+  getUserProfile: (userId: number) => void
+  getStatus: (userId: number) => void
+  updateStatus: (status: string) => void
+  savePhotoTC: (photoFile: any) => void
+  updateUserDataTC: (formData: ProfileDataFormReduxFormType) => void
+}
+export type ProfileContainerPropsType = MapStateToPropsType &
+  MapDispatchToProps &
+  RouteComponentProps<PathParamType>
