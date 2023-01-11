@@ -13,14 +13,30 @@ import { createField, Input } from '../common/FormsControls/FormsControl'
 const maxLengthForLogin = maxLengthCreator(50)
 const maxLengthForPassword = maxLengthCreator(20)
 
-export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({ handleSubmit, error }) => {
+export const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType>> = ({
+  handleSubmit,
+  error,
+}) => {
   return (
     <form onSubmit={handleSubmit}>
-      {createField('email', 'email', Input, [required, maxLengthForLogin])}
-      {createField('Password', 'password', Input, [required, maxLengthForPassword], {
-        type: 'password',
-      })}
-      {createField('checkbox', 'remember me', Input, [], { type: 'checkbox' }, 'remember me')}
+      {createField<LoginFormValuesTypeKeys>('email', 'email', Input, [required, maxLengthForLogin])}
+      {createField<LoginFormValuesTypeKeys>(
+        'Password',
+        'password',
+        Input,
+        [required, maxLengthForPassword],
+        {
+          type: 'password',
+        }
+      )}
+      {createField<LoginFormValuesTypeKeys>(
+        'checkbox',
+        'rememberMe',
+        Input,
+        [],
+        { type: 'checkbox' },
+        'remember me'
+      )}
       {error && <div className={styles.formSummaryError}>{error}</div>}
       <div>
         <button>Login</button>
@@ -29,24 +45,11 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({ handleSub
   )
 }
 
-const LoginReduxForm = reduxForm<FormDataType>({ form: 'login' })(LoginForm)
+const LoginReduxForm = reduxForm<LoginFormValuesType>({ form: 'login' })(LoginForm)
 
-type MapDispatchToPropsType = {
-  loginUserTC: (email: string, password: string, rememberMe: boolean) => void
-}
-type MapStateToPropsType = {
-  isAuth: boolean
-}
-type LoginPropsType = MapStateToPropsType & MapDispatchToPropsType
-
-export type FormDataType = {
-  email: string
-  password: string
-  rememberMe: boolean
-}
 const mapStateToProps = (state: StoreType): MapStateToPropsType => ({ isAuth: state.auth.isAuth })
 const Login = (props: LoginPropsType) => {
-  const onSubmit = (formData: FormDataType) => {
+  const onSubmit = (formData: LoginFormValuesType) => {
     props.loginUserTC(formData.email, formData.password, formData.rememberMe)
   }
 
@@ -63,3 +66,22 @@ const Login = (props: LoginPropsType) => {
 }
 
 export default connect(mapStateToProps, { loginUserTC })(Login)
+
+//TYPES =========================
+
+type LoginFormValuesType = {
+  email: string
+  password: string
+  rememberMe: boolean
+}
+
+type LoginFormValuesTypeKeys = keyof LoginFormValuesType
+
+type MapDispatchToPropsType = {
+  loginUserTC: (email: string, password: string, rememberMe: boolean) => void
+}
+
+type MapStateToPropsType = {
+  isAuth: boolean
+}
+type LoginPropsType = MapStateToPropsType & MapDispatchToPropsType
