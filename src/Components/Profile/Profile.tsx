@@ -13,6 +13,7 @@ const Profile = (props: ProfileContainerPropsType) => {
         updateStatus={props.updateStatus}
         isOwner={props.isOwner}
         savePhoto={props.savePhotoTC}
+        updateUserDataTC={props.updateUserDataTC}
       />
       <MyPostsContainer
       // posts={props.posts}
