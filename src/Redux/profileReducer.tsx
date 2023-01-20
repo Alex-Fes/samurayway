@@ -4,11 +4,12 @@ import { AxiosError } from 'axios'
 import { stopSubmit } from 'redux-form'
 
 import { profileAPI, usersAPI } from '../api/api'
+import { setAppStatusAC } from '../App/appReducer'
+import { AppThunkType } from '../App/store'
 import { ProfileDataFormReduxFormType } from '../Components/Profile/ProfileInfo/ProfileDataForm'
 import { RootUserProfileType } from '../Components/Profile/RootUserProfileType'
 
-import { AppThunkType } from './redux-store'
-import { ActionTypes } from './state'
+import { AppActionsType } from './types'
 
 const ADD_POST = 'profile/ADD-POST'
 // const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT';
@@ -51,7 +52,7 @@ let initialState = {
 
 export const profileReducer = (
   state: InitialStateType = initialState,
-  action: ActionTypes
+  action: AppActionsType
 ): InitialStateType => {
   switch (action.type) {
     case ADD_POST:
@@ -102,10 +103,12 @@ export const savePhotoSuccessAC = (photos: string) =>
 export const getUserProfile =
   (userId: number): AppThunkType =>
   async dispatch => {
+    dispatch(setAppStatusAC('loading'))
     try {
       let response = await usersAPI.getProfile(userId)
 
       dispatch(setUserProfile(response.data))
+      dispatch(setAppStatusAC('succeeded'))
     } catch (err) {
       console.log(err)
     }
@@ -114,10 +117,12 @@ export const getUserProfile =
 export const getStatus =
   (userId: string): AppThunkType =>
   async dispatch => {
+    dispatch(setAppStatusAC('loading'))
     try {
       let response = await profileAPI.getStatus(userId)
 
       dispatch(setStatus(response.data))
+      dispatch(setAppStatusAC('succeeded'))
     } catch (err) {
       console.log(err)
     }
@@ -126,10 +131,12 @@ export const getStatus =
 export const updateStatus =
   (status: string): AppThunkType =>
   async dispatch => {
+    dispatch(setAppStatusAC('loading'))
     try {
       let response = await profileAPI.updateStatus(status)
 
       if (response.data.resultCode === 0) dispatch(setStatus(status))
+      dispatch(setAppStatusAC('succeeded'))
     } catch (err) {
       console.log(err)
     }
@@ -138,10 +145,12 @@ export const updateStatus =
 export const savePhotoTC =
   (photoFile: string): AppThunkType =>
   async dispatch => {
+    dispatch(setAppStatusAC('loading'))
     try {
       let response = await profileAPI.savePhoto(photoFile)
 
       if (response.data.resultCode === 0) dispatch(savePhotoSuccessAC(response.data.data.photos))
+      dispatch(setAppStatusAC('succeeded'))
     } catch (err) {
       console.log(err)
     }
@@ -152,16 +161,18 @@ export const updateUserDataTC =
   async (dispatch, getState) => {
     const userId = getState().auth.userId
 
+    dispatch(setAppStatusAC('loading'))
     try {
       let response = await profileAPI.updateUserData(formData)
 
       if (response.data.resultCode === 0) {
         dispatch(getUserProfile(userId))
+        dispatch(setAppStatusAC('succeeded'))
       } else {
         let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
 
         dispatch(stopSubmit('edit-profile', { _error: message }))
-
+        dispatch(setAppStatusAC('succeeded'))
         //return Promise.reject(message)
       }
     } catch (e) {
