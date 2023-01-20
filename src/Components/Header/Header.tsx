@@ -2,7 +2,7 @@ import React from 'react'
 
 import { NavLink } from 'react-router-dom'
 
-import classes from './Header.module.css'
+import s from './Header.module.css'
 
 type HeaderPropsType = {
   login: string
@@ -11,9 +11,9 @@ type HeaderPropsType = {
 }
 const Header = (props: HeaderPropsType) => {
   return (
-    <header className={classes.header}>
-      <img src="logo_transparent.png" alt="logo" />
-      <div className={classes.loginBlock}>
+    <header className={s.header}>
+      <img src="../../assets/images/logo_transparent.png" alt="logo" />
+      <div className={s.loginBlock}>
         {props.isAuth ? (
           <div>
             {props.login} - <button onClick={props.logoutUserTC}>Log out</button>
