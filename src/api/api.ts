@@ -1,15 +1,9 @@
-import axios, { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 
 import { ProfileDataFormReduxFormType } from '../Components/Profile/ProfileInfo/ProfileDataForm'
 import { RootUserProfileType } from '../Components/Profile/RootUserProfileType'
 
-const instance = axios.create({
-  withCredentials: true,
-  baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-  headers: {
-    'API-KEY': '3af1a50e-9363-4d90-80ea-b72e392fafcb',
-  },
-})
+import { instance } from './instance'
 
 export const usersAPI = {
   getUsers(currentPage = 1, pageSize = 10) {
@@ -54,23 +48,6 @@ export const profileAPI = {
       `profile`,
       formData
     )
-  },
-}
-
-export const authAPI = {
-  me() {
-    return instance.get(`auth/me`)
-  },
-  login(email: string, password: string, rememberMe: boolean, captcha: string) {
-    return instance.post<ResponseType<{ userId: number }>>('/auth/login', {
-      email,
-      password,
-      rememberMe,
-      captcha,
-    })
-  },
-  logout() {
-    return instance.delete<ResponseType>('/auth/login')
   },
 }
 
