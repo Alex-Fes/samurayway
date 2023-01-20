@@ -1,25 +1,26 @@
 import React, { Component, lazy, Suspense } from 'react'
 
-import './App.css'
+import { CircularProgress, LinearProgress } from '@mui/material'
 import { connect } from 'react-redux'
 import { Route, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 
-import { Preloader } from './Components/common/Preloader/Preloader'
-import DialogsContainer from './Components/Dialogs/DialogsContainer'
-import Footer from './Components/Footer/Footer'
-import HeaderContainer from './Components/Header/HeaderContainer'
-import Login from './Components/Login/Login'
-import Navigation from './Components/Navigation/Navigation'
-import ProfileContainer from './Components/Profile/ProfileContainer'
-import UsersContainer from './Components/Users/UsersContainer'
-import { initializeAppTC } from './Redux/appReducer'
-import { StoreType } from './Redux/redux-store'
+import './App.css'
+import DialogsContainer from '../Components/Dialogs/DialogsContainer'
+import Footer from '../Components/Footer/Footer'
+import HeaderContainer from '../Components/Header/HeaderContainer'
+import Navigation from '../Components/Navigation/Navigation'
+import ProfileContainer from '../Components/Profile/ProfileContainer'
+import UsersContainer from '../Components/Users/UsersContainer'
+import Login from '../features/auth/Login'
 
-const Music = lazy(() => import('./Components/Music/Music'))
-const News = lazy(() => import('./Components/News/News'))
-const Settings = lazy(() => import('./Components/Settings/Settings'))
-const Sidebar = lazy(() => import('./Components/Sidebar/Sidebar'))
+import { initializeAppTC, RequestStatusType } from './appReducer'
+import { StoreType } from './store'
+
+const Music = lazy(() => import('../Components/Music/Music'))
+const News = lazy(() => import('../Components/News/News'))
+const Settings = lazy(() => import('../Components/Settings/Settings'))
+const Sidebar = lazy(() => import('../Components/Sidebar/Sidebar'))
 
 class App extends Component<AppPropsType> {
   catchAllUnhandledErrors = (promiseRejectionEvent: PromiseRejectionEvent) => {
@@ -36,17 +37,32 @@ class App extends Component<AppPropsType> {
 
   render() {
     if (!this.props.initialized) {
-      return <Preloader />
+      return (
+        <div className="app-wrapper-initial-progress">
+          <div className="app-initial-progress">
+            <CircularProgress size="50px" className="circularProgress" />
+          </div>
+        </div>
+      )
     }
 
     return (
       <div className="app-wrapper">
+        {this.props.appStatus === 'loading' && (
+          <LinearProgress sx={{ position: 'absolute', width: '100%', height: '5px', top: '0' }} />
+        )}
         <HeaderContainer />
         <Navigation />
         <div className="app-wrapper-content">
           <Route path="/profile/:userId?" render={() => <ProfileContainer />}></Route>
           <Route path="/dialogs" render={() => <DialogsContainer />}></Route>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense
+            fallback={
+              <div>
+                <CircularProgress size="50px" className="circularProgress" />
+              </div>
+            }
+          >
             <Route path="/news" render={() => <News />}></Route>
             <Route path="/music" render={() => <Music />}></Route>{' '}
             <Route path="/settings" render={() => <Settings />}></Route>
@@ -65,6 +81,7 @@ class App extends Component<AppPropsType> {
 
 const mapStateToProps = (state: StoreType) => ({
   initialized: state.app.initialized,
+  appStatus: state.app.status,
 })
 
 export default compose<React.ComponentType>(
@@ -78,5 +95,6 @@ type mapDispatchToPropsType = {
 }
 type mapStateToPropsType = {
   initialized: boolean
+  appStatus: RequestStatusType
 }
 type AppPropsType = mapStateToPropsType & mapDispatchToPropsType
