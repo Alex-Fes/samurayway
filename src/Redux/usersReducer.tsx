@@ -1,10 +1,11 @@
 import React from 'react'
 
 import { usersAPI } from '../api/api'
+import { setAppStatusAC } from '../App/appReducer'
+import { AppThunkDispatchType, AppThunkType } from '../App/store'
 import { updateObjectInArray } from '../utilits/objectHelpers'
 
-import { AppThunkDispatchType, AppThunkType } from './redux-store'
-import { ActionTypes } from './state'
+import { AppActionsType } from './types'
 
 const initialState: InitialStateType = {
   users: [],
@@ -17,19 +18,13 @@ const initialState: InitialStateType = {
 
 export const usersReducer = (
   state: InitialStateType = initialState,
-  action: ActionTypes
+  action: AppActionsType
 ): InitialStateType => {
   switch (action.type) {
     case 'FOLLOW':
       return {
         ...state,
         users: updateObjectInArray(state.users, action.userId, 'id', { followed: true }),
-        // users: state.users.map(u => {
-        //     if (u.id === action.userId) {
-        //         return {...u, followed: true}
-        //     }
-        //     return u;
-        // })
       }
     case 'UNFOLLOW':
       return {
@@ -86,6 +81,7 @@ export const toggleIsFollowingInProcess = (isFetching: boolean, userId: number) 
 export const getUsersThunkCreator =
   (currentPage: number, pageSize: number): AppThunkType =>
   async dispatch => {
+    dispatch(setAppStatusAC('loading'))
     dispatch(toggleIsFetching(true))
     dispatch(setCurrentPage(currentPage))
     try {
@@ -94,6 +90,7 @@ export const getUsersThunkCreator =
       dispatch(toggleIsFetching(false))
       dispatch(setUsers(response.data.items))
       dispatch(setTotalUsersCount(response.data.totalCount))
+      dispatch(setAppStatusAC('succeeded'))
     } catch (err) {
       console.log(err)
     }
@@ -102,13 +99,15 @@ export const getUsersThunkCreator =
 export const onPageChangedThunkCreator =
   (pageNumber: number, pageSize: number): AppThunkType =>
   async dispatch => {
-    dispatch(toggleIsFetching(true))
-    dispatch(setCurrentPage(pageNumber))
     try {
+      dispatch(setAppStatusAC('loading'))
+      dispatch(toggleIsFetching(true))
+      dispatch(setCurrentPage(pageNumber))
       let response = await usersAPI.getUsers(pageNumber, pageSize)
 
       dispatch(toggleIsFetching(false))
       dispatch(setUsers(response.data.items))
+      dispatch(setAppStatusAC('succeeded'))
     } catch (err) {
       console.log(err)
     }
@@ -118,22 +117,31 @@ const followUnfollowFlow = async (
   dispatch: AppThunkDispatchType,
   userId: number,
   apiMethod: any,
-  actionCreator: ActionTypes
+  actionCreator: AppActionsType
 ) => {
-  dispatch(toggleIsFollowingInProcess(true, userId))
-  let response = await apiMethod(userId)
+  try {
+    dispatch(setAppStatusAC('loading'))
+    dispatch(toggleIsFollowingInProcess(true, userId))
+    let response = await apiMethod(userId)
 
-  if (response.data.resultCode === 0) {
-    dispatch(actionCreator(userId))
+    if (response.data.resultCode === 0) {
+      dispatch(actionCreator(userId))
+      dispatch(setAppStatusAC('succeeded'))
+    }
+    dispatch(toggleIsFollowingInProcess(false, userId))
+    dispatch(setAppStatusAC('succeeded'))
+  } catch (err) {
+    console.log(err)
   }
-  dispatch(toggleIsFollowingInProcess(false, userId))
 }
 
 export const follow =
   (userId: number): AppThunkType =>
   async dispatch => {
     try {
+      dispatch(setAppStatusAC('loading'))
       await followUnfollowFlow(dispatch, userId, usersAPI.followUser, followSuccess)
+      dispatch(setAppStatusAC('succeeded'))
     } catch (err) {
       console.log(err)
     }
@@ -143,7 +151,9 @@ export const unfollow =
   (userId: number): AppThunkType =>
   async dispatch => {
     try {
+      dispatch(setAppStatusAC('loading'))
       await followUnfollowFlow(dispatch, userId, usersAPI.unFollowUser, unfollowSuccess)
+      dispatch(setAppStatusAC('succeeded'))
     } catch (err) {
       console.log(err)
     }
