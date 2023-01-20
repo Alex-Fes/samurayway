@@ -3,8 +3,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 
+import { StoreType } from '../../../../App/store'
 import { addPostActionCreator } from '../../../../Redux/profileReducer'
-import { StoreType } from '../../../../Redux/redux-store'
 import MyPosts from '../MyPosts'
 
 // type MyPostsPropsType = {
