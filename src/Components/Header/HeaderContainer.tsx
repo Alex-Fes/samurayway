@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
 
-import { logoutUserTC } from '../../Redux/authReducer'
-import { StoreType } from '../../Redux/redux-store'
+import { StoreType } from '../../App/store'
+import { logoutUserTC } from '../../features/auth/authReducer'
 
 import Header from './Header'
+import HeaderMui from './HeaderMui'
 
 type mapStateToPropsType = {
   login: string
@@ -16,7 +17,7 @@ type mapDispatchToPropsType = {
   logoutUserTC: () => void
 }
 type HeaderAPIComponentType = mapStateToPropsType & mapDispatchToPropsType
-class HeaderContainer extends React.Component<HeaderAPIComponentType> {
+class HeaderContainer extends Component<HeaderAPIComponentType> {
   render() {
     return <Header {...this.props} />
   }
