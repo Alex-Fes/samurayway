@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 
-import { withAuthRedirect } from '../../hoc/withAuthRedirect'
+import { StoreType } from '../../App/store'
 import {
   getStatus,
   getUserProfile,
@@ -12,13 +12,13 @@ import {
   updateStatus,
   updateUserDataTC,
 } from '../../Redux/profileReducer'
-import { StoreType } from '../../Redux/redux-store'
+import { withAuthRedirect } from '../hoc/withAuthRedirect'
 
 import Profile from './Profile'
 import { ProfileDataFormReduxFormType } from './ProfileInfo/ProfileDataForm'
 import { RootUserProfileType } from './RootUserProfileType'
 
-class ProfileContainer extends React.Component<ProfileContainerPropsType> {
+class ProfileContainer extends Component<ProfileContainerPropsType> {
   refreshProfile() {
     let userId = +this.props.match.params.userId
 
