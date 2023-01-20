@@ -4,11 +4,12 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { InjectedFormProps, reduxForm } from 'redux-form'
 
-import { loginUserTC } from '../../Redux/authReducer'
-import { StoreType } from '../../Redux/redux-store'
+import { StoreType } from '../../App/store'
+import styles from '../../Components/common/FormsControls/FormControls.module.css'
+import { createField, Input } from '../../Components/common/FormsControls/FormsControl'
 import { maxLengthCreator, required } from '../../utilits/validators/validators'
-import styles from '../common/FormsControls/FormControls.module.css'
-import { createField, Input } from '../common/FormsControls/FormsControl'
+
+import { loginUserTC } from './authReducer'
 
 const maxLengthForLogin = maxLengthCreator(50)
 const maxLengthForPassword = maxLengthCreator(20)
