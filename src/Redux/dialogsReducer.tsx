@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ActionTypes } from './state'
+import { AppActionsType } from './types'
 
 export type DialogType = {
   id: number
@@ -36,38 +36,21 @@ let initialState = {
 
 export const dialogReducer = (
   state: InitialStateType = initialState,
-  action: ActionTypes
+  action: AppActionsType
 ): InitialStateType => {
   switch (action.type) {
     case 'ADD-MESSAGE':
       // eslint-disable-next-line no-case-declarations
-      let newMessage: MessageType = {
+      const newMessage: MessageType = {
         id: new Date().getTime(),
         message: action.newMessage,
       }
 
-      // state.message.push(newMessage)
-      // state.newMessageText = '';
       return { ...state, message: [...state.message, newMessage] }
-    // case "CHANGE-NEW-MESSAGE-TEXT":
-    //     // state.newMessageText = action.newMessage;
-    //     return {...state,
-    //         // newMessageText: action.newMessage
-    //     };
+
     default:
       return state
   }
-  // if (action.type === 'ADD-MESSAGE') {
-  //     let newMessage: MessageType = {
-  //         id: new Date().getTime(),
-  //         message: state.newMessageText
-  //     };
-  //     state.message.push(newMessage)
-  //     state.newMessageText = '';
-  // } else if (action.type === 'CHANGE-NEW-MESSAGE-TEXT') {
-  //     state.newMessageText = action.newMessage;
-  // }
-  // return state;
 }
 export const sendMessageActionCreator = (newMessage: string) =>
   ({ type: 'ADD-MESSAGE', newMessage } as const)
