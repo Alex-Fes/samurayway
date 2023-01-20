@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
-import { withAuthRedirect } from '../../hoc/withAuthRedirect'
-import { StoreType } from '../../Redux/redux-store'
+import { StoreType } from '../../App/store'
 import {
   getCurrentPage,
   getFollowingProcess,
@@ -21,11 +20,11 @@ import {
   setCurrentPage,
   unfollow,
 } from '../../Redux/usersReducer'
-import { Preloader } from '../common/Preloader/Preloader'
+import { withAuthRedirect } from '../hoc/withAuthRedirect'
 
 import { Users } from './Users'
 
-class UsersContainer extends React.Component<UsersAPIComponentPropsType> {
+class UsersContainer extends Component<UsersAPIComponentPropsType> {
   componentDidMount() {
     const { currentPage, pageSize } = this.props
 
@@ -41,7 +40,9 @@ class UsersContainer extends React.Component<UsersAPIComponentPropsType> {
   render() {
     return (
       <>
-        {this.props.isFetching ? <Preloader /> : null}
+        {/*{this.props.isFetching ? (*/}
+        {/*  <CircularProgress size="30px" className="circularProgress" />*/}
+        {/*) : null}*/}
         <Users
           totalUserCount={this.props.totalUserCount}
           pageSize={this.props.pageSize}
