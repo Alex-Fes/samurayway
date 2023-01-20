@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import { Field, reduxForm } from 'redux-form'
 
@@ -9,7 +9,7 @@ import classes from './MyPosts.module.css'
 import { MyPostPropsType } from './Post/MyPostsContainer'
 import Post from './Post/Post'
 
-const MyPosts = React.memo((props: MyPostPropsType) => {
+const MyPosts = memo((props: MyPostPropsType) => {
   let postsElement = [...props.posts]
     .reverse()
     .map(p => <Post message={p.message} likeCount={p.likeCount} key={p.id} />)
