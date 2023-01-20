@@ -3,9 +3,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { compose, Dispatch } from 'redux'
 
-import { withAuthRedirect } from '../../hoc/withAuthRedirect'
+import { StoreType } from '../../App/store'
 import { DialogType, MessageType, sendMessageActionCreator } from '../../Redux/dialogsReducer'
-import { StoreType } from '../../Redux/redux-store'
+import { withAuthRedirect } from '../hoc/withAuthRedirect'
 
 import Dialogs from './Dialogs'
 
