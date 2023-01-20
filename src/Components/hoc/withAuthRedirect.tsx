@@ -3,7 +3,7 @@ import React, { ComponentType } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import { StoreType } from '../Redux/redux-store'
+import { StoreType } from '../../App/store'
 
 type MapStateToPropsForRedirectType = {
   isAuth: boolean
