@@ -51,8 +51,10 @@ class App extends Component<AppPropsType> {
         {this.props.appStatus === 'loading' && (
           <LinearProgress sx={{ position: 'absolute', width: '100%', height: '5px', top: '0' }} />
         )}
-        <HeaderContainer />
-        <Navigation />
+        <div>
+          <HeaderContainer />
+        </div>
+
         <div className="app-wrapper-content">
           <Route path="/profile/:userId?" render={() => <ProfileContainer />}></Route>
           <Route path="/dialogs" render={() => <DialogsContainer />}></Route>

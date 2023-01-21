@@ -1,13 +1,20 @@
 .nav {
-    grid-area: n;
+    display: flex;
+
+
 
     padding: 35px;
 
-    background-color: rgba(28, 98, 178, 0.83);
+
+    /*background-color: rgba(28, 98, 178, 0.83);*/
 }
 
 .item a {
-    color: white;
+    cursor: pointer;
+
+    padding: 0 5px 0 5px;
+
+    color: #070707;
     text-decoration: none;
 }
 
