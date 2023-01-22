@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import { Preloader } from '../../common/Preloader/Preloader'
 
@@ -11,7 +11,7 @@ type LocalStateType = {
   status: string
 }
 
-class ProfileStatus extends React.Component<ProfileInfoPropsType, LocalStateType> {
+class ProfileStatus extends Component<ProfileInfoPropsType, LocalStateType> {
   state: LocalStateType = {
     editMode: false,
     status: this.props.status,
