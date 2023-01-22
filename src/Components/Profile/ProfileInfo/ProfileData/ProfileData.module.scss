@@ -1,0 +1,15 @@
+.mainContainer{
+  text-align: center;
+
+  position: relative;
+  .editBtn{
+    position: absolute; /* position the button relative to the block */
+    top: -15px; /* position the button 10px from the top of the block */
+    right: -25px; /* position the button 10px from the right of the block */
+  }
+
+  .list {
+    list-style-type: none;
+  }
+}
+
