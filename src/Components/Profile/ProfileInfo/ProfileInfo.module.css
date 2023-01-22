@@ -1,9 +1,78 @@
+.container {
+
+}
+
 .descriptionBlock {
     display: flex;
     flex-direction: column;
 
+    padding-bottom: 20px;
+
+}
+.firstBlock {
+    position: inherit;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 16px;
+    padding: 24px 16px;
+
+    background-color: #fff;
+
+}
+.firstBlock img {
+    cursor: pointer;
+
+    width: 200px;
+    height: 200px;
+    /*margin-top: 8px;*/
+
+
+    /*//border-radius: 20%;*/
+}
+.firstBlock img:hover {
+    opacity: 0.5;
+    box-shadow: 0 0 10px #ccc;
+}
+
+.uploadPhotoBtn {
+    cursor: pointer;
+
+    position: absolute;
+    top: 200px;
+
+    padding: 5px 10px;
+
+    /*font-size: 0.8em;*/
+    color: #fff;
+
+    visibility: hidden;
+    /*right: 10px;*/
+    opacity: 0.5;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+}
+.uploadPhotoBtn:hover {
+    visibility: visible;
+}
+
+.firstBlock img:hover + .uploadPhotoBtn {
+    visibility: visible;
+}
+
+
+.firstBlock h2 {
+    box-sizing: border-box;
+    margin: 0;
     padding: 20px;
 }
+
+
+
 
 .formError {
     padding: 5px;
