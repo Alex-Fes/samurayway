@@ -15,7 +15,7 @@ import {
 import { withAuthRedirect } from '../hoc/withAuthRedirect'
 
 import Profile from './Profile'
-import { ProfileDataFormReduxFormType } from './ProfileInfo/ProfileDataForm'
+import { ProfileDataFormReduxFormType } from './ProfileInfo/ProfileDataForm/ProfileDataForm'
 import { RootUserProfileType } from './RootUserProfileType'
 
 class ProfileContainer extends Component<ProfileContainerPropsType> {
