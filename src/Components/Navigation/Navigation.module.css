@@ -1,12 +1,7 @@
 .nav {
     display: flex;
 
-
-
     padding: 35px;
-
-
-    /*background-color: rgba(28, 98, 178, 0.83);*/
 }
 
 .item a {
@@ -19,5 +14,5 @@
 }
 
 .item a.active{
-    color: gold;
+    color: #dcbb21;
 }
