@@ -6,7 +6,6 @@ import { StoreType } from '../../App/store'
 import { logoutUserTC } from '../../features/auth/authReducer'
 
 import Header from './Header'
-import HeaderMui from './HeaderMui'
 
 type mapStateToPropsType = {
   login: string
