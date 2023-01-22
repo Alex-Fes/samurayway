@@ -1,6 +1,5 @@
 import React from 'react'
 
-import MyPostsContainer from './MyPosts/Post/MyPostsContainer'
 import { ProfileContainerPropsType } from './ProfileContainer'
 import { ProfileInfo } from './ProfileInfo/ProfileInfo'
 
@@ -15,12 +14,7 @@ const Profile = (props: ProfileContainerPropsType) => {
         savePhoto={props.savePhotoTC}
         updateUserDataTC={props.updateUserDataTC}
       />
-      <MyPostsContainer
-      // posts={props.posts}
-      // newPostText={props.newPostText}
-      // dispatch={props.dispatch}
-      // store={props.store}
-      />
+      {/*<MyPostsContainer />*/}
     </div>
   )
 }
