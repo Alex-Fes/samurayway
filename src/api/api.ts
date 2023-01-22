@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 
-import { ProfileDataFormReduxFormType } from '../Components/Profile/ProfileInfo/ProfileDataForm'
+import { ProfileDataFormReduxFormType } from '../Components/Profile/ProfileInfo/ProfileDataForm/ProfileDataForm'
 import { RootUserProfileType } from '../Components/Profile/RootUserProfileType'
 
 import { instance } from './instance'
