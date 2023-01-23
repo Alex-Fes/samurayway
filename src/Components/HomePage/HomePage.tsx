@@ -3,7 +3,7 @@ import React from 'react'
 import { Grid } from '@mui/material'
 
 import News from '../News/News'
-import MyPostsContainer from '../Profile/MyPosts/Post/MyPostsContainer'
+import MyPostsContainer from '../Profile/MyPosts/MyPostsContainer'
 import ProfileContainer from '../Profile/ProfileContainer'
 import Sidebar from '../Sidebar/Sidebar'
 
