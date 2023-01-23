@@ -21,9 +21,34 @@ const SAVE_PHOTO_SUCCESS = 'profile/SAVE-PHOTO-SUCCESS'
 export type InitialStateType = typeof initialState
 let initialState = {
   posts: [
-    { id: 1, message: 'Hi, how are you?', likeCount: 15 },
-    { id: 2, message: "Yo yo, what's up", likeCount: 20 },
-    { id: 3, message: 'Common', likeCount: 10 },
+    {
+      id: 1,
+      message:
+        "Exciting news! We're thrilled to announce the launch of our new AI-powered chatbot feature for our social network. Say hello to instant 24/7 customer support for all your needs.",
+      likeCount: 15,
+      view: Math.floor(Math.random() * 100),
+    },
+    {
+      id: 2,
+      message:
+        'We are proud to present our new augmented reality feature for our social network, now you can easily enhance your photos and videos with realistic 3D effects!',
+      likeCount: 20,
+      view: Math.floor(Math.random() * 100),
+    },
+    {
+      id: 3,
+      message:
+        'Introducing our new feature for our social network, now you can easily create and share polls with your friends and get instant results. Make your voice heard!',
+      likeCount: 10,
+      view: Math.floor(Math.random() * 100),
+    },
+    {
+      id: 4,
+      message:
+        'We are thrilled to announce our new feature for our social network, now you can easily schedule your posts and stories for optimal engagement with your followers.',
+      likeCount: 14,
+      view: Math.floor(Math.random() * 100),
+    },
   ] as Array<PostType>,
   // newPostText: '',
   profile: {
@@ -61,6 +86,7 @@ export const profileReducer = (
         id: new Date().getTime(),
         message: action.newPostText,
         likeCount: 0,
+        view: 0,
       }
 
       return { ...state, posts: [...state.posts, newPost] }
@@ -188,6 +214,7 @@ export type PostType = {
   id: number
   message: string
   likeCount: number
+  view: number
 }
 export type ProfileType = {
   aboutMe: ''
