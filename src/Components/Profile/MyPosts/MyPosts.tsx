@@ -1,20 +1,26 @@
 import React, { memo } from 'react'
 
+import PostAddOutlinedIcon from '@mui/icons-material/PostAddOutlined'
 import { Field, reduxForm } from 'redux-form'
 
 import { maxLengthCreator, required } from '../../../utilits/validators/validators'
 import { Textarea } from '../../common/FormsControls/FormsControl'
 
 import s from './MyPosts.module.css'
-import { MyPostPropsType } from './Post/MyPostsContainer'
+import { MyPostPropsType } from './MyPostsContainer'
 import Post from './Post/Post'
 
 const MyPosts = memo((props: MyPostPropsType) => {
   let postsElement = [...props.posts].reverse().map(p => {
     return (
-      <div key={p.id} className={s.post}>
-        <Post message={p.message} key={p.id} />
-      </div>
+      <Post
+        message={p.message}
+        key={p.id}
+        smallAva={props.smallAva}
+        fullName={props.fullName}
+        likeCount={p.likeCount}
+        view={p.view}
+      />
     )
   })
   const addNewPost = (newPostText: any) => {
@@ -23,28 +29,19 @@ const MyPosts = memo((props: MyPostPropsType) => {
 
   return (
     <div>
-      <div className={s.postsBlock}>
-        <div className={s.addPost}>
-          <AddPostFormRedux onSubmit={addNewPost} />
-        </div>
+      <div className={s.addPost}>
+        <AddPostFormRedux onSubmit={addNewPost} />
       </div>
-      <div className={s.posts}>
-        <div className={s.postHead}>
-          <img src={props.smallAva} alt="Avatar" />
-          <h3>{props.fullName}</h3>
-        </div>
-        {postsElement}
-        <div className={s.postFooter}></div>
-      </div>
+      <div className={s.postsBlock}>{postsElement}</div>
     </div>
   )
 })
 
-const maxLength = maxLengthCreator(10)
+const maxLength = maxLengthCreator(2000)
 const addPostForm = (props: any) => {
   return (
     <form onSubmit={props.handleSubmit} className={s.textArea}>
-      <div>
+      <div className={s.textField}>
         <Field
           component={Textarea}
           name="newPost"
@@ -53,7 +50,9 @@ const addPostForm = (props: any) => {
         />
       </div>
       <div className={s.addPostBtn}>
-        <button>Add post</button>
+        <button>
+          <PostAddOutlinedIcon />
+        </button>
       </div>
     </form>
   )
