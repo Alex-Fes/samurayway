@@ -3,15 +3,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 
-import { StoreType } from '../../../../App/store'
-import { addPostActionCreator } from '../../../../Redux/profileReducer'
-import MyPosts from '../MyPosts'
+import { StoreType } from '../../../App/store'
+import { addPostActionCreator, PostType } from '../../../Redux/profileReducer'
 
-type PostType = {
-  id: number
-  message: string
-  likeCount: number
-}
+import MyPosts from './MyPosts'
+
 type MapStateToPropsType = {
   posts: Array<PostType>
   smallAva: string
