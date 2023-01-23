@@ -1,24 +1,59 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import classes from './Post.module.css'
+import { FavoriteBorder } from '@mui/icons-material'
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined'
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
+import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material'
+
+import EditPostMenu from './EditPostMenu'
+import s from './Post.module.css'
 
 type MessagePropsType = {
   message: string
-  // likeCount: number
+  likeCount: number
+  smallAva: string
+  fullName: string
+  view: number
 }
-// let posts = [
-//     {id: 1, message: 'Hi, how are you?', likeCount: 15},
-//     {id: 2, message: 'Yo yo, what\'s up', likeCount: 20},
-//     {id: 3, message: 'Common', likeCount: 10}
-// ];
 
 const Post = (props: MessagePropsType) => {
+  const [value, setValue] = useState(props.likeCount)
+  const [touched, setTouched] = useState(false)
+
   return (
-    <div>
-      <div className={classes.item}>{props.message}</div>
-      {/*<div>*/}
-      {/*  <span>{props.likeCount} Like</span>*/}
-      {/*</div>*/}
+    <div className={s.posts}>
+      <div className={s.post}>
+        <div className={s.postHead}>
+          <img src={props.smallAva} alt="Avatar" />
+          <h3>{props.fullName}</h3>
+        </div>
+        <div className={s.editMenu}>
+          <EditPostMenu />
+        </div>
+        <div className={s.message}>{props.message}</div>
+        <div className={s.postFooter}>
+          <Box sx={{ width: '100%' }}>
+            <BottomNavigation showLabels>
+              <BottomNavigationAction
+                onClick={() => {
+                  if (!touched) {
+                    setValue(value => value + 1)
+                    setTouched(true)
+                  } else {
+                    setValue(value => value - 1)
+                    setTouched(false)
+                  }
+                }}
+                label={value}
+                icon={!touched ? <FavoriteBorder /> : <FavoriteIcon />}
+              />
+              <BottomNavigationAction icon={<ShareOutlinedIcon />} />
+              <BottomNavigationAction label={props.view} icon={<VisibilityOutlinedIcon />} />
+            </BottomNavigation>
+          </Box>
+        </div>
+      </div>
     </div>
   )
 }
