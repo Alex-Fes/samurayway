@@ -20,7 +20,7 @@ import {
   setCurrentPage,
   unfollow,
 } from '../../Redux/usersReducer'
-import { withAuthRedirect } from '../hoc/withAuthRedirect'
+import { withAuthRedirect } from '../../utilits/hoc/withAuthRedirect'
 
 import { Users } from './Users'
 
