@@ -1,7 +1,7 @@
 import React from 'react'
 
+import { Pagination } from '../../Components/common/Pagination/Pagination'
 import { InitialStateType } from '../../Redux/usersReducer'
-import { Pagination } from '../common/Pagination/Pagination'
 
 import { User } from './User'
 
