@@ -3,13 +3,12 @@ import React, { lazy, Suspense } from 'react'
 import { CircularProgress } from '@mui/material'
 import { Route } from 'react-router-dom'
 
-import Login from '../../features/auth/Login'
-import DialogsContainer from '../Dialogs/DialogsContainer'
+import DialogsContainer from '../../Components/Dialogs/DialogsContainer'
+import ProfileContainer from '../../Components/Profile/ProfileContainer'
+import Login from '../auth/Login'
 import { HomePage } from '../HomePage/HomePage'
-import ProfileContainer from '../Profile/ProfileContainer'
 import UsersContainer from '../Users/UsersContainer'
 
-const Music = lazy(() => import('../Music/Music'))
 const News = lazy(() => import('../News/News'))
 const Settings = lazy(() => import('../Settings/Settings'))
 const Sidebar = lazy(() => import('../Sidebar/Sidebar'))
@@ -28,7 +27,6 @@ export const AppRoutes = () => {
         }
       >
         <Route path="/news" render={() => <News />}></Route>
-        <Route path="/music" render={() => <Music />}></Route>
         <Route path="/settings" render={() => <Settings />}></Route>
         <Route path="/sidebar" render={() => <Sidebar />}></Route>
       </Suspense>
