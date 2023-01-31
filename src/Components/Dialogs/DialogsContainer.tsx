@@ -5,7 +5,7 @@ import { compose, Dispatch } from 'redux'
 
 import { StoreType } from '../../App/store'
 import { DialogType, MessageType, sendMessageActionCreator } from '../../Redux/dialogsReducer'
-import { withAuthRedirect } from '../hoc/withAuthRedirect'
+import { withAuthRedirect } from '../../utilits/hoc/withAuthRedirect'
 
 import Dialogs from './Dialogs'
 
