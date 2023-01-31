@@ -12,7 +12,7 @@ import {
   updateStatus,
   updateUserDataTC,
 } from '../../Redux/profileReducer'
-import { withAuthRedirect } from '../hoc/withAuthRedirect'
+import { withAuthRedirect } from '../../utilits/hoc/withAuthRedirect'
 
 import Profile from './Profile'
 import { ProfileDataFormReduxFormType } from './ProfileInfo/ProfileDataForm/ProfileDataForm'
