@@ -2,9 +2,9 @@ import React from 'react'
 
 import { Grid } from '@mui/material'
 
+import MyPostsContainer from '../../Components/Profile/MyPosts/MyPostsContainer'
+import ProfileContainer from '../../Components/Profile/ProfileContainer'
 import News from '../News/News'
-import MyPostsContainer from '../Profile/MyPosts/MyPostsContainer'
-import ProfileContainer from '../Profile/ProfileContainer'
 import Sidebar from '../Sidebar/Sidebar'
 
 import s from './HomePage.module.scss'
