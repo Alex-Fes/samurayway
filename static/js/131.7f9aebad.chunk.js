@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunksamurai_way=self.webpackChunksamurai_way||[]).push([[131],{6131:function(a,u,e){e.r(u);e(2791);var s=e(184);u.default=function(){return(0,s.jsx)("div",{children:"News"})}}}]);
-//# sourceMappingURL=131.7f9aebad.chunk.js.map
