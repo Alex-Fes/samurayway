@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 
-import { CircularProgress, Container, LinearProgress } from '@mui/material'
+import { CircularProgress, Container } from '@mui/material'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 
 import './App.css'
-import { AppRoutes } from '../Components/AppRoutes/AppRoutes'
-import Footer from '../Components/Footer/Footer'
 import HeaderContainer from '../Components/Header/HeaderContainer'
+import { AppRoutes } from '../features/AppRoutes/AppRoutes'
 
 import { initializeAppTC, RequestStatusType } from './appReducer'
 import { StoreType } from './store'
@@ -39,14 +38,18 @@ class App extends Component<AppPropsType> {
 
     return (
       <div className="app-wrapper">
-        {this.props.appStatus === 'loading' && (
-          <LinearProgress sx={{ position: 'absolute', width: '100%', height: '5px', top: '0' }} />
-        )}
-        <HeaderContainer />
-        <Container sx={{ pt: 4 }}>
-          <AppRoutes />
-        </Container>
-        <Footer />
+        {/*{this.props.appStatus === 'loading' && (*/}
+        {/*  <LinearProgress sx={{ position: 'absolute', width: '100%', height: '5px', top: '0' }} />*/}
+        {/*)}*/}
+        <div className="main">
+          <HeaderContainer />
+          <Container sx={{ pt: 4, position: 'relative', height: '100%' }}>
+            <AppRoutes />
+          </Container>
+        </div>
+        {/*<div className="footer">*/}
+        {/*  <Footer />*/}
+        {/*</div>*/}
       </div>
     )
   }
