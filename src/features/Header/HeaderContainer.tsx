@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { RequestStatusType } from '../../App/appReducer'
 import { StoreType } from '../../App/store'
-import { logoutUserTC } from '../../features/auth/authReducer'
+import { logoutUserTC } from '../auth/authReducer'
 
 import Header from './Header'
 
