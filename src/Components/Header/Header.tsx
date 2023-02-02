@@ -19,7 +19,7 @@ const Header = (props: HeaderPropsType) => {
     <header className={s.header}>
       <div className={s.container}>
         <div className={s.logo}>
-          <img src="../../assets/images/logo_transparent.png" alt="logo" />
+          <img src="../../assets/images/logo.png" alt="logo" />
         </div>
         <div className={s.navBar}>
           <Navigation />
