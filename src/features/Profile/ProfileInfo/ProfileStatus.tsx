@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Preloader } from '../../common/Preloader/Preloader'
+import { Preloader } from '../../../common/Preloader/Preloader'
 
 type ProfileInfoPropsType = {
   status: string

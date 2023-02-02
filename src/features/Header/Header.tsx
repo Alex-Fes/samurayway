@@ -3,7 +3,8 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { RequestStatusType } from '../../App/appReducer'
-import { SvgSelector } from '../common/svgSelector/SvgSelector'
+import logo from '../../assets/images/logo.png'
+import { SvgSelector } from '../../common/svgSelector/SvgSelector'
 
 import s from './Header.module.scss'
 import Navigation from './Navigation/Navigation'
@@ -19,7 +20,7 @@ const Header = (props: HeaderPropsType) => {
     <header className={s.header}>
       <div className={s.container}>
         <div className={s.logo}>
-          <img src="../../assets/images/logo.png" alt="logo" />
+          <img src={logo} alt="logo" />
         </div>
         <div className={s.navBar}>
           <Navigation />

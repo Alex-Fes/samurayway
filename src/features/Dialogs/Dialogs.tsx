@@ -3,8 +3,8 @@ import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
 
+import { Textarea } from '../../common/FormsControls/FormsControl'
 import { maxLengthCreator, required } from '../../utilits/validators/validators'
-import { Textarea } from '../common/FormsControls/FormsControl'
 
 import DialogItem from './DialogItem/DialogItem'
 import style from './Dialogs.module.css'
@@ -21,9 +21,9 @@ import Message from './Message/Message'
 //     sendMessage:()=> void
 // }
 
-type newMessageFormType = {
-  newMessage: string
-}
+// type newMessageFormType = {
+//   newMessage: string
+// }
 
 const Dialogs = (props: DialogsPropsType) => {
   let dialogElements = props.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id} />)

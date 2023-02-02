@@ -5,12 +5,13 @@ import { Redirect } from 'react-router-dom'
 import { InjectedFormProps, reduxForm } from 'redux-form'
 
 import { StoreType } from '../../App/store'
-import styles from '../../Components/common/FormsControls/FormControls.module.scss'
-import { createField, Input } from '../../Components/common/FormsControls/FormsControl'
+import logo from '../../assets/images/logo.png'
+import { createField, Input } from '../../common/FormsControls/FormsControl'
 import { maxLengthCreator, required } from '../../utilits/validators/validators'
 
 import { loginUserTC } from './authReducer'
 import s from './Login.module.scss'
+
 const maxLengthForLogin = maxLengthCreator(50)
 const maxLengthForPassword = maxLengthCreator(20)
 
@@ -51,7 +52,7 @@ export const LoginForm: React.FC<
         {captchaUrl &&
           createField<LoginFormValuesTypeKeys>('Symbols from image', 'captcha', Input, [required])}
       </div>
-      <div>{error && <div className={styles.formSummaryError}>{error}</div>}</div>
+      <div>{error && <div className={s.formSummaryError}>{error}</div>}</div>
 
       <div>
         <button>Login</button>
@@ -83,7 +84,7 @@ const Login = (props: LoginPropsType) => {
       <div className={s.loginContainer}>
         <div className={s.descriptionBox}>
           <div className={s.descriptionTitle}>
-            <img src="../../assets/images/logo.png" alt="logo" />
+            <img src={logo} alt="logo" />
             <h2>Samurai Way</h2>
           </div>
           <div className={s.description}>

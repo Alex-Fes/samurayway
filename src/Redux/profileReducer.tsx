@@ -6,8 +6,8 @@ import { stopSubmit } from 'redux-form'
 import { profileAPI, usersAPI } from '../api/api'
 import { setAppStatusAC } from '../App/appReducer'
 import { AppThunkType } from '../App/store'
-import { ProfileDataFormReduxFormType } from '../Components/Profile/ProfileInfo/ProfileDataForm/ProfileDataForm'
-import { RootUserProfileType } from '../Components/Profile/RootUserProfileType'
+import { ProfileDataFormReduxFormType } from '../features/Profile/ProfileInfo/ProfileDataForm/ProfileDataForm'
+import { RootUserProfileType } from '../features/Profile/RootUserProfileType'
 
 import { AppActionsType } from './types'
 

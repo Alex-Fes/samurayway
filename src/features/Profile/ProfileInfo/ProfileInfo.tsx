@@ -4,7 +4,7 @@ import UploadFileIcon from '@mui/icons-material/UploadFile'
 import { Paper } from '@mui/material'
 
 import defaultUserPhoto from '../../../assets/images/userPic.png'
-import { Preloader } from '../../common/Preloader/Preloader'
+import { Preloader } from '../../../common/Preloader/Preloader'
 import { RootUserProfileType } from '../RootUserProfileType'
 
 import { ProfileData } from './ProfileData/ProfileData'

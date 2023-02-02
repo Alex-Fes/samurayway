@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-import { CircularProgress, Container } from '@mui/material'
+import { Container } from '@mui/material'
 import { connect } from 'react-redux'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 
 import './App.css'
-import HeaderContainer from '../Components/Header/HeaderContainer'
 import { AppRoutes } from '../features/AppRoutes/AppRoutes'
+import HeaderContainer from '../features/Header/HeaderContainer'
 
 import { initializeAppTC, RequestStatusType } from './appReducer'
 import { StoreType } from './store'

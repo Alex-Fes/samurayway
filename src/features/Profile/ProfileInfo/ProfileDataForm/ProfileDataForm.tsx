@@ -2,7 +2,7 @@ import React from 'react'
 
 import { InjectedFormProps, reduxForm } from 'redux-form'
 
-import { createField, Input, Textarea } from '../../../common/FormsControls/FormsControl'
+import { createField, Input, Textarea } from '../../../../common/FormsControls/FormsControl'
 import { ProfileDataFormPropsType } from '../ProfileData/ProfileData'
 import s from '../ProfileInfo.module.css'
 

@@ -3,8 +3,8 @@ import React, { memo } from 'react'
 import PostAddOutlinedIcon from '@mui/icons-material/PostAddOutlined'
 import { Field, reduxForm } from 'redux-form'
 
+import { Textarea } from '../../../common/FormsControls/FormsControl'
 import { maxLengthCreator, required } from '../../../utilits/validators/validators'
-import { Textarea } from '../../common/FormsControls/FormsControl'
 
 import s from './MyPosts.module.css'
 import { MyPostPropsType } from './MyPostsContainer'

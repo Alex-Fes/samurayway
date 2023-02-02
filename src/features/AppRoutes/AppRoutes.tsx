@@ -3,10 +3,10 @@ import React, { lazy, Suspense } from 'react'
 import { CircularProgress } from '@mui/material'
 import { Route } from 'react-router-dom'
 
-import DialogsContainer from '../../Components/Dialogs/DialogsContainer'
-import ProfileContainer from '../../Components/Profile/ProfileContainer'
 import Login from '../auth/Login'
+import DialogsContainer from '../Dialogs/DialogsContainer'
 import { HomePage } from '../HomePage/HomePage'
+import ProfileContainer from '../Profile/ProfileContainer'
 import UsersContainer from '../Users/UsersContainer'
 
 const News = lazy(() => import('../News/News'))

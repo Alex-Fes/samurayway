@@ -2,7 +2,7 @@ import React from 'react'
 
 import { NavLink } from 'react-router-dom'
 
-import { SvgSelector } from '../../common/svgSelector/SvgSelector'
+import { SvgSelector } from '../../../common/svgSelector/SvgSelector'
 
 import s from './Navigation.module.scss'
 

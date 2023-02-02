@@ -3,7 +3,7 @@ import React from 'react'
 import { Field } from 'redux-form'
 import { WrappedFieldMetaProps, WrappedFieldProps } from 'redux-form/lib/Field'
 
-import { FieldValidatorType } from '../../../utilits/validators/validators'
+import { FieldValidatorType } from '../../utilits/validators/validators'
 
 import s from './FormControls.module.scss'
 
