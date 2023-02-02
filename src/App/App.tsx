@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { CircularProgress, Container } from '@mui/material'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 
 import './App.css'
@@ -26,15 +26,18 @@ class App extends Component<AppPropsType> {
   }
 
   render() {
-    if (!this.props.initialized) {
-      return (
-        <div className="app-wrapper-initial-progress">
-          <div className="app-initial-progress">
-            <CircularProgress size="50px" className="circularProgress" />
-          </div>
-        </div>
-      )
-    }
+    // if (!this.props.initialized) {
+    //   return (
+    //     <div className="app-wrapper-initial-progress">
+    //       <div className="app-initial-progress">
+    //         <CircularProgress size="50px" className="circularProgress" />
+    //       </div>
+    //     </div>
+    //   )
+    // }
+    // if (!this.props.isLoggedIn) {
+    //   return <Redirect to={'/login'} />
+    // }
 
     return (
       <div className="app-wrapper">
@@ -42,7 +45,7 @@ class App extends Component<AppPropsType> {
         {/*  <LinearProgress sx={{ position: 'absolute', width: '100%', height: '5px', top: '0' }} />*/}
         {/*)}*/}
         <div className="main">
-          <HeaderContainer />
+          {this.props.isLoggedIn && <HeaderContainer />}
           <Container sx={{ pt: 4, position: 'relative', height: '100%' }}>
             <AppRoutes />
           </Container>
@@ -58,6 +61,7 @@ class App extends Component<AppPropsType> {
 const mapStateToProps = (state: StoreType) => ({
   initialized: state.app.initialized,
   appStatus: state.app.status,
+  isLoggedIn: state.auth.isAuth,
 })
 
 export default compose<React.ComponentType>(
@@ -72,5 +76,6 @@ type mapDispatchToPropsType = {
 type mapStateToPropsType = {
   initialized: boolean
   appStatus: RequestStatusType
+  isLoggedIn: boolean
 }
 type AppPropsType = mapStateToPropsType & mapDispatchToPropsType
