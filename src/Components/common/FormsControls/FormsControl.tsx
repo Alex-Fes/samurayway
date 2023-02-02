@@ -5,7 +5,7 @@ import { WrappedFieldMetaProps, WrappedFieldProps } from 'redux-form/lib/Field'
 
 import { FieldValidatorType } from '../../../utilits/validators/validators'
 
-import s from './FormControls.module.css'
+import s from './FormControls.module.scss'
 
 export const FormControl: React.FC<FormControlPropsType> = ({
   meta: { touched, error },
