@@ -11,7 +11,7 @@
 
 .formSummaryError {
     padding: 5px;
-    
+
     color: #e3541b;
 
     border: red 1px solid;
@@ -33,4 +33,16 @@
     outline: none;
 
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+
+.inputStyle {
+    border-radius: 5px;
+    height: 32px;
+    outline: none;
+    padding-left: 30px;
+    position: relative;
+    text-align: left;
+    top: -20px;
+    width: 100%;
 }
