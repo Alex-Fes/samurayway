@@ -14,9 +14,14 @@ const Navigation = () => {
         Home
       </NavLink>
 
-      <NavLink to="/profile" className={s.item}>
-        <SvgSelector svgname={'profileLight'} />
-        Profile
+      {/*<NavLink to="/profile" className={s.item}>*/}
+      {/*  <SvgSelector svgname={'profileLight'} />*/}
+      {/*  Profile*/}
+      {/*</NavLink>*/}
+
+      <NavLink to="/users" className={s.item}>
+        <SvgSelector svgname={'users'} />
+        Users
       </NavLink>
 
       <NavLink to="/dialogs" className={s.item}>
@@ -29,14 +34,9 @@ const Navigation = () => {
         News
       </NavLink>
 
-      <NavLink to="/users" className={s.item}>
-        <SvgSelector svgname={'users'} />
-        Users
-      </NavLink>
-
-      <NavLink to="/settings" className={s.item}>
-        Settings
-      </NavLink>
+      {/*<NavLink to="/settings" className={s.item}>*/}
+      {/*  Settings*/}
+      {/*</NavLink>*/}
     </>
   )
 }
