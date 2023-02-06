@@ -29,8 +29,10 @@ const Header = (props: HeaderPropsType) => {
         <div className={s.loginBlock}>
           {props.isAuth ? (
             <div className={s.userBox}>
-              <SvgSelector svgname={'profileLight'} />
-              <span className={s.userName}>{props.login}</span> -
+              <NavLink to="/profile">
+                <SvgSelector svgname={'profileLight'} />
+              </NavLink>
+              <span className={s.userName}>{props.login}</span>
               <button onClick={props.logoutUserTC} className={s.logoutBtn}>
                 <SvgSelector svgname={'logout'} />
               </button>
