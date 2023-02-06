@@ -37,7 +37,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
         <Paper elevation={3}>
           <div className={s.firstBlock}>
             <img src={props.profile.photos.large || defaultUserPhoto} alt="" />
-            <UploadFileIcon fontSize="large" className={s.uploadPhotoBtn} />
+            <UploadFileIcon fontSize="medium" className={s.uploadPhotoBtn} />
             <h2>
               {props.isOwner && (
                 <input type={'file'} onChange={onMainPhotoSelected} style={{ display: 'none' }} />
