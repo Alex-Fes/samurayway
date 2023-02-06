@@ -1,15 +1,16 @@
 import React from 'react'
 
-import style from './../Dialogs.module.css'
-
+import userPic from '../../../assets/images/user-circle-icon-png.png'
+import s from '../Dialogs.module.scss'
 type MessagePropsType = {
   id: number
   message: string
 }
 const Message = (props: MessagePropsType) => {
   return (
-    <div>
-      <div className={style.message}>{props.message}</div>
+    <div className={s.messages}>
+      <img src={userPic} alt="" />
+      <span>{props.message}</span>
     </div>
   )
 }
