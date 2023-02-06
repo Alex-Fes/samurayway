@@ -5,4 +5,25 @@
   padding: 0 15px;
   min-height: 100vh;
 
+  .friendsContainer {
+    box-sizing: content-box;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .newsContainer {
+    box-sizing: content-box;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 }
