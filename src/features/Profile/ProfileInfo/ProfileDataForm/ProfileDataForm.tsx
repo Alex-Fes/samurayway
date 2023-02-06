@@ -18,22 +18,21 @@ export const ProfileDataForm: React.FC<
         {createField('', 'lookingForAJob', Input, [], { type: 'checkbox' })}
       </div>
       <div>
-        <b>My professional skills:</b>
+        <h3>My professional skills:</h3>
         {createField('My professional skills', 'lookingForAJobDescription', Textarea, [])}
       </div>
       <span>About me:</span>
       {createField('About me', 'aboutMe', Textarea, [])}
       <div>
-        <b>Contacts:</b>
-        <ul>
-          {Object.keys(initialValues.contacts).map(key => {
-            return (
-              <li key={key}>
-                <b>{key}</b> : {createField(key, 'contacts.' + key, Textarea, [])}
-              </li>
-            )
-          })}
-        </ul>
+        <h3>Contacts:</h3>
+
+        {Object.keys(initialValues.contacts).map(key => {
+          return (
+            <li key={key} style={{ listStyleType: 'none' }}>
+              <b>{key}</b>: {createField(key, 'contacts.' + key, Input, [])}
+            </li>
+          )
+        })}
       </div>
       {error && <div className={s.formError}>{error}</div>}
       <div>
