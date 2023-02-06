@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksamurai_way=self.webpackChunksamurai_way||[]).push([[432],{9432:function(a,u,e){e.r(u);e(2791);var n=e(184);u.default=function(){return(0,n.jsx)("div",{children:"My Friends"})}}}]);
+//# sourceMappingURL=432.14c52d43.chunk.js.map

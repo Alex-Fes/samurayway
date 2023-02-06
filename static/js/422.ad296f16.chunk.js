@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksamurai_way=self.webpackChunksamurai_way||[]).push([[422],{8422:function(e,n,s){s.r(n),s.d(n,{default:function(){return t}});s(2791);var a=s(3338),i="News_mainContainer__j5MhQ",r="News_newsContainer__B1PJ5",u=s(184),t=function(){return(0,u.jsx)("div",{className:i,children:(0,u.jsxs)("div",{className:r,children:[(0,u.jsx)(a.O,{svgname:"underDevelopment"}),(0,u.jsx)("div",{children:"This page is under development."})]})})}}}]);
+//# sourceMappingURL=422.ad296f16.chunk.js.map
